@@ -1,0 +1,10 @@
+<?php
+
+namespace app\engine\api;
+
+use Walrus\core\WalrusAPI;
+
+class %name%Controller extends WalrusAPI
+{
+
+}
