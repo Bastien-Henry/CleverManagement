@@ -9,3 +9,5 @@ config/compiled/
 
 #JetBrains IDE
 .idea/
+
+vendor/
