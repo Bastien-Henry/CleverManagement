@@ -10,4 +10,19 @@ _user:
     path:   'clevermanagement/user'
     controller:   'UserController'
     action: 'run'
-    method: 'GET'
+
+_project_create:
+	path:   'clevermanagement/project/create'
+	controller:   'ProjectController'
+	action: 'create'
+	method: 'POST'
+
+_project_delete:
+	path:   'clevermanagement/project/:id/delete'
+	controller:   'ProjectController'
+	action: 'delete'
+
+_project:
+	path:   'clevermanagement/project'
+	controller:   'ProjectController'
+	action: 'run'
