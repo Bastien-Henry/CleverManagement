@@ -5,3 +5,9 @@ _home:
     controller:   'HelloController'
     action: 'run'
     method: 'GET'
+
+_user:
+    path:   'clevermanagement/user'
+    controller:   'UserController'
+    action: 'run'
+    method: 'GET'
