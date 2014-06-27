@@ -16,7 +16,6 @@ class HelloController extends WalrusController
     {
         $this->register('username', 'lel');
         $this->setView('world');
-
         var_dump($_SESSION);
     }
 }

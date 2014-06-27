@@ -2,13 +2,14 @@ form_signin:
   form:
     method: POST
     action: /clevermanagement/signin
-    submit: Sign up
+    submit: Sign in
     structure: table
 
   fields:
     type:
       type: hidden
-      value: signup
+      value: signin
+      label: false
     email:
       type: text
       required: true
@@ -17,7 +18,6 @@ form_signin:
         validate: /^\w{3,10}$/
     password:
       type: password
-      id: helloworld
       check:
         required: true
 

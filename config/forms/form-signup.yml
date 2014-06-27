@@ -9,6 +9,7 @@ form_signup:
     type:
       type: hidden
       value: signup
+      label: false
     firstname:
       type: text
       required: true
