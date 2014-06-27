@@ -6,8 +6,14 @@ _home:
     action: 'run'
     method: 'GET'
 
-_user:
-    path:   'clevermanagement/user'
+_register:
+    path:   'clevermanagement/signup'
     controller:   'UserController'
-    action: 'run'
-    method: 'GET'
+    action: 'signup'
+    method: 'POST'
+
+login:
+    path:   'clevermanagement/signin'
+    controller:   'UserController'
+    action: 'signin'
+    method: 'POST'
