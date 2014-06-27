@@ -1,22 +1,16 @@
-# Routes
-
-_home:
-    path:   'clevermanagement'
-    controller:   'HelloController'
-    action: 'run'
-    method: 'GET'
-
-_user:
-    path:   'clevermanagement/user'
-    controller:   'UserController'
-    action: 'run'
-    method: 'GET'
-
 _step:
     path:   'clevermanagement/step'
     controller:   'StepController'
     action: 'index'
     method: 'GET'
+
+_step_show:
+    path:   'clevermanagement/step/:id'
+    controller:   'StepController'
+    action: 'find'
+    method: 'GET'
+    require:
+        id: '[1-9]*'
 
 _step_create:
     path:   'clevermanagement/step/create'
@@ -24,10 +18,18 @@ _step_create:
     action: 'create'
     method: 'GET'
 
-_step_create:
+_step_delete:
     path:   'clevermanagement/step/:id/delete'
     controller:   'StepController'
     action: 'delete'
     method: 'GET'
     require:
     	id: '[1-9]*'
+
+_step_edit:
+    path:   'clevermanagement/step/:id/edit'
+    controller:   'StepController'
+    action: 'edit'
+    method: 'GET'
+    require:
+        id: '[1-9]*'
