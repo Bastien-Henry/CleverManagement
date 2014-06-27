@@ -5,29 +5,3 @@ _home:
     controller:   'HelloController'
     action: 'run'
     method: 'GET'
-
-_user:
-    path:   'clevermanagement/user'
-    controller:   'UserController'
-    action: 'run'
-    method: 'GET'
-
-_step:
-    path:   'clevermanagement/step'
-    controller:   'StepController'
-    action: 'index'
-    method: 'GET'
-
-_step_create:
-    path:   'clevermanagement/step/create'
-    controller:   'StepController'
-    action: 'create'
-    method: 'GET'
-
-_step_create:
-    path:   'clevermanagement/step/:id/delete'
-    controller:   'StepController'
-    action: 'delete'
-    method: 'GET'
-    require:
-    	id: '[1-9]*'

@@ -41,15 +41,15 @@ class Step
     {
         $step = R::load('steps', $id);
 
-        if(empty($_step['name']))
+        if(empty($_POST['name']))
         {
             return array('name.empty' => 'Name can\'t be empty');
         }
 
-        $step->name = $_step['name'];
-        $step->description = $_step['description'];
-        $step->startline = $_step['startline'];
-        $step->deadline = $_step['deadline'];
+        $step->name = $_POST['name'];
+        $step->description = $_POST['description'];
+        $step->startline = $_POST['startline'];
+        $step->deadline = $_POST['deadline'];
 
         R::store($step);
         return $step;
@@ -59,7 +59,7 @@ class Step
     {
         $step = R::dispense('steps');
 
-        if(empty($_step['name']))
+        if(empty($_POST['name']))
         {
             return array('name.empty' => 'Name can\'t be empty');
         }
@@ -68,11 +68,11 @@ class Step
             return $errors;
         //___________________________________
 
-        $step->name = $_step['name'];
-        $step->descrption = $_step['description'];
-        $step->startline = $_step['startline'];
-        $step->deadline = $_step['deadline'];
-        //$step->id_project = $_step['project'];        hidden field storing project id
+        $step->name = $_POST['name'];
+        $step->descrption = $_POST['description'];
+        $step->startline = $_POST['startline'];
+        $step->deadline = $_POST['deadline'];
+        //$step->id_project = $_POST['project'];        hidden field storing project id
 
         R::store($step);
 

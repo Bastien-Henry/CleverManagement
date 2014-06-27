@@ -6,20 +6,18 @@ use Walrus\core\WalrusController;
 use Walrus\core\WalrusForm;
 
 /**
- * Class StepController
+ * Class TaskController
  * @package engine\controllers
  */
-class StepController extends WalrusController
+class TaskController extends WalrusController
 {
 	public function index()
 	{
-		die('hello');
-
-        $res = $this->model('step')->index();
+        $res = $this->model('task')->index();
         if empty($res) {
-        	$this->register('message', 'no step found');
+        	$this->register('message', 'no task found');
         } else {
-        	$this->register('message', 'All Steps :');
+        	$this->register('message', 'All tasks :');
         }
 
         $this->setView('index');
@@ -29,18 +27,18 @@ class StepController extends WalrusController
     {
         $this->setView('create');
 
-	    $form = new WalrusForm('form_step_create');
+	    $form = new WalrusForm('form_task_create');
 		echo $form->render();
 
         if (isset($_POST['type'])) {
-            $res = $this->model('step')->create();
+            $res = $this->model('task')->create();
             
             if (isset($res['errors'])) {
                 $this->register('errors', $res['errors']);
             }
             else
             {
-                $this->go('/CleverManagement/step/');
+                $this->go('/CleverManagement/task/');
             }
         }
     }
