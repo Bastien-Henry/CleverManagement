@@ -14,10 +14,10 @@ class UserController extends WalrusController
 
     public function signup()
     {
-     $this->setView('signup');
+        $this->setView('signup');
 
-     $form = new WalrusForm('form_signup');
-echo $form->render();
+        $form = new WalrusForm('form_signup');
+        echo $form->render();
 
         if (isset($_POST['type'])) {
             if ($_POST['type'] === 'signup') {
@@ -37,8 +37,8 @@ echo $form->render();
 
     public function signin()
     {
-     $form = new WalrusForm('form_signin');
-echo $form->render();
+        $form = new WalrusForm('form_signin');
+        echo $form->render();
 
         if (isset($_POST['type'])) {
             if ($_POST['type'] === 'signin') {

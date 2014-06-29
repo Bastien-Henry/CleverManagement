@@ -14,17 +14,16 @@ class Project
         $project->startline = $_POST['startline'];
         $project->deadline = $_POST['deadline'];
         $project->description = $_POST['description'];
-
         R::store($project);
 
+// to test when session is working
+        /*$user = R::load('users', $_SESSION['user']['id']);
 
-        //$user = R::load('users', $_SESSION['user']['id']);
-
-        //$project_user = R::dispense('projects_users');
-        //$project_user->admin = $user->getProperties()['id'];
-        //$project->getProperties()['id']
-
-
+        $relation = R::dispense('projects_users');
+        $relation->project = $project;
+        $relation->user = $user;
+        $relation->admin = 1;
+        R::store($relation);*/
 
         return true;
     }
