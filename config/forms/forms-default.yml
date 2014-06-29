@@ -1,17 +1,23 @@
-# Form exemple
-
-# _form_login:
+# form_signup:
 #   form:
 #     method: POST
 #     action: /my-form
-#     submit: Send
-#     structure: list
-#
+#     submit: Sign up
+#     structure: table
+
 #   fields:
+#     firstname:
+#       type: text
+#       required: true
+#       label: Firstname
+#     lastname:
+#       type: text
+#       required: true
+#       label: Lastname
 #     email:
 #       type: text
 #       required: true
-#       label: Your email
+#       label: Email
 #       check:
 #         validate: /^\w{3,10}$/
 #     password:
@@ -19,31 +25,9 @@
 #       id: helloworld
 #       check:
 #         required: true
-#     sexe:
-#       type: radio
-#       options:
-#         male:
-#           label: Male
-#         female:
-#           label: Female
-#       check:
-#         required: true
-#     newsletter:
-#       type: checkbox
-#       options:
-#         1:
-#           label: 'Yes'
-#         0:
-#           label: 'No'
-#     categories:
-#       type: select
-#       function: HelloController::getSelect
-#       check:
-#         required: true
-#     transport:
-#       type: select
-#       options:
-#         - train
-#         - car
-#         - plane
+#     job:
+#       type: text
+#       required: true
+#       label: Job
+
 

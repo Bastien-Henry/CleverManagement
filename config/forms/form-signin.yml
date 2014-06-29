@@ -1,0 +1,23 @@
+form_signin:
+  form:
+    method: POST
+    action: /clevermanagement/signin
+    submit: Sign in
+    structure: table
+
+  fields:
+    type:
+      type: hidden
+      value: signin
+      label: false
+    email:
+      type: text
+      required: true
+      label: Email
+      check:
+        validate: /^\w{3,10}$/
+    password:
+      type: password
+      check:
+        required: true
+

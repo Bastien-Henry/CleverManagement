@@ -11,12 +11,13 @@ use Walrus\core\WalrusForm;
 */
 class UserController extends WalrusController
 {
+
     public function signup()
     {
-	    $this->setView('signup');
+     $this->setView('signup');
 
-	    $form = new WalrusForm('form_signup');
-		echo $form->render();
+     $form = new WalrusForm('form_signup');
+echo $form->render();
 
         if (isset($_POST['type'])) {
             if ($_POST['type'] === 'signup') {
@@ -29,32 +30,31 @@ class UserController extends WalrusController
                 else
                 {
                     $this->go('/CleverManagement/');
-                }	
+                }   
             }
         }
     }
 
-    public function signin()
+     public function signin()
     {
-	    $this->setView('signin');
-
-	    $form = new WalrusForm('form_signin');
-		echo $form->render();
+     $form = new WalrusForm('form_signin');
+echo $form->render();
 
         if (isset($_POST['type'])) {
-            if ($_POST['type'] === 'login') {
-
+            if ($_POST['type'] === 'signin') {
                 if(!$this->model('user')->signin())
                 {
-                    $this->register('errors', array('credentials' => 'wrong login/password'));
+                 var_dump('if');
+                    $this->register('errors', array('credentials' => 'wrong email/password'));
                 }
                 else
                 {
+                 var_dump('else');
                     $this->go('/CleverManagement/');
                 }
             }
         }
 
-        var_dump($_SESSION);
+        $this->setView('signin');
     }
 }
