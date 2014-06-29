@@ -25,6 +25,11 @@ class StepController extends WalrusController
         $this->setView('index');
 	}
 
+    public function find($id)
+    {
+        $res = $this->model('step')->find($id);
+    }
+
     public function create()
     {
         $this->setView('create');
@@ -43,5 +48,15 @@ class StepController extends WalrusController
                 $this->go('/CleverManagement/step/');
             }
         }
+    }
+
+    public function delete($id)
+    {
+        $res = $this->model('step')->delete($id);
+    }
+
+    public function edit($id)
+    {
+        $res = $this->model('step')->edit($id);
     }
 }

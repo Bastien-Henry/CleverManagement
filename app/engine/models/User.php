@@ -37,8 +37,6 @@ class User
         $user->job = $_POST['job'];
         $user->hourprice = $_POST['hour_price'];
 
-        $this->fillSession($user);
-
         R::store($user);
 
         return true;
@@ -46,12 +44,14 @@ class User
 
     public function signin()
     {
+        $password = hash("sha256", 'salt' . $_POST['password']);
+
         $user = R::findOne(
             'users',
-            ' email = :email AND password = :password',
+            'email = :email AND password = :password',
             array(
                 ':email' => $_POST['email'],
-                ':password' => hash("sha256", 'salt' . $_POST['password']),
+                ':password' => $password
             )
         );
 
@@ -65,11 +65,7 @@ class User
 
     public function fillSession($bean)
     {
-        $_SESSION['user']['firstname'] = (string)$bean->firstname;
-        $_SESSION['user']['lastname'] = (string)$bean->lastname;
+        $_SESSION['user']['id'] = (string)$bean->id;
         $_SESSION['user']['email'] = (string)$bean->email;
-        $_SESSION['user']['password'] = (string)$bean->password;
-        $_SESSION['user']['job'] = (string)$bean->job;
-        $_SESSION['user']['hourprice'] = (float)$bean->hour_price;
     }
 }

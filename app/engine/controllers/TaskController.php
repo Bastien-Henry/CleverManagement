@@ -13,6 +13,8 @@ class TaskController extends WalrusController
 {
 	public function index()
 	{
+        die('hellotask');
+        
         $res = $this->model('task')->index();
         if empty($res) {
         	$this->register('message', 'no task found');
@@ -22,6 +24,11 @@ class TaskController extends WalrusController
 
         $this->setView('index');
 	}
+
+    public function find($id)
+    {
+        $res = $this->model('task')->find($id);
+    }
 
     public function create()
     {
@@ -41,5 +48,15 @@ class TaskController extends WalrusController
                 $this->go('/CleverManagement/task/');
             }
         }
+    }
+
+    public function delete($id)
+    {
+        $res = $this->model('task')->delete($id);
+    }
+
+    public function edit($id)
+    {
+        $res = $this->model('task')->edit($id);
     }
 }

@@ -14,7 +14,8 @@ class HelloController extends WalrusController
 
     public function run()
     {
-        $this->register('speak', 'Hello World!');
+        $this->register('username', 'lel');
         $this->setView('world');
+        var_dump($_SESSION);
     }
 }
