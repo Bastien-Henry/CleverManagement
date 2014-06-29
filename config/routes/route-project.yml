@@ -21,3 +21,9 @@ _project_delete:
     filters:
         require:
             id: '[1-9]+'
+
+_project_edit:
+	path:   'clevermanagement/project/:id/edit'
+	controller:   'ProjectController'
+	action: 'edit'
+	method: 'POST'

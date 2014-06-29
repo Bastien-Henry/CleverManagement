@@ -13,6 +13,8 @@ class TaskController extends WalrusController
 {
 	public function index()
 	{
+        die('hellotask');
+        
         $res = $this->model('task')->index();
         if empty($res) {
         	$this->register('message', 'no task found');
