@@ -5,7 +5,9 @@
     <title>Walrus welcome page</title>
 </head>
 <body>
-<h1>Test : {{test}}</h1>
-<a href="/CleverManagement/project/create">Nouveau</a>
+<a href="/CleverManagement/project/create">Nouveau</a><br>
+{% for project in projects %}
+	{{project.name}}&nbsp;<a href="project/{{project.id}}/delete">Supprimer</a><br>
+{% endfor %}
 </body>
 </html>

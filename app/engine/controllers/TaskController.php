@@ -23,6 +23,11 @@ class TaskController extends WalrusController
         $this->setView('index');
 	}
 
+    public function find($id)
+    {
+        $res = $this->model('task')->find($id);
+    }
+
     public function create()
     {
         $this->setView('create');
@@ -41,5 +46,15 @@ class TaskController extends WalrusController
                 $this->go('/CleverManagement/task/');
             }
         }
+    }
+
+    public function delete($id)
+    {
+        $res = $this->model('task')->delete($id);
+    }
+
+    public function edit($id)
+    {
+        $res = $this->model('task')->edit($id);
     }
 }

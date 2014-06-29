@@ -11,7 +11,7 @@ _register:
     action: 'signup'
     method: 'POST'
 
-login:
+_login:
     path: 'clevermanagement/signin'
     controller: 'UserController'
     action: 'signin'

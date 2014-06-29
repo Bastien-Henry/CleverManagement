@@ -35,7 +35,7 @@ echo $form->render();
         }
     }
 
-     public function signin()
+    public function signin()
     {
      $form = new WalrusForm('form_signin');
 echo $form->render();
