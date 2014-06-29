@@ -17,17 +17,17 @@ class Project
 		return true;
 	}
 
-    // public function find($id)
-    // {
-    //     $project = R::load('projects', $id);
+    public function find($id)
+    {
+        $project = R::load('projects', $id);
 
-    //     if($project->getProperties()['id'] == 0)
-    //     {
-    //         return array('project.not_found' => 'project doesnt exist');
-    //     }
+        if($project->getProperties()['id'] == 0)
+        {
+            return array('project.not_found' => 'project doesnt exist');
+        }
 
-    //     return $project;
-    // }
+        return $project;
+    }
 
     public function index()
     {
@@ -36,23 +36,21 @@ class Project
         return $projects;
     }
 
-    // public function edit($id)
-    // {
-    //     $project = R::load('projects', $id);
+    public function edit($id)
+    {
+        $project = R::load('projects', $id);
 
-    //     if(empty($_POST['name']))
-    //     {
-    //         return array('name.empty' => 'Name can\'t be empty');
-    //     }
+        if(empty($_POST['name']))
+        {
+            return array('name.empty' => 'Name can\'t be empty');
+        }
 
-    //     $project->name = $_POST['name'];
-    //     $project->description = $_POST['description'];
-    //     $project->startline = $_POST['startline'];
-    //     $project->deadline = $_POST['deadline'];
+        $project->name = $_POST['name'];
+        $project->description = $_POST['description'];
 
-    //     R::store($project);
-    //     return $project;
-    // }
+        R::store($project);
+        return $project;
+    }
 
 	public function delete($id)
     {

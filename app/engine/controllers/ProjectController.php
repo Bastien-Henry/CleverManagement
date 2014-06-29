@@ -43,6 +43,36 @@ class ProjectController extends WalrusController
     	$this->setView('create');
     }
 
+    public function edit($id)
+    {
+        if(!empty($_POST))
+        {
+            $res = $this->model('project')->edit($id);
+            if(!empty($res['name.empty']))
+            {
+                $this->register('errors', $res);
+            }
+            else
+            {
+                $this->go('/CleverManagement/project');
+            }
+        }
+
+        $result = $this->model('project')->find($id);
+
+        if(is_array($result))
+        {
+            $this->register('error', 'Project doesnt exist');
+        }
+        else
+        {
+            $this->register('project', $result);
+        }
+
+        $this->setView('project/edit');
+
+    }
+
     public function delete($id)
     {
         $result = $this->model('project')->delete($id);

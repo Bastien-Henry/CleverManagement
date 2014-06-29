@@ -7,7 +7,8 @@
 <body>
 <a href="/CleverManagement/project/create">Nouveau</a><br>
 {% for project in projects %}
-	{{project.name}}&nbsp;<a href="{{project.id}}/delete">Supprimer</a><br>
+	{{project.name}}&nbsp;<a href="{{project.id}}/delete">Supprimer</a>
+							<a href="project/{{project.id}}/edit">Editer</a><br>
 {% endfor %}
 </body>
 </html>
