@@ -17,6 +17,15 @@ class Project
 
         R::store($project);
 
+
+        //$user = R::load('users', $_SESSION['user']['id']);
+
+        //$project_user = R::dispense('projects_users');
+        //$project_user->admin = $user->getProperties()['id'];
+        //$project->getProperties()['id']
+
+
+
         return true;
     }
 
