@@ -2,8 +2,8 @@
 
 _home:
     path:   'clevermanagement'
-    controller:   'HelloController'
-    action: 'run'
+    controller:   'UserController'
+    action: 'signin'
 
 _register:
     path: 'clevermanagement/signup'
