@@ -1,10 +1,5 @@
 # Routes
 
-_home:
-    path:   'clevermanagement'
-    controller:   'UserController'
-    action: 'signin'
-
 _register:
     path: 'clevermanagement/signup'
     controller: 'UserController'
@@ -16,3 +11,9 @@ _login:
     controller: 'UserController'
     action: 'signin'
     method: 'POST'
+
+#_logout:
+#    path: 'clevermanagement/signin'
+#    controller: 'UserController'
+#    action: 'signout'
+#    method: 'POST'

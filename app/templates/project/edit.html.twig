@@ -7,7 +7,7 @@
 <body>
 	<h3>Edit Post</h3>
 
-	<form action="/CleverManagement/project/{{ project.id }}/edit" method="POST">
+	<form action="/CleverManagement/{{ project.id }}/edit" method="POST">
 	    <input type="text" name="name" placeholder="name" value="{{ project.name }}"/>
 	    <br>
 	    {% if errors['name.empty'] is defined %}

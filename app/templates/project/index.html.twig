@@ -5,14 +5,14 @@
     <title>Walrus welcome page</title>
 </head>
 <body>
-	<a href="/CleverManagement/project/create">Nouveau</a><br><br>
+	<a href="/CleverManagement/create">Nouveau</a><br><br>
 	<table>
 	{% for project in projects %}
 		<tr>
 			<td>{{project.name}}</td>
-			<td><a href="/CleverManagement/project/{{project.id}}/show">Voir</a></td>
-			<td><a href="/CleverManagement/project/{{project.id}}/delete">Supprimer</a></td>
-			<td><a href="/CleverManagement/project/{{project.id}}/edit">Editer</a></td>
+			<td><a href="/CleverManagement/{{project.id}}/show">Voir</a></td>
+			<td><a href="/CleverManagement/{{project.id}}/delete">Supprimer</a></td>
+			<td><a href="/CleverManagement/{{project.id}}/edit">Editer</a></td>
 		</tr>
 	{% endfor %}
 	</table>

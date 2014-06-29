@@ -1,16 +1,16 @@
 _project:
-    path: 'clevermanagement/project'
+    path: 'clevermanagement'
     controller: 'ProjectController'
     action: 'index'
 
 _project_create:
-    path: 'clevermanagement/project/create'
+    path: 'clevermanagement/create'
     controller: 'ProjectController'
     action: 'create'
     method: 'POST'
 
 _project_show:
-    path: 'clevermanagement/project/:id/show'
+    path: 'clevermanagement/:id/show'
     controller: 'ProjectController'
     action: 'show'
     filters:
@@ -18,7 +18,7 @@ _project_show:
             id: '[1-9]+'
 
 _project_delete:
-    path:   'clevermanagement/project/:id/delete'
+    path:   'clevermanagement/:id/delete'
     controller:   'ProjectController'
     action: 'delete'
     filters:
@@ -26,7 +26,7 @@ _project_delete:
             id: '[1-9]+'
 
 _project_edit:
-	path:   'clevermanagement/project/:id/edit'
+	path:   'clevermanagement/:id/edit'
 	controller:   'ProjectController'
 	action: 'edit'
 	method: 'POST'

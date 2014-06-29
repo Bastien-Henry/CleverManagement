@@ -34,8 +34,8 @@ class ProjectController extends WalrusController
         // $form->check();
         if(!empty($_POST))
         {
-        $this->model('project')->create();
-            return $this->index();
+            $this->model('project')->create();
+            $this->go('/CleverManagement');
         }
 
         echo $form->render();
@@ -54,7 +54,7 @@ class ProjectController extends WalrusController
             }
             else
             {
-                $this->go('/CleverManagement/project');
+                $this->go('/CleverManagement');
             }
         }
 
@@ -76,7 +76,7 @@ class ProjectController extends WalrusController
     {
         $res = $this->model('project')->delete($id);
 
-        return $this->index();
+        $this->go('/CleverManagement');
     }
 
     public function show($id)

@@ -3,7 +3,7 @@
 form_project_create:
   form:
     method: POST
-    action: /clevermanagement/project/create
+    action: /clevermanagement/create
     submit: Envoyer
     structure: table
 
