@@ -4,25 +4,15 @@ _home:
     path:   'clevermanagement'
     controller:   'HelloController'
     action: 'run'
-    method: 'GET'
 
-_user:
-    path:   'clevermanagement/user'
-    controller:   'UserController'
-    action: 'run'
+_register:
+    path: 'clevermanagement/signup'
+    controller: 'UserController'
+    action: 'signup'
+    method: 'POST'
 
-_project_create:
-	path:   'clevermanagement/project/create'
-	controller:   'ProjectController'
-	action: 'create'
-	method: 'POST'
-
-_project_delete:
-	path:   'clevermanagement/project/:id/delete'
-	controller:   'ProjectController'
-	action: 'delete'
-
-_project:
-	path:   'clevermanagement/project'
-	controller:   'ProjectController'
-	action: 'run'
+login:
+    path: 'clevermanagement/signin'
+    controller: 'UserController'
+    action: 'signin'
+    method: 'POST'
