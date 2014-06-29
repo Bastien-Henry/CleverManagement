@@ -11,6 +11,8 @@ class Project
         $project = R::dispense('projects');
 
         $project->name = $_POST['name'];
+        $project->startline = $_POST['startline'];
+        $project->deadline = $_POST['deadline'];
         $project->description = $_POST['description'];
 
         R::store($project);
