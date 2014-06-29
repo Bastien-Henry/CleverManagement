@@ -58,25 +58,33 @@ class ProjectController extends WalrusController
             }
         }
 
-        $result = $this->model('project')->find($id);
+        $res = $this->model('project')->show($id);
 
-        if(is_array($result))
+        if(is_array($res))
         {
             $this->register('error', 'Project doesnt exist');
         }
         else
         {
-            $this->register('project', $result);
+            $this->register('project', $res);
         }
 
-        $this->setView('project/edit');
-
+        $this->setView('edit');
     }
 
     public function delete($id)
     {
-        $result = $this->model('project')->delete($id);
+        $res = $this->model('project')->delete($id);
 
         return $this->index();
+    }
+
+    public function show($id)
+    {
+        $res = $this->model('project')->show($id);
+
+        $this->register('project', $res);
+
+        $this->setView('show');
     }
 }

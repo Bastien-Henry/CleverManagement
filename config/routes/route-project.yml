@@ -9,10 +9,13 @@ _project_create:
     action: 'create'
     method: 'POST'
 
-#_project_show:
-#    path:'clevermanagement/project/:id'
-#    controller: 'ProjectController'
-#    action: 'find'
+_project_show:
+    path: 'clevermanagement/project/:id/show'
+    controller: 'ProjectController'
+    action: 'show'
+    filters:
+        require:
+            id: '[1-9]+'
 
 _project_delete:
     path:   'clevermanagement/project/:id/delete'

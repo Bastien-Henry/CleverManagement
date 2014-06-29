@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CleverManagement welcome page</title>
+</head>
+<body>
+	<h3>{{project.name|raw}}</h3>
+
+	<p>
+		{{project.description|raw}}
+	</p>
+	<br>
+	<a href="/Clevermanagement/project/{{project.id}}/edit">Editer</a> | <a href="/Clevermanagement/project/{{project.id}}/delete">Supprimer</a>
+</body>
+</html>
+
+

@@ -18,7 +18,7 @@ class Project
         return true;
     }
 
-    public function find($id)
+    public function show($id)
     {
         $project = R::load('projects', $id);
 

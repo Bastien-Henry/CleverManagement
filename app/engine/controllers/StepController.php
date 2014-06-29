@@ -28,6 +28,8 @@ class StepController extends WalrusController
     public function find($id)
     {
         $res = $this->model('step')->find($id);
+
+        $this->setView('show');
     }
 
     public function create()
