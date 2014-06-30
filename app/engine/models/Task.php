@@ -27,12 +27,12 @@ class Task
 
     public function delete($id)
     {
-        $task = $this->find($id);
+        $task = $this->show($id);
 
-        if($_SESSION['user']['id'] != $task->getProperties()['users_id'])
-        {
-            return array('user.forbidden' => 'Vous n\'avez pas les droits de faire ca');
-        }
+        // if($_SESSION['user']['id'] != $task->getProperties()['users_id'])
+        // {
+        //     return array('user.forbidden' => 'Vous n\'avez pas les droits de faire ca');
+        // }
 
         R::trash($task);
     }

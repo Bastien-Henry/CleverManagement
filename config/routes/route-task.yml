@@ -3,6 +3,11 @@ _task_create:
     controller: 'taskController'
     action: 'create'
 
+_task_show:
+    path: 'clevermanagement/:id_project/show/step/:id_step/show/task/:id_task/show'
+    controller: 'taskController'
+    action: 'show'
+
 _task_delete:
     path: 'clevermanagement/:id_project/show/step/:id_step/show/task/:id_task/delete'
     controller: 'taskController'

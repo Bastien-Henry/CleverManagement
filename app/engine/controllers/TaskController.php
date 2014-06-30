@@ -11,6 +11,17 @@ use Walrus\core\WalrusForm;
  */
 class TaskController extends WalrusController
 {
+    public function show($id_project, $id_step, $id_task)
+    {
+        $task = $this->model('task')->show($id_task);
+
+        $this->register('task', $task);
+        $this->register('step_id', $id_step);
+        $this->register('project_id', $id_project);
+
+        $this->setView('show');
+    }
+
     public function create($id_project, $id_step)
     {
         $this->setView('create');
@@ -34,7 +45,9 @@ class TaskController extends WalrusController
 
     public function delete($id_project, $id_step, $id_task)
     {
+
         $this->model('task')->delete($id_task);
+
         $this->go('/CleverManagement/'.$id_project.'/show/step/'.$id_step.'/show');
     }
 
