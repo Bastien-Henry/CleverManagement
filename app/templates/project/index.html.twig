@@ -1,19 +1,82 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Walrus welcome page</title>
-</head>
-<body>
-	<a href="/CleverManagement/create">Nouveau projet</a><br><br>
+  		<title>Clever Management - Make your projects crystal</title>
+  		<link rel="stylesheet" type="text/css" href="main.css">
+  		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="assets/styles/bootstrap.css">
+		<link rel="stylesheet" href="assets/styles/main.css">
+	</head>
+ 	<body>
+ 		<div class="navbar">
+		  <div class="navbar-inner">
+		    <a class="brand" href="#"><img src="assets/images/logo.png"></a>
+		    <ul class="nav">
+		      <li><a href="clevermanagement/signup">Log In</a></li>
+		      <li><a href="">Dashboard</a></li>
+		    </ul>
+		  </div>
+		</div>
+		<div class="container-fluid">
+		  <div class="row-fluid">
+		    <div class="span2 sidebar">
+		    	<ul class="span2 sidebar-menu">
+		    		<a href="new-project.php">
+		    			<li class="current">
+		    				<span class="text-li-sidebar">
+		    					<a href="/CleverManagement/create" class="text-li-sidebar">Nouveau projet</a>
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Add Directory
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Directory 1
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Directory 2
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Directory 3
+		    				</span>
+		    			</li>
+		    		</a>
+		    	</ul>
+		      <!--Sidebar content-->
+		    </div>
 	<table>
 	{% for project in projects %}
-		<tr>
+<!-- 		<tr>
 			<td>{{project.name}}</td>
 			<td><a href="/CleverManagement/{{project.id}}/show">Voir</a></td>
 			<td><a href="/CleverManagement/{{project.id}}/delete">Supprimer</a></td>
 			<td><a href="/CleverManagement/{{project.id}}/edit">Editer</a></td>
-		</tr>
+		</tr> -->
+		<div class="span2 directory">
+	      	<div class="title-directory">
+	      		<span style='position:relative;top:5px;'>{{project.name}}</span>
+	      	</div>
+	      	<div class="descr-directory">
+	      		<p>
+		      		{{project.description}}
+		      	</p>
+	      	</div>
+	      </div>
 	{% endfor %}
 	</table>
 </body>
