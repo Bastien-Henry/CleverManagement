@@ -18,15 +18,15 @@ _project_show:
             id: '[0-9]+'
 
 _project_delete:
-    path:   'clevermanagement/:id/delete'
-    controller:   'ProjectController'
+    path: 'clevermanagement/:id/delete'
+    controller: 'ProjectController'
     action: 'delete'
     filters:
         require:
             id: '[0-9]+'
 
 _project_edit:
-	path:   'clevermanagement/:id/edit'
-	controller:   'ProjectController'
-	action: 'edit'
-	method: 'POST'
+    path: 'clevermanagement/:id/edit'
+    controller: 'ProjectController'
+    action: 'edit'
+    method: 'POST'

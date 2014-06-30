@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CleverManagement welcome page</title>
+    <title>SHOW</title>
 </head>
 <body>
-	<h3>{{project.name|raw}}</h3>
+	<h3>{{step.name|raw}}</h3>
 
 	<p>
-		{{project.description|raw}}
+		{{step.description|raw}}
 	</p>
 	<br><br>
-	<a href="/Clevermanagement/{{project.id}}/edit">Editer</a> | <a href="/Clevermanagement/{{project.id}}/delete">Supprimer</a><br>
+	<a href="/Clevermanagement/{{project.id}}/show/step/{{step.id}}/edit">Editer</a> | <a href="/Clevermanagement/{{project.id}}/show/{{step.id}}/delete">Supprimer</a><br>
 	<strong>STEPS</strong><br><br>
 	<a href="/Clevermanagement/{{project.id}}/show/step/create">Nouvelle etape</a><br><br>
 	<strong>{{message}}</strong><br>
@@ -27,5 +27,3 @@
 	{% endfor %}
 </body>
 </html>
-
-
