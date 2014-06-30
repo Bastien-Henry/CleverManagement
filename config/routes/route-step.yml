@@ -1,7 +1,7 @@
 _step_show:
-    path: 'clevermanagement/:id_project/show/step/:id/show'
+    path: 'clevermanagement/:id_project/show/step/:id_step/show'
     controller: 'StepController'
-    action: 'find'
+    action: 'show'
     filters:
         require:
             id: '[0-9]+'

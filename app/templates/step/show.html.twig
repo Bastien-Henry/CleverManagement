@@ -11,18 +11,18 @@
 		{{step.description|raw}}
 	</p>
 	<br><br>
-	<a href="/Clevermanagement/{{project.id}}/show/step/{{step.id}}/edit">Editer</a> | <a href="/Clevermanagement/{{project.id}}/show/{{step.id}}/delete">Supprimer</a><br>
+	<a href="/Clevermanagement/{{project_id}}/show/step/{{step.id}}/edit">Editer</a> | <a href="/Clevermanagement/{{project_id}}/show/{{step.id}}/delete">Supprimer</a><br>
 	<strong>STEPS</strong><br><br>
-	<a href="/Clevermanagement/{{project.id}}/show/step/create">Nouvelle etape</a><br><br>
+	<a href="/Clevermanagement/{{project_id}}/show/step/create">Nouvelle etape</a><br><br>
 	<strong>{{message}}</strong><br>
 	<br>
 	{% for step in steps %}
 		{% if step.id_project == project.id %}
 			name : {{ step.name }}<br>
 			description : {{ step.description }}<br>
-			<a href="/Clevermanagement/{{project.id}}/show/{{step.id}}/delete">Supprimer</a><br>
-			<a href="/Clevermanagement/{{project.id}}/show/step/{{step.id}}/edit">Editer</a><br>
-			<a href="/Clevermanagement/{{project.id}}/show/step/{{step.id}}/show">Voir</a><br>
+			<a href="/Clevermanagement/{{project_id}}/show/{{step.id}}/delete">Supprimer</a><br>
+			<a href="/Clevermanagement/{{project_id}}/show/step/{{step.id}}/edit">Editer</a><br>
+			<a href="/Clevermanagement/{{project_id}}/show/step/{{step.id}}/show">Voir</a><br>
 		{% endif %}
 	{% endfor %}
 </body>

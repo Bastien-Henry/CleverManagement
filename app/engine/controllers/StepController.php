@@ -11,9 +11,12 @@ use Walrus\core\WalrusForm;
  */
 class StepController extends WalrusController
 {
-    public function find($id)
+    public function show($id_project, $id_step)
     {
-        $res = $this->model('step')->find($id);
+        $step = $this->model('step')->find($id_step);
+
+        $this->register('step', $step);
+        $this->register('project_id', $id_project);
 
         $this->setView('show');
     }
