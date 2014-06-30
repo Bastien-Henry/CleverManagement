@@ -6,7 +6,7 @@ use R;
 
 class Task
 {
-    public function find($id)
+    public function show($id)
     {
         $task = R::load('tasks', $id);
 
@@ -56,7 +56,7 @@ class Task
         return $task;
     }
 
-    public function create()
+    public function create($id_step)
     {
         $task = R::dispense('tasks');
 
@@ -70,11 +70,11 @@ class Task
         //___________________________________
 
         $task->name = $_POST['name'];
+        $task->id_step = $id_step;
         $task->descrption = $_POST['description'];
-        $task->urgent = $_POST['urgent'];
+        // $task->urgent = $_POST['urgent'];
         $task->startline = $_POST['startline'];
         $task->deadline = $_POST['deadline'];
-        //$task->id_step = $_POST['step'];        hidden field storing project id
 
         R::store($task);
 

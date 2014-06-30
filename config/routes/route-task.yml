@@ -1,35 +1,19 @@
-_task:
-    path:   'clevermanagement/task'
-    controller:   'taskController'
-    action: 'index'
-
-_task_show:
-    path:   'clevermanagement/task/:id'
-    controller:   'taskController'
-    action: 'find'
-    filters:
-        require:
-            id: '[0-9]+'
-
 _task_create:
-    path:   'clevermanagement/task/create'
-    controller:   'taskController'
+    path: 'clevermanagement/:id_project/show/step/:id_step/show/task/create'
+    controller: 'taskController'
     action: 'create'
-    filters:
-        require:
-            id: '[0-9]+'
 
 _task_delete:
-    path:   'clevermanagement/task/:id/delete'
-    controller:   'taskController'
+    path: 'clevermanagement/:id_project/show/step/:id_step/show/task/:id_task/delete'
+    controller: 'taskController'
     action: 'delete'
     filters:
         require:
             id: '[0-9]+'
 
 _task_edit:
-    path:   'clevermanagement/task/:id/edit'
-    controller:   'taskController'
+    path: 'clevermanagement/:id_project/show/step/:id_step/show/task/:id_task/edit'
+    controller: 'taskController'
     action: 'edit'
     filters:
         require:
