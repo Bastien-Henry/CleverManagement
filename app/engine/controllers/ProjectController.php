@@ -85,6 +85,15 @@ class ProjectController extends WalrusController
 
         $this->register('project', $res);
 
+        $step = $this->model('step')->index();
+        if (empty($step)) {
+            $this->register('message', 'no step found');
+        } else {
+            $this->register('message', 'All Steps :');
+        }
+
+        $this->register('steps', $step);
+
         $this->setView('show');
     }
 }

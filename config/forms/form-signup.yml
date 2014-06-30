@@ -4,6 +4,7 @@ form_signup:
     action: /clevermanagement/signup
     submit: Sign up
     structure: table
+    class: form-signin
 
   fields:
     type:
@@ -14,26 +15,32 @@ form_signup:
       type: text
       required: true
       label: Firstname
+      class: input-block-level
     lastname:
       type: text
       required: true
       label: Lastname
+      class: input-block-level
     email:
       type: text
       required: true
       label: Email
+      class: input-block-level
       check:
         validate: /^\w{3,10}$/
     password:
       type: password
       id: helloworld
+      class: input-block-level
       check:
         required: true
     job:
       type: text
       required: true
       label: Job
+      class: input-block-level
     hour_price:
       type: text
       required: true
       label: Hour Price
+      class: input-block-level

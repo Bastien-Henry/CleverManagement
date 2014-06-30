@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  		<title>Clever Management - Make your projects crystal</title>
+  		<link rel="stylesheet" type="text/css" href="main.css">
+  		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="assets/styles/bootstrap.css">
+	</head>
+ 	<body>
+ 		<div class="navbar">
+		  <div class="navbar-inner">
+		    <a class="brand" href="#"><img src="logo.png"></a>
+		    <ul class="nav">
+		      <li><a href="index.php">Log In</a></li>
+		    </ul>
+		  </div>
+		</div>
+		<div class="row-log">
+			<div class="span4 offset5">
+
+		      <form class="form-signin">
+		        <h2 class="form-signin-heading">Log In</h2>
+		        <input type="text" class="input-block-level" placeholder="Email address" required>
+		        <input type="password" class="input-block-level" placeholder="Password" required>
+		        <label class="checkbox">
+		          <input type="checkbox" value="remember-me"> Remember me
+		        </label>
+		        <button class="btn btn-block btn-inverse" type="submit">Log in</button>
+		      </form>
+
+		    </div> <!-- /container -->
+
+		    <div class="span5 offset3">
+
+		    <!-- {{formSignUp}} -->
+		      <form class="form-signin" action="/clevermanagement/signup" method="POST">
+		        <h2 class="form-signin-heading">Sign In</h2>
+		        <input type="hidden" value="signup" name="type">
+		        <input type="text" class="input-block-level" placeholder="firstname" name="firstname" required>
+		        <input type="text" class="input-block-level" placeholder="lastname" name="lastname" required>
+		        <input type="email" class="input-block-level" placeholder="email" name="email" required>
+		        <input type="password" class="input-block-level" placeholder="Password" name="password" required>
+		        <input type="text" class="input-block-level" placeholder="job" name="job" required>
+		        <input type="text" class="input-block-level" name="hour_price" placeholder="Hour price &euro; / h" required> 
+		        <button class="btn btn-lg btn-inverse btn-block" type="submit">Sign in</button>
+		      </form>
+
+		    </div> <!-- /container -->
+	    </div>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="bootstrap.js"></script>
+	</body>
+</html>
