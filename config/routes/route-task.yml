@@ -9,7 +9,7 @@ _task_show:
     action: 'find'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
 
 _task_create:
     path:   'clevermanagement/task/create'
@@ -17,7 +17,7 @@ _task_create:
     action: 'create'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
 
 _task_delete:
     path:   'clevermanagement/task/:id/delete'
@@ -25,7 +25,7 @@ _task_delete:
     action: 'delete'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
 
 _task_edit:
     path:   'clevermanagement/task/:id/edit'
@@ -33,4 +33,4 @@ _task_edit:
     action: 'edit'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
