@@ -9,7 +9,7 @@ _step_show:
     action: 'find'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
 
 _step_create:
     path:   'clevermanagement/step/create'
@@ -22,7 +22,7 @@ _step_delete:
     action: 'delete'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
 
 _step_edit:
     path:   'clevermanagement/step/:id/edit'
@@ -30,4 +30,4 @@ _step_edit:
     action: 'edit'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'

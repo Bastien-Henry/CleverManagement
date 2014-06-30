@@ -35,7 +35,7 @@ class User
         $user->email = $_POST['email'];
         $user->password = hash("sha256", 'salt' . $_POST['password']);
         $user->job = $_POST['job'];
-        $user->hourprice = $_POST['hour_price'];
+        $user->hourPrice = $_POST['hour_price'];
 
         R::store($user);
 

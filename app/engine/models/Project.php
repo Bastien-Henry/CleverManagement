@@ -14,16 +14,15 @@ class Project
         $project->startline = $_POST['startline'];
         $project->deadline = $_POST['deadline'];
         $project->description = $_POST['description'];
-        R::store($project);
+        $id = R::store($project);
 
-// to test when session is working
-        /*$user = R::load('users', $_SESSION['user']['id']);
-
-        $relation = R::dispense('projects_users');
-        $relation->project = $project;
-        $relation->user = $user;
-        $relation->admin = 1;
-        R::store($relation);*/
+        $user = R::load('users', $_SESSION['user']['id']);
+        $newproject = R::load('projects', $id);
+        
+        R::exec('INSERT INTO projects_users (id_user, id_project, admin) VALUES (:user, :project, 1)', array(
+            ':user' => $user->getProperties()['id'], 
+            ':project' => $newproject->getProperties()['id'])
+        );
 
         return true;
     }

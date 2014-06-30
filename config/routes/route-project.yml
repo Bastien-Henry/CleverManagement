@@ -15,7 +15,7 @@ _project_show:
     action: 'show'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
 
 _project_delete:
     path:   'clevermanagement/:id/delete'
@@ -23,7 +23,7 @@ _project_delete:
     action: 'delete'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
 
 _project_edit:
 	path:   'clevermanagement/:id/edit'
