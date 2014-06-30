@@ -1,7 +1,7 @@
 form_step_create:
   form:
     method: POST
-    action: /clevermanagement/6/show/step/create
+    action: /clevermanagement/2/show/step/create
     submit: Create
     structure: table
 
