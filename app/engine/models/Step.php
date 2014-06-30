@@ -18,6 +18,18 @@ class Step
         return $step;
     }
 
+    public function show($id)
+    {
+        $step = R::load('steps', $id);
+
+        if($step->getProperties()['id'] == 0)
+        {
+            return array('step.not_found' => 'Step doesnt exist');
+        }
+
+        return $step;
+    }
+
     public function index()
     {
         $steps = R::findAll('steps');
@@ -55,7 +67,7 @@ class Step
         return $step;
     }
 
-    public function create()
+    public function create($id_project)
     {
         $step = R::dispense('steps');
 
@@ -67,13 +79,12 @@ class Step
         if(!empty($errors))
             return $errors;
         //___________________________________
-
         $step->name = $_POST['name'];
-        $step->descrption = $_POST['description'];
+        $step->id_project = $id_project;
+        $step->description = $_POST['description'];
         $step->startline = $_POST['startline'];
         $step->deadline = $_POST['deadline'];
         //$step->id_project = $_POST['project'];        hidden field storing project id
-
         R::store($step);
 
         return true;

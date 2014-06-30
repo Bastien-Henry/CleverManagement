@@ -1,33 +1,28 @@
-_step:
-    path:   'clevermanagement/step'
-    controller:   'StepController'
-    action: 'index'
-
 _step_show:
-    path:   'clevermanagement/step/:id'
-    controller:   'StepController'
+    path: 'clevermanagement/:id_project/show/step/:id/show'
+    controller: 'StepController'
     action: 'find'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
 
 _step_create:
-    path:   'clevermanagement/step/create'
-    controller:   'StepController'
+    path: 'clevermanagement/:id_project/show/step/create'
+    controller: 'StepController'
     action: 'create'
 
 _step_delete:
-    path:   'clevermanagement/step/:id/delete'
-    controller:   'StepController'
+    path: 'clevermanagement/:id_project/show/:id_step/delete'
+    controller: 'StepController'
     action: 'delete'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
 
 _step_edit:
-    path:   'clevermanagement/step/:id/edit'
-    controller:   'StepController'
+    path: 'clevermanagement/:id_project/show/step/:id_step/edit'
+    controller: 'StepController'
     action: 'edit'
     filters:
         require:
-            id: '[1-9]+'
+            id: '[0-9]+'
