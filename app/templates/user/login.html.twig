@@ -14,6 +14,7 @@
 		    <ul class="nav">
 		      <li><a href="signup">Log In</a></li>
 		      <li><a href="">Dashboard</a></li>
+		      <li><a href="deconnection">Deconnexion</a></li>
 		    </ul>
 		  </div>
 		</div>
@@ -21,14 +22,11 @@
 			<div class="span4 offset5">
 
 		      <form class="form-signin" method="post" action="/clevermanagement/signin">
-		        <h2 class="form-signin-heading">Log In</h2>
+		        <h2 class="form-signin-heading">Se connecter</h2>
 		        <input type="hidden" name="type" value="signin">
 		        <input type="text" class="input-block-level" placeholder="Email address" name="email" required>
 		        <input type="password" class="input-block-level" placeholder="Password" name="password" required>
-		        <label class="checkbox">
-		          <input type="checkbox" value="remember-me"> Remember me
-		        </label>
-		        <button class="btn btn-block btn-inverse" type="submit">Log in</button>
+		        <button class="btn btn-block btn-inverse" type="submit">Se connecter</button>
 		      </form>
 
 		    </div> <!-- /container -->
@@ -37,7 +35,7 @@
 
 		    <!-- {{formSignUp}} -->
 		      <form class="form-signin" action="/clevermanagement/signup" method="POST">
-		        <h2 class="form-signin-heading">Sign In</h2>
+		        <h2 class="form-signin-heading">S'inscrire</h2>
 		        <input type="hidden" value="signup" name="type">
 		        <input type="text" class="input-block-level" placeholder="firstname" name="firstname" required>
 		        <input type="text" class="input-block-level" placeholder="lastname" name="lastname" required>
@@ -45,7 +43,7 @@
 		        <input type="password" class="input-block-level" placeholder="Password" name="password" required>
 		        <input type="text" class="input-block-level" placeholder="job" name="job" required>
 		        <input type="text" class="input-block-level" name="hour_price" placeholder="Hour price &euro; / h" required> 
-		        <button class="btn btn-lg btn-inverse btn-block" type="submit">Sign in</button>
+		        <button class="btn btn-lg btn-inverse btn-block" type="submit">S'inscrire</button>
 		      </form>
 
 		    </div> <!-- /container -->
