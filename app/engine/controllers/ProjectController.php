@@ -54,7 +54,12 @@ class ProjectController extends WalrusController
 
         $project = $this->model('project')->show($id);
         foreach ($form->getFields() as $field => $arrayOfAttribute) {
-            $arrayOfAttribute['value'] = $project->getProperties()[$field];
+            if ($arrayOfAttribute['type'] == 'textarea') {
+                $arrayOfAttribute['text'] = $project->getProperties()[$field];
+            } else {
+                $arrayOfAttribute['value'] = $project->getProperties()[$field];
+            }
+            
             $form->setFields($field, $arrayOfAttribute);
         }
 
@@ -94,11 +99,11 @@ class ProjectController extends WalrusController
 
         $this->register('project', $res);
 
-        $step = $this->model('step')->index();
+        $step = $this->model('step')->index($id);
         if (empty($step)) {
-            $this->register('message', 'no step found');
+            $this->register('message', "Pas d'etape trouvee pour ce projet");
         } else {
-            $this->register('message', 'All Steps :');
+            $this->register('message', 'Etapes :');
         }
 
         $this->register('steps', $step);

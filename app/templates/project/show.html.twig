@@ -17,13 +17,11 @@
 	<strong>{{message}}</strong><br>
 	<br>
 	{% for step in steps %}
-		{% if step.id_project == project.id %}
-			Nom : {{ step.name }}<br>
-			Description : {{ step.description }}<br>
-			<a href="/Clevermanagement/{{project.id}}/{{step.id}}/delete">Supprimer</a><br>
-			<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/edit">Editer</a><br>
-			<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/show">Voir</a><br>
-		{% endif %}
+		Nom : {{ step.name }}<br>
+		Description : {{ step.description }}<br>
+		<a href="/Clevermanagement/{{project.id}}/{{step.id}}/delete">Supprimer</a><br>
+		<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/edit">Editer</a><br>
+		<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/show">Voir</a><br>
 	{% endfor %}
 </body>
 </html>

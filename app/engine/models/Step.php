@@ -18,9 +18,9 @@ class Step
         return $step;
     }
 
-    public function index()
+    public function index($id_project)
     {
-        $steps = R::findAll('steps');
+        $steps = R::findAll('steps', 'id_project = ?', array($id_project));
 
         return $steps;
     }
@@ -72,7 +72,6 @@ class Step
         $step->description = $_POST['description'];
         $step->startline = $_POST['startline'];
         $step->deadline = $_POST['deadline'];
-        //$step->id_project = $_POST['project'];        hidden field storing project id
         R::store($step);
 
         return true;

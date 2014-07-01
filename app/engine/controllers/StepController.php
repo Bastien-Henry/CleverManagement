@@ -42,7 +42,7 @@ class StepController extends WalrusController
         $form->setForm('action', $formAction);
 		echo $form->render();
 
-        if (isset($_POST['type'])) {
+        if (!empty($_POST)) {
             $res = $this->model('step')->create($id_project);
             if (isset($res['errors'])) {
                 $this->register('errors', $res['errors']);
@@ -70,7 +70,11 @@ class StepController extends WalrusController
 
         $step = $this->model('step')->show($id_step);
         foreach ($form->getFields() as $field => $arrayOfAttribute) {
-            $arrayOfAttribute['value'] = $step->getProperties()[$field];
+            if ($arrayOfAttribute['type'] == 'textarea') {
+                $arrayOfAttribute['text'] = $step->getProperties()[$field];
+            } else {
+                $arrayOfAttribute['value'] = $step->getProperties()[$field];
+            }
             $form->setFields($field, $arrayOfAttribute);
         }
 

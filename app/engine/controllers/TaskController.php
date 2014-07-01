@@ -63,7 +63,11 @@ class TaskController extends WalrusController
 
         $task = $this->model('task')->show($id_task);
         foreach ($form->getFields() as $field => $arrayOfAttribute) {
-            $arrayOfAttribute['value'] = $task->getProperties()[$field];
+            if ($arrayOfAttribute['type'] == 'textarea') {
+                $arrayOfAttribute['text'] = $task->getProperties()[$field];
+            } else {
+                $arrayOfAttribute['value'] = $task->getProperties()[$field];
+            }
             $form->setFields($field, $arrayOfAttribute);
         }
 
