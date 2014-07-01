@@ -53,7 +53,8 @@ class ProjectController extends WalrusController
                 $arrayOfAttribute['text'] = $project->getProperties()[$field];
             } else {
                 if ($field == 'members' || $field == 'additionalAdmins') {
-                    $this->model('project')->retrieveMembers($field, $arrayOfAttribute);
+                    $usersEmail = $this->model('project')->retrieveUsers($id, $field);
+                    $arrayOfAttribute['value'] = implode(',', $usersEmail);
                 } else {
                     $arrayOfAttribute['value'] = $project->getProperties()[$field];
                 }
