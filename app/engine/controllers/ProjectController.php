@@ -26,15 +26,13 @@ class ProjectController extends WalrusController
     public function create()
     {
         $form = new WalrusForm('form_project_create');
-
+        $this->register('myFormCreate', $form->render());
         // $form->check();
         if(!empty($_POST))
         {
             $this->model('project')->create();
             $this->go('/CleverManagement');
         }
-
-        echo $form->render();
 
         $this->setView('create');
     }
