@@ -55,6 +55,6 @@ class UserController extends WalrusController
     {
     	session_destroy();
 
-    	$this->setView('login');
+    	$this->go('/CleverManagement/');
     }
 }
