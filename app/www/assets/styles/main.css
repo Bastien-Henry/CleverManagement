@@ -48,6 +48,50 @@ body
 	background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
 	background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
 	background-repeat: repeat-x;
+	font-weight: bold;
+}
+
+.menu-directory
+{
+	border-top: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	height: 30px;
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	font-size: 15px;
+	background-color: #fafafa;
+	background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+	background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+	background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+	background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+	background-repeat: repeat-x;
+	position: relative;
+	top: 150px;
+}
+
+.edit-project
+{
+	margin-left: 200px;
+}
+
+.delete-project
+{
+	margin-left: 10px;
+}
+
+.edit-project img
+{
+	height: 28px;
+}
+
+.delete-project img
+{
+	height: 28px;
 }
 
 .descr-directory
@@ -104,4 +148,63 @@ a:hover
 {
 	position: relative;
 	top: 5px;
+}
+
+.name-project
+{
+	color: #2980b9;
+	font-size: 20px;
+	background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+	background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+	background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+	background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+	background-repeat: repeat-x;
+	border: 1px solid #d4d4d4;
+	height: 30px;
+	margin-left: 282px;
+	text-align: center;
+	position: relative;
+	bottom: 21px;
+}
+
+.description-project, .action-project,	.steps
+{
+	margin-left: 282px;
+	padding: 10px;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.one-step
+{
+	color:#252f56;
+	font-size: 20px;
+	background-color: #fff;
+	border-top: 1px solid #c6c6c6;
+	border-bottom: 1px solid #c6c6c6;
+	height: 30px;
+	margin-left: 286px;
+	text-align: left;
+	position: relative;
+	bottom: 7px;
+	height: 75px;
+}
+
+.title-steps-project
+{
+	padding-left:40px;
+	background-color: #beccff;
+	height: 30px;
+}
+
+.description-steps-project
+{
+	padding-left:40px;
+	color: #4e556f;
+}
+
+.my-form-create
+{
+	margin-left: 500px;
 }

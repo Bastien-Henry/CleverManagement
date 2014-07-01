@@ -33,7 +33,7 @@ form_project_create:
       id: members-project
       placeholder: Members
       style: width:300px;;height:30px;
-    AdditionnalAdminProject:
+    additionalAdmins:
       type: hidden
       id: add-admin-project
       label: Additional Admin-Project

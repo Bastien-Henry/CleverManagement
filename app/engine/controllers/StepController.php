@@ -49,7 +49,7 @@ class StepController extends WalrusController
             }
             else
             {
-                $this->go('/clevermanagement/'.$id_project.'/show/');
+                $this->go('/clevermanagement/'.$id_project.'/show');
             }
         }
     }

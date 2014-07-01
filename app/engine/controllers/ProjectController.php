@@ -13,28 +13,26 @@ class ProjectController extends WalrusController
 {
     public function index()
     {
-        $res = $this->model('project')->index();
-        $this->register('projects', $res);
-
         if (empty($_SESSION)) {
             $this->setView('user/login');
         }
-        else
+        else {
+            $res = $this->model('project')->index();
+            $this->register('projects', $res);
             $this->setView('index');
+        }
     }
 
     public function create()
     {
         $form = new WalrusForm('form_project_create');
-
+        $this->register('myFormCreate', $form->render());
         // $form->check();
         if(!empty($_POST))
         {
             $this->model('project')->create();
             $this->go('/CleverManagement');
         }
-
-        echo $form->render();
 
         $this->setView('create');
     }
@@ -52,7 +50,12 @@ class ProjectController extends WalrusController
             if ($arrayOfAttribute['type'] == 'textarea') {
                 $arrayOfAttribute['text'] = $project->getProperties()[$field];
             } else {
-                $arrayOfAttribute['value'] = $project->getProperties()[$field];
+                if ($field == 'members' || $field == 'additionalAdmins') {
+                    $usersEmail = $this->model('project')->retrieveUsers($id, $field);
+                    $arrayOfAttribute['value'] = implode(',', $usersEmail);
+                } else {
+                    $arrayOfAttribute['value'] = $project->getProperties()[$field];
+                }
             }
             
             $form->setFields($field, $arrayOfAttribute);
