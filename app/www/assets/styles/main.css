@@ -26,6 +26,7 @@ body
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius:10px;
 	margin-bottom: 40px;
+	margin-left: 35px !important;
 }
 
 .title-directory

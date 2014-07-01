@@ -48,9 +48,6 @@ class UserController extends WalrusController
                 }
                 else
                 {
-                 var_dump('else');
-                 var_dump($_SESSION);
-                 die('hello');
                     $this->go('/CleverManagement/');
                 }
             }

@@ -12,11 +12,53 @@
 		  <div class="navbar-inner">
 		    <a class="brand" href="#"><img src="assets/images/logo.png"></a>
 		    <ul class="nav">
-		      <li><a href="index.php">Log In</a></li>
+		      <li><a href="signup">Log In</a></li>
 		      <li><a href="">Dashboard</a></li>
 		    </ul>
 		  </div>
 		</div>
+		<div class="container-fluid">
+		  <div class="row-fluid">
+		    <div class="span2 sidebar">
+		    	<ul class="span2 sidebar-menu">
+		    		<a href="new-project.php">
+		    			<li class="current">
+		    				<span class="text-li-sidebar">
+		    					<a href="/CleverManagement/create" class="text-li-sidebar">Nouveau projet</a>
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Add Directory
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Directory 1
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Directory 2
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Directory 3
+		    				</span>
+		    			</li>
+		    		</a>
+		    	</ul>
+		      <!--Sidebar content-->
+		    </div>
 	<h3>Edit Post</h3>
 
 	<form action="/CleverManagement/{{ project.id }}/edit" method="POST">

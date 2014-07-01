@@ -20,10 +20,11 @@
 		<div class="row-log">
 			<div class="span4 offset5">
 
-		      <form class="form-signin">
+		      <form class="form-signin" method="post" action="/clevermanagement/signin">
 		        <h2 class="form-signin-heading">Log In</h2>
-		        <input type="text" class="input-block-level" placeholder="Email address" required>
-		        <input type="password" class="input-block-level" placeholder="Password" required>
+		        <input type="hidden" name="type" value="signin">
+		        <input type="text" class="input-block-level" placeholder="Email address" name="email" required>
+		        <input type="password" class="input-block-level" placeholder="Password" name="password" required>
 		        <label class="checkbox">
 		          <input type="checkbox" value="remember-me"> Remember me
 		        </label>

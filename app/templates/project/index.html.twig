@@ -12,7 +12,7 @@
 		  <div class="navbar-inner">
 		    <a class="brand" href="#"><img src="assets/images/logo.png"></a>
 		    <ul class="nav">
-		      <li><a href="clevermanagement/signup">Log In</a></li>
+		      <li><a href="signup">Log In</a></li>
 		      <li><a href="">Dashboard</a></li>
 		    </ul>
 		  </div>
@@ -67,16 +67,18 @@
 			<td><a href="/CleverManagement/{{project.id}}/delete">Supprimer</a></td>
 			<td><a href="/CleverManagement/{{project.id}}/edit">Editer</a></td>
 		</tr> -->
-		<div class="span2 directory">
-	      	<div class="title-directory">
-	      		<span style='position:relative;top:5px;'>{{project.name}}</span>
-	      	</div>
-	      	<div class="descr-directory">
-	      		<p>
-		      		{{project.description}}
-		      	</p>
-	      	</div>
-	      </div>
+		<a href="/CleverManagement/{{project.id}}/show">
+			<div class="span2 directory">
+		      	<div class="title-directory">
+		      		<span style='position:relative;top:5px;'>{{project.name}}</span>
+		      	</div>
+		      	<div class="descr-directory">
+		      		<p>
+			      		{{project.description}}
+			      	</p>
+		      	</div>
+		      </div>
+		</a>
 	{% endfor %}
 	</table>
 </body>
