@@ -11,26 +11,18 @@ use Walrus\core\WalrusForm;
  */
 class TaskController extends WalrusController
 {
-	public function index()
-	{
-        die('hellotask');
-        
-        $res = $this->model('task')->index();
-        if empty($res) {
-        	$this->register('message', 'no task found');
-        } else {
-        	$this->register('message', 'All tasks :');
-        }
-
-        $this->setView('index');
-	}
-
-    public function find($id)
+    public function show($id_project, $id_step, $id_task)
     {
-        $res = $this->model('task')->find($id);
+        $task = $this->model('task')->show($id_task);
+
+        $this->register('task', $task);
+        $this->register('step_id', $id_step);
+        $this->register('project_id', $id_project);
+
+        $this->setView('show');
     }
 
-    public function create()
+    public function create($id_project, $id_step)
     {
         $this->setView('create');
 
@@ -38,25 +30,55 @@ class TaskController extends WalrusController
 		echo $form->render();
 
         if (isset($_POST['type'])) {
-            $res = $this->model('task')->create();
+            $res = $this->model('task')->create($id_step);
             
-            if (isset($res['errors'])) {
+            if (isset($res['errors']))
+            {
                 $this->register('errors', $res['errors']);
             }
             else
             {
-                $this->go('/CleverManagement/task/');
+                $this->go('/clevermanagement/'.$id_project.'/show/step/'.$id_step.'/show');
             }
         }
     }
 
-    public function delete($id)
+    public function delete($id_project, $id_step, $id_task)
     {
-        $res = $this->model('task')->delete($id);
+
+        $this->model('task')->delete($id_task);
+
+        $this->go('/CleverManagement/'.$id_project.'/show/step/'.$id_step.'/show');
     }
 
-    public function edit($id)
+    public function edit($id_project, $id_step, $id_task)
     {
-        $res = $this->model('task')->edit($id);
+        if(!empty($_POST))
+        {
+            $task = $this->model('task')->edit($id_task);
+            if(!empty($task['name.empty']))
+            {
+                $this->register('errors', $task);
+            }
+            else
+            {
+                $this->go('/CleverManagement/'.$id_project.'/show/step/'.$id_step.'/show');
+            }
+        }
+
+        $task = $this->model('task')->show($id_task);
+
+        if(is_array($task))
+        {
+            $this->register('error', 'Task doesnt exist');
+        }
+        else
+        {
+            $this->register('task', $task);
+            $this->register('step_id', $id_step);
+            $this->register('project_id', $id_project);
+        }
+
+        $this->setView('edit');
     }
 }
