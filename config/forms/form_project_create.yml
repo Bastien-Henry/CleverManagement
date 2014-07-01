@@ -12,16 +12,31 @@ form_project_create:
       type: text
       label: Name
       required: false
+      style: width:300px;height:30px;
     startline:
       type: date
       label: Startline
       required: false
+      style: width:300px;height:30px;
     deadline:
       type: date
       label: Deadline
       required: false
+      style: width:300px;height:30px;
     description:
       type: textarea
       label: Description
       required: false
+      style: width:300px;height:100px;
+    members:
+      type: hidden
+      id: members-project
+      placeholder: Members
+      style: width:300px;;height:30px;
+    AdditionnalAdminProject:
+      type: hidden
+      id: add-admin-project
+      label: Additional Admin-Project
+      placeholder: Additional Admin-Project
+      style: width:300px;;height:30px;
 

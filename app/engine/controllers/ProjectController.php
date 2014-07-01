@@ -25,7 +25,11 @@ class ProjectController extends WalrusController
 
         $this->register('projects', $res);
 
-        $this->setView('index');
+        if (empty($_SESSION)) {
+            $this->setView('user/login');
+        }
+        else
+            $this->setView('index');
     }
 
     public function create()

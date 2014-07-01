@@ -18,9 +18,9 @@ class Task
         return $task;
     }
 
-    public function index()
+    public function index($id_step)
     {
-        $tasks = R::findAll('tasks');
+        $tasks = R::findAll('tasks', 'id_step = ?', array($id_step));
 
         return $tasks;
     }

@@ -12,6 +12,11 @@ _login:
     action: 'signin'
     method: 'POST'
 
+_destroy:
+	path: 'clevermanagement/deconnection'
+	controller: 'UserController'
+	action: 'destroy'
+
 #_logout:
 #    path: 'clevermanagement/signin'
 #    controller: 'UserController'

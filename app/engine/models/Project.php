@@ -9,7 +9,6 @@ class Project
     public function create()
     {
         $project = R::dispense('projects');
-
         $project->name = $_POST['name'];
         $project->startline = $_POST['startline'];
         $project->deadline = $_POST['deadline'];

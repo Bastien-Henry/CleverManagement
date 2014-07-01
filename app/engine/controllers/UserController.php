@@ -35,22 +35,26 @@ class UserController extends WalrusController
     {
         $form = new WalrusForm('form_signin');
         echo $form->render();
-
-        if (!empty($_POST)) {
-            if(!$this->model('user')->signin())
-            {
-             var_dump('if');
-                $this->register('errors', array('credentials' => 'wrong email/password'));
-            }
-            else
-            {
-             var_dump('else');
-             var_dump($_SESSION);
-             die('hello');
-                $this->go('/CleverManagement/');
-            }
+            
+        if (!empty($_POST)) 
+        {
+	        if(!$this->model('user')->signin())
+	        {
+	            $this->register('errors', array('credentials' => 'wrong email/password'));
+	        }
+	        else
+	        {
+	            $this->go('/CleverManagement/');
+	        }
         }
 
         $this->setView('login');
+    }
+
+    public function destroy()
+    {
+    	session_destroy();
+
+    	$this->setView('login');
     }
 }
