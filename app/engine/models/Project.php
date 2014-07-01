@@ -109,7 +109,7 @@ class Project
         $relations = R::getAll('SELECT * FROM projects_users WHERE id_user = :user',
             [':user' => $user->getProperties()['id']]
         );
-        
+
         $projects = array();
         foreach ($relations as $key => $object) {
             $projects[] = R::load('projects', $object['id_project']);
@@ -132,6 +132,11 @@ class Project
 
         R::store($project);
         return $project;
+    }
+
+    private function retrieveMembers($field, $attributes)
+    {
+        
     }
 
     public function delete($id)
