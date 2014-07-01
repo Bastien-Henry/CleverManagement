@@ -13,15 +13,14 @@ class ProjectController extends WalrusController
 {
     public function index()
     {
-        $res = $this->model('project')->index();
-
-        $this->register('projects', $res);
-
         if (empty($_SESSION)) {
             $this->setView('user/login');
         }
-        else
+        else {
+            $res = $this->model('project')->index();
+            $this->register('projects', $res);
             $this->setView('index');
+        }
     }
 
     public function create()
@@ -53,7 +52,11 @@ class ProjectController extends WalrusController
             if ($arrayOfAttribute['type'] == 'textarea') {
                 $arrayOfAttribute['text'] = $project->getProperties()[$field];
             } else {
-                $arrayOfAttribute['value'] = $project->getProperties()[$field];
+                if ($field == 'members' || $field == 'additionalAdmins') {
+                    $this->model('project')->retrieveMembers($field, $arrayOfAttribute);
+                } else {
+                    $arrayOfAttribute['value'] = $project->getProperties()[$field];
+                }
             }
             
             $form->setFields($field, $arrayOfAttribute);
