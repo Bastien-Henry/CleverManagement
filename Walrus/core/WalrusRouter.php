@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Walrus Framework
- * File maintained by: Nicolas Beauvais (E-Wok)
- * Created: 20:46 15/01/14
- */
+* Walrus Framework
+* File maintained by: Nicolas Beauvais (E-Wok)
+* Created: 20:46 15/01/14
+*/
 
 namespace Walrus\core;
 
@@ -14,68 +14,68 @@ use Walrus\core\WalrusException;
 use ReflectionClass;
 
 /**
- * Class WalrusRoute
- * @package Walrus\core
- */
+* Class WalrusRoute
+* @package Walrus\core
+*/
 class WalrusRouter
 {
     /**
-     * Array that holds all Route objects
-     * @var array
-     */
+* Array that holds all Route objects
+* @var array
+*/
     private $routes = array();
 
     /**
-     * Array to store named routes in, used for reverse routing.
-     * @var array
-     */
+* Array to store named routes in, used for reverse routing.
+* @var array
+*/
     private $namedRoutes = array();
 
     /**
-     * String to store the current URL
-     * @var string
-     */
+* String to store the current URL
+* @var string
+*/
     private $currentPath = '';
 
     /**
-     * The base REQUEST_URI. Gets prepended to all route url's.
-     * @var string
-     */
+* The base REQUEST_URI. Gets prepended to all route url's.
+* @var string
+*/
     private $basePath = '';
 
     /**
-     * Set the base url - gets prepended to all route url's.
-     * @param string $basePath
-     */
+* Set the base url - gets prepended to all route url's.
+* @param string $basePath
+*/
     public function setBasePath($basePath)
     {
         $this->basePath = (string) $basePath;
     }
 
     /**
-     * The WalrusRouter unique instance for singleton.
-     * @var WalrusRouter
-     */
+* The WalrusRouter unique instance for singleton.
+* @var WalrusRouter
+*/
     private static $instance;
 
     /**
-     * Private construct to prevent multiples instances
-     */
+* Private construct to prevent multiples instances
+*/
     private function __construct()
     {
     }
 
     /**
-     * Private clone to prevent multiples instances
-     */
+* Private clone to prevent multiples instances
+*/
     private function __clone()
     {
     }
 
     /**
-     * Main function to call to get an instance of WalrusRouter.
-     * @return WalrusRouter
-     */
+* Main function to call to get an instance of WalrusRouter.
+* @return WalrusRouter
+*/
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
@@ -86,11 +86,11 @@ class WalrusRouter
     }
 
     /**
-     * Launch the Walrus routing.
-     *
-     * test if it's an API route or not.
-     * API route demand less process execution.
-     */
+* Launch the Walrus routing.
+*
+* test if it's an API route or not.
+* API route demand less process execution.
+*/
     public function execute()
     {
         $this->setBasePath('/');
@@ -119,9 +119,9 @@ class WalrusRouter
     }
 
     /**
-     * Soft Walrus routing.
-     * Used by Walrus routing for get soft
-     */
+* Soft Walrus routing.
+* Used by Walrus routing for get soft
+*/
     public function softExecute()
     {
         $this->setBasePath('/');
@@ -137,13 +137,13 @@ class WalrusRouter
     }
 
     /**
-     * Route factory method.
-     * Maps the given URL to the given target
-     *
-     * @param string $routeUrl string
-     * @param mixed $target The target of this route: can be anything.
-     * @param array $args Array of optional arguments.
-     */
+* Route factory method.
+* Maps the given URL to the given target
+*
+* @param string $routeUrl string
+* @param mixed $target The target of this route: can be anything.
+* @param array $args Array of optional arguments.
+*/
     public function map($routeUrl, $target = '', array $args = array())
     {
         $route = new Route();
@@ -175,11 +175,11 @@ class WalrusRouter
     }
 
     /**
-     * Matches the current request against mapped routes
-     */
+* Matches the current request against mapped routes
+*/
     private function matchCurrentRequest()
     {
-        $checkMethod  = isset($_POST['_method'])
+        $checkMethod = isset($_POST['_method'])
             && ($_method = strtoupper($_POST['_method']))
             && in_array($_method, array('PUT', 'DELETE'));
 
@@ -188,7 +188,7 @@ class WalrusRouter
 
         // strip GET variables from URL
         if (($pos = strpos($requestUrl, '?')) !== false) {
-            $requestUrl =  substr($requestUrl, 0, $pos);
+            $requestUrl = substr($requestUrl, 0, $pos);
         }
 
         $this->currentPath = rtrim($requestUrl, '/').'/';
@@ -197,14 +197,14 @@ class WalrusRouter
     }
 
     /**
-     * Match given request url and request method and see if a route has been defined for it.
-     * If so, return route's target
-     * If called multiple times
-     *
-     * @param string $requestMethod The type of method for the route.
-     *
-     * @return Route|false
-     */
+* Match given request url and request method and see if a route has been defined for it.
+* If so, return route's target
+* If called multiple times
+*
+* @param string $requestMethod The type of method for the route.
+*
+* @return Route|false
+*/
     public function match($requestMethod = 'GET')
     {
         foreach ($this->routes as $route) {
@@ -259,14 +259,14 @@ class WalrusRouter
     }
 
     /**
-     * Reverse a named route.
-     *
-     * @param string $routeName The name of the route to reverse route.
-     * @param array $params Optional array of parameters to use in URL.
-     *
-     * @throws WalrusException
-     * @return string The url to the route
-     */
+* Reverse a named route.
+*
+* @param string $routeName The name of the route to reverse route.
+* @param array $params Optional array of parameters to use in URL.
+*
+* @throws WalrusException
+* @return string The url to the route
+*/
     public function generate($routeName, array $params = array())
     {
         // Check if route exists
@@ -299,10 +299,10 @@ class WalrusRouter
     }
 
     /**
-     * Match routes, make verification on controller and action.
-     *
-     * @throws WalrusException
-     */
+* Match routes, make verification on controller and action.
+*
+* @throws WalrusException
+*/
     private function process()
     {
         $_ENV['W']['route_type'] = 'classic';
@@ -313,7 +313,7 @@ class WalrusRouter
         if (!$route) {
             // try to find a default route
             foreach ($this->routes as $defaultRoute) {
-                if ($defaultRoute->getName()  == '_404') {
+                if ($defaultRoute->getName() == '_404') {
                     $route = $defaultRoute;
                 }
             }
@@ -329,7 +329,7 @@ class WalrusRouter
             $route = null;
 
             foreach ($this->routes as $defaultRoute) {
-                if ($defaultRoute->getName()  == '_403' && !$defaultRoute->getAcl()
+                if ($defaultRoute->getName() == '_403' && !$defaultRoute->getAcl()
                     || (isset($_SESSION['acl']) && WalrusACL::hasRole($_SESSION['acl'], $defaultRoute->getAcl()))) {
                     $route = $defaultRoute;
                 }
@@ -398,8 +398,8 @@ class WalrusRouter
     }
 
     /**
-     * Match for API
-     */
+* Match for API
+*/
     private function processForAPI()
     {
         $_ENV['W']['route_type'] = 'api';
@@ -450,19 +450,19 @@ class WalrusRouter
     }
 
     /**
-     * Reroute to a new controller.
-     *
-     * Reroute from a controller / action couple in string format.
-     * There is no params test on this function, use it carefully.
-     *
-     * @param string $controller a controller name
-     * @param string $action an action of the controller
-     * @param array $param an array of the parameter to pass to the controller
-     *
-     * @throws WalrusException
-     *
-     * @return mixed the result of the called function
-     */
+* Reroute to a new controller.
+*
+* Reroute from a controller / action couple in string format.
+* There is no params test on this function, use it carefully.
+*
+* @param string $controller a controller name
+* @param string $action an action of the controller
+* @param array $param an array of the parameter to pass to the controller
+*
+* @throws WalrusException
+*
+* @return mixed the result of the called function
+*/
     public static function reroute($controller, $action, $param = array())
     {
         if (strpos(strtolower($controller), 'controller') > 0) {
@@ -495,8 +495,8 @@ class WalrusRouter
     }
 
     /**
-     * Parse routes
-     */
+* Parse routes
+*/
     public function getRoutes()
     {
         foreach ($_ENV['W']['routes'] as $name => $route) {

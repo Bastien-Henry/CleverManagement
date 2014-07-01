@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SHOW</title>
+    <title>CleverManagement</title>
 </head>
 <body>
 	<h3>{{step.name|raw}}</h3>
@@ -11,18 +11,18 @@
 		{{step.description|raw}}
 	</p>
 	<br><br>
-	<a href="/Clevermanagement/{{project_id}}/show/step/{{step.id}}/edit">Editer</a> | <a href="/Clevermanagement/{{project_id}}/show/{{step.id}}/delete">Supprimer</a><br>
+	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/edit">Editer</a> | <a href="/Clevermanagement/{{project_id}}/show/{{step.id}}/delete">Supprimer</a><br>
 	<strong>Tasks</strong><br><br>
-	<a href="/Clevermanagement/{{project_id}}/show/step/{{step.id}}/show/task/create">Nouvelle tache</a><br><br>
+	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/task/create">Nouvelle tache</a><br><br>
 	<strong>{{message}}</strong><br>
 	<br>
 	{% for task in tasks %}
 		{% if task.id_step == step.id %}
-			name : {{ task.name }}<br>
-			description : {{ task.description }}<br>
-			<a href="/Clevermanagement/{{ project_id }}/show/step/{{ step.id }}/show/task/{{ task.id }}/delete">Supprimer</a><br>
-			<a href="/Clevermanagement/{{ project_id }}/show/step/{{ step.id }}/show/task/{{ task.id }}/edit">Editer</a><br>
-			<a href="/Clevermanagement/{{ project_id }}/show/step/{{ step.id }}/show/task/{{ task.id }}/show">Show</a><br>
+			Nom : {{ task.name }}<br>
+			Description : {{ task.description }}<br>
+			<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/delete">Supprimer</a><br>
+			<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/edit">Editer</a><br>
+			<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/show">Voir</a><br>
 		{% endif %}
 	{% endfor %}
 </body>

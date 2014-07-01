@@ -1,10 +1,10 @@
 # Form exemple
 
-form_project_create:
+form_project_edit:
   form:
     method: POST
-    action: /clevermanagement/create
-    submit: Valider
+    action: /clevermanagement/id_project/edit
+    submit: Editer
     structure: table
 
   fields:

@@ -6,18 +6,6 @@ use R;
 
 class Step
 {
-    public function find($id)
-    {
-        $step = R::load('steps', $id);
-
-        if($step->getProperties()['id'] == 0)
-        {
-            return array('step.not_found' => 'step doesnt exist');
-        }
-
-        return $step;
-    }
-
     public function show($id)
     {
         $step = R::load('steps', $id);
@@ -39,7 +27,7 @@ class Step
 
     public function delete($id)
     {
-        $step = $this->find($id);
+        $step = $this->show($id);
 
         if($_SESSION['user']['id'] != $step->getProperties()['users_id'])
         {

@@ -1,14 +1,11 @@
 form_step_create:
   form:
     method: POST
-    action: /clevermanagement/6/show/step/create
-    submit: Create
+    action: /clevermanagement/id_project/step/create
+    submit: Valider
     structure: table
 
   fields:
-    type:
-      type: hidden
-      value: step-create
     name:
       type: text
       required: true

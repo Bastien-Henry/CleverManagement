@@ -2,21 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CleverManagement welcome page</title>
+    <title>Editer Projet</title>
 </head>
 <body>
-	<h3>Edit Post</h3>
-
-	<form action="/CleverManagement/{{ project.id }}/edit" method="POST">
-	    <input type="text" name="name" placeholder="name" value="{{ project.name }}"/>
-	    <br>
-	    {% if errors['name.empty'] is defined %}
-	        <span style="color:#ff0000;">{{ errors['name.empty'] }}</span>
-	    {% endif %}
-	    <br>
-	    <textarea name="description">{{ project.description }}</textarea>
-	    <input type="submit" value="submit"/>
-	</form>
+	<h3>Editer un Projet</h3>
 </body>
 </html>
 

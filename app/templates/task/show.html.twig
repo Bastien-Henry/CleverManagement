@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SHOW</title>
+    <title>CleverManagement</title>
 </head>
 <body>
 	<h3>{{task.name|raw}}</h3>
@@ -11,6 +11,6 @@
 		{{task.description|raw}}
 	</p>
 	<br><br>
-	<a href="/Clevermanagement/{{ project_id }}/show/step/{{ step_id }}/show/task/{{ task.id }}/edit">Editer</a> | <a href="/Clevermanagement/{{project_id}}/show/step/{{step_id}}/show/task/{{ task.id }}/delete">Supprimer</a><br>
+	<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit">Editer</a> | <a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/delete">Supprimer</a><br>
 </body>
 </html>
