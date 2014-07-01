@@ -165,7 +165,7 @@ a:hover
 	margin-left: 282px;
 	text-align: center;
 	position: relative;
-	bottom: 7px;
+	bottom: 21px;
 }
 
 .description-project, .action-project,	.steps
@@ -199,4 +199,9 @@ a:hover
 .description-steps-project
 {
 	color: #5EB6DD;
+}
+
+.my-form-create
+{
+	margin-left: 500px;
 }

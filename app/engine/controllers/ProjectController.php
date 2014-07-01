@@ -13,20 +13,24 @@ class ProjectController extends WalrusController
 {
     public function index()
     {
-        $res = $this->model('project')->index();
-
-        $this->register('projects', $res);
+        
 
         if (empty($_SESSION)) {
             $this->setView('user/login');
         }
         else
+        {
+            $res = $this->model('project')->index();
+            $this->register('projects', $res);
             $this->setView('index');
+        }
+            
     }
 
     public function create()
     {
         $form = new WalrusForm('form_project_create');
+        $this->register('myFormCreate', $form->render());
 
         // $form->check();
         if(!empty($_POST))
@@ -34,8 +38,6 @@ class ProjectController extends WalrusController
             $this->model('project')->create();
             $this->go('/CleverManagement');
         }
-
-        echo $form->render();
 
         $this->setView('create');
     }
