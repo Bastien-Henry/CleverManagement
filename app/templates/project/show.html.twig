@@ -69,8 +69,8 @@
 					{{project.description|raw}}
 				</p>
 				<p>
-					Startline : {{project.startline}} <br>
-					Deadline : {{project.deadline}}
+					Debut : {{project.startline}} <br>
+					Fin : {{project.deadline}}
 				</p>
 			</div>
 			<div class="action-project">
@@ -87,13 +87,12 @@
 	  		</div>
 	  		<div class="steps-project">
 	  			<div class="steps">
-	  				<strong>STEPS</strong><br><br>
-					<button class="btn btn-primary"><a href="/Clevermanagement/{{project.id}}/step/create" style="color:#fff;">Nouvelle etape</a></button>
+		  			<button class="btn btn-primary"><a href="/Clevermanagement/{{project.id}}/step/create" style="color:#fff;">Nouvelle etape</a></button>
 	  			</div>
-		  		
+
 				<br><br>
 				<strong>{{message}}</strong><br>
-				<br>
+				<br><br>
 				{% for step in steps %}
 				<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/show">
 					<div class="one-step">

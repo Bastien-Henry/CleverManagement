@@ -178,13 +178,14 @@ a:hover
 
 .one-step
 {
-	color: #fff;
+	color:#252f56;
 	font-size: 20px;
 	background-color: #fff;
-	border: 1px solid #000;
+	border-top: 1px solid #c6c6c6;
+	border-bottom: 1px solid #c6c6c6;
 	height: 30px;
-	margin-left: 282px;
-	text-align: center;
+	margin-left: 286px;
+	text-align: left;
 	position: relative;
 	bottom: 7px;
 	height: 75px;
@@ -192,11 +193,13 @@ a:hover
 
 .title-steps-project
 {
-	background-color: #5EB6DD;
+	padding-left:40px;
+	background-color: #beccff;
 	height: 30px;
 }
 
 .description-steps-project
 {
-	color: #5EB6DD;
+	padding-left:40px;
+	color: #4e556f;
 }
