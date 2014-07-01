@@ -18,9 +18,9 @@ class Task
         return $task;
     }
 
-    public function index()
+    public function index($id_step)
     {
-        $tasks = R::findAll('tasks');
+        $tasks = R::findAll('tasks', 'id_step = ?', array($id_step));
 
         return $tasks;
     }
@@ -71,7 +71,7 @@ class Task
 
         $task->name = $_POST['name'];
         $task->id_step = $id_step;
-        $task->descrption = $_POST['description'];
+        $task->description = $_POST['description'];
         // $task->urgent = $_POST['urgent'];
         $task->startline = $_POST['startline'];
         $task->deadline = $_POST['deadline'];

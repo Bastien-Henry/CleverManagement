@@ -1,15 +1,15 @@
 _task_create:
-    path: 'clevermanagement/:id_project/show/step/:id_step/show/task/create'
+    path: 'clevermanagement/:id_project/step/:id_step/task/create'
     controller: 'taskController'
     action: 'create'
 
 _task_show:
-    path: 'clevermanagement/:id_project/show/step/:id_step/show/task/:id_task/show'
+    path: 'clevermanagement/:id_project/step/:id_step/task/:id_task/show'
     controller: 'taskController'
     action: 'show'
 
 _task_delete:
-    path: 'clevermanagement/:id_project/show/step/:id_step/show/task/:id_task/delete'
+    path: 'clevermanagement/:id_project/step/:id_step/task/:id_task/delete'
     controller: 'taskController'
     action: 'delete'
     filters:
@@ -17,7 +17,7 @@ _task_delete:
             id: '[0-9]+'
 
 _task_edit:
-    path: 'clevermanagement/:id_project/show/step/:id_step/show/task/:id_task/edit'
+    path: 'clevermanagement/:id_project/step/:id_step/task/:id_task/edit'
     controller: 'taskController'
     action: 'edit'
     filters:

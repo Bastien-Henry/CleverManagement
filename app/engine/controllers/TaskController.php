@@ -27,9 +27,11 @@ class TaskController extends WalrusController
         $this->setView('create');
 
 	    $form = new WalrusForm('form_task_create');
+        $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/create';
+        $form->setForm('action', $formAction);
 		echo $form->render();
 
-        if (isset($_POST['type'])) {
+        if (!empty($_POST)) {
             $res = $this->model('task')->create($id_step);
             
             if (isset($res['errors']))
@@ -38,7 +40,7 @@ class TaskController extends WalrusController
             }
             else
             {
-                $this->go('/clevermanagement/'.$id_project.'/show/step/'.$id_step.'/show');
+                $this->go('/clevermanagement/'.$id_project.'/step/'.$id_step.'/show');
             }
         }
     }
@@ -48,11 +50,29 @@ class TaskController extends WalrusController
 
         $this->model('task')->delete($id_task);
 
-        $this->go('/CleverManagement/'.$id_project.'/show/step/'.$id_step.'/show');
+        $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/show');
     }
 
     public function edit($id_project, $id_step, $id_task)
     {
+        $this->setView('edit');
+
+        $form = new WalrusForm('form_task_edit');
+        $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/edit';
+        $form->setForm('action', $formAction);
+
+        $task = $this->model('task')->show($id_task);
+        foreach ($form->getFields() as $field => $arrayOfAttribute) {
+            if ($arrayOfAttribute['type'] == 'textarea') {
+                $arrayOfAttribute['text'] = $task->getProperties()[$field];
+            } else {
+                $arrayOfAttribute['value'] = $task->getProperties()[$field];
+            }
+            $form->setFields($field, $arrayOfAttribute);
+        }
+
+        echo $form->render();
+
         if(!empty($_POST))
         {
             $task = $this->model('task')->edit($id_task);
@@ -62,7 +82,7 @@ class TaskController extends WalrusController
             }
             else
             {
-                $this->go('/CleverManagement/'.$id_project.'/show/step/'.$id_step.'/show');
+                $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/show');
             }
         }
 
@@ -72,13 +92,5 @@ class TaskController extends WalrusController
         {
             $this->register('error', 'Task doesnt exist');
         }
-        else
-        {
-            $this->register('task', $task);
-            $this->register('step_id', $id_step);
-            $this->register('project_id', $id_project);
-        }
-
-        $this->setView('edit');
     }
 }

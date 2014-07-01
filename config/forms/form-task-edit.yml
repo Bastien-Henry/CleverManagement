@@ -1,8 +1,8 @@
-form_task_create:
+form_task_edit:
   form:
     method: POST
-    action: /clevermanagement/id_project/step/id_step/task/create
-    submit: Valider
+    action: /clevermanagement/id_project/step/id_step/task/id_task/edit
+    submit: Editer
     structure: table
 
   fields:

@@ -6,18 +6,6 @@ use R;
 
 class Step
 {
-    public function find($id)
-    {
-        $step = R::load('steps', $id);
-
-        if($step->getProperties()['id'] == 0)
-        {
-            return array('step.not_found' => 'step doesnt exist');
-        }
-
-        return $step;
-    }
-
     public function show($id)
     {
         $step = R::load('steps', $id);
@@ -30,16 +18,16 @@ class Step
         return $step;
     }
 
-    public function index()
+    public function index($id_project)
     {
-        $steps = R::findAll('steps');
+        $steps = R::findAll('steps', 'id_project = ?', array($id_project));
 
         return $steps;
     }
 
     public function delete($id)
     {
-        $step = $this->find($id);
+        $step = $this->show($id);
 
         if($_SESSION['user']['id'] != $step->getProperties()['users_id'])
         {
@@ -84,7 +72,6 @@ class Step
         $step->description = $_POST['description'];
         $step->startline = $_POST['startline'];
         $step->deadline = $_POST['deadline'];
-        //$step->id_project = $_POST['project'];        hidden field storing project id
         R::store($step);
 
         return true;

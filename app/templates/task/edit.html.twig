@@ -2,19 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Editer une Tache</title>
 </head>
 <body>
-	<h3>Edit step</h3>
-
-	<form action="/CleverManagement/{{ project_id }}/show/step/{{ step_id }}/show/task/{{ task.id }}/edit" method="POST">
-	    <input type="text" name="name" placeholder="name" value="{{ task.name }}"/>
-	    <br>
-	    {% if errors['name.empty'] is defined %}
-	        <span style="color:#ff0000;">{{ errors['name.empty'] }}</span>
-	    {% endif %}
-	    <br>
-	    <textarea name="description">{{ task.description }}</textarea>
-	    <input type="submit" value="submit"/>
-	</form>
+	<h3>Editer une Tache</h3>
 </body>
 </html>

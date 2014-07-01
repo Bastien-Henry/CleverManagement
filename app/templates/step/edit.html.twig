@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-<head>
+	<head>
+    	<meta charset="UTF-8">
   		<title>Clever Management - Make your projects crystal</title>
   		<link rel="stylesheet" type="text/css" href="main.css">
   		<!-- Latest compiled and minified CSS -->
@@ -59,17 +60,7 @@
 		    	</ul>
 		      <!--Sidebar content-->
 		    </div>
-	<h3>Edit step</h3>
-
-	<form action="/CleverManagement/{{ project_id }}/show/step/{{ step.id }}/edit" method="POST">
-	    <input type="text" name="name" placeholder="name" value="{{ step.name }}"/>
-	    <br>
-	    {% if errors['name.empty'] is defined %}
-	        <span style="color:#ff0000;">{{ errors['name.empty'] }}</span>
-	    {% endif %}
-	    <br>
-	    <textarea name="description">{{ step.description }}</textarea>
-	    <input type="submit" value="submit"/>
-	</form>
+		    <div>
+		    </div>
 </body>
 </html>

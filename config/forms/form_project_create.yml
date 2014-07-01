@@ -4,7 +4,7 @@ form_project_create:
   form:
     method: POST
     action: /clevermanagement/create
-    submit: Envoyer
+    submit: Valider
     structure: table
 
   fields:

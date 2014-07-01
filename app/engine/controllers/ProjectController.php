@@ -35,6 +35,7 @@ class ProjectController extends WalrusController
     public function create()
     {
         $form = new WalrusForm('form_project_create');
+
         // $form->check();
         if(!empty($_POST))
         {
@@ -49,6 +50,25 @@ class ProjectController extends WalrusController
 
     public function edit($id)
     {
+        $this->setView('edit');
+
+        $form = new WalrusForm('form_project_edit');
+        $formAction = '/clevermanagement/'.$id.'/edit';
+        $form->setForm('action', $formAction);
+
+        $project = $this->model('project')->show($id);
+        foreach ($form->getFields() as $field => $arrayOfAttribute) {
+            if ($arrayOfAttribute['type'] == 'textarea') {
+                $arrayOfAttribute['text'] = $project->getProperties()[$field];
+            } else {
+                $arrayOfAttribute['value'] = $project->getProperties()[$field];
+            }
+            
+            $form->setFields($field, $arrayOfAttribute);
+        }
+
+        echo $form->render();
+
         if(!empty($_POST))
         {
             $res = $this->model('project')->edit($id);
@@ -68,12 +88,6 @@ class ProjectController extends WalrusController
         {
             $this->register('error', 'Project doesnt exist');
         }
-        else
-        {
-            $this->register('project', $res);
-        }
-
-        $this->setView('edit');
     }
 
     public function delete($id)
@@ -89,11 +103,11 @@ class ProjectController extends WalrusController
 
         $this->register('project', $res);
 
-        $step = $this->model('step')->index();
+        $step = $this->model('step')->index($id);
         if (empty($step)) {
-            $this->register('message', 'no step found');
+            $this->register('message', "Pas d'etape trouvee pour ce projet");
         } else {
-            $this->register('message', 'All Steps :');
+            $this->register('message', 'Etapes :');
         }
 
         $this->register('steps', $step);
