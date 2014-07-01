@@ -2,7 +2,7 @@ form_signup:
   form:
     method: POST
     action: /clevermanagement/signup
-    submit: Sign up
+    submit: "S'inscrire"
     structure: table
     class: form-signin
 

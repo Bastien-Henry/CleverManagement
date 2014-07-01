@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-<head>
+	<head>
+	    <meta charset="UTF-8">
   		<title>Clever Management - Make your projects crystal</title>
   		<link rel="stylesheet" type="text/css" href="main.css">
   		<!-- Latest compiled and minified CSS -->
@@ -59,27 +60,27 @@
 		    	</ul>
 		      <!--Sidebar content-->
 		    </div>
-	<h3>{{project.name|raw}}</h3>
+		<div>
+			<h3>{{project.name|raw}}</h3>
 
-	<p>
-		{{project.description|raw}}
-	</p>
-	<br><br>
-	<a href="/Clevermanagement/{{project.id}}/edit">Editer</a> | <a href="/Clevermanagement/{{project.id}}/delete">Supprimer</a><br>
-	<strong>STEPS</strong><br><br>
-	<a href="/Clevermanagement/{{project.id}}/show/step/create">Nouvelle etape</a><br><br>
-	<strong>{{message}}</strong><br>
-	<br>
-	{% for step in steps %}
-		{% if step.id_project == project.id %}
-			name : {{ step.name }}<br>
-			description : {{ step.description }}<br>
-			<a href="/Clevermanagement/{{project.id}}/show/{{step.id}}/delete">Supprimer</a><br>
-			<a href="/Clevermanagement/{{project.id}}/show/step/{{step.id}}/edit">Editer</a><br>
-			<a href="/Clevermanagement/{{project.id}}/show/step/{{step.id}}/show">Voir</a><br>
-		{% endif %}
-	{% endfor %}
-</body>
+			<p>
+				{{project.description|raw}}
+			</p>
+			<br><br>
+			<a href="/Clevermanagement/{{project.id}}/edit">Editer</a> | <a href="/Clevermanagement/{{project.id}}/delete">Supprimer</a><br>
+			<strong>STEPS</strong><br><br>
+			<a href="/Clevermanagement/{{project.id}}/step/create">Nouvelle etape</a><br><br>
+			<strong>{{message}}</strong><br>
+			<br>
+			{% for step in steps %}
+				Nom : {{ step.name }}<br>
+				Description : {{ step.description }}<br>
+				<a href="/Clevermanagement/{{project.id}}/{{step.id}}/delete">Supprimer</a><br>
+				<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/edit">Editer</a><br>
+				<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/show">Voir</a><br>
+			{% endfor %}
+		</div>
+	</body>
 </html>
 
 

@@ -13,12 +13,12 @@ class StepController extends WalrusController
 {
     public function show($id_project, $id_step)
     {
-        $step = $this->model('step')->find($id_step);
+        $step = $this->model('step')->show($id_step);
 
         $this->register('step', $step);
         $this->register('project_id', $id_project);
 
-        $task = $this->model('task')->index();
+        $task = $this->model('task')->index($id_step);
         if (empty($task))
         {
             $this->register('message', 'no task found');
@@ -38,9 +38,11 @@ class StepController extends WalrusController
         $this->setView('create');
 
 	    $form = new WalrusForm('form_step_create');
+        $formAction = '/clevermanagement/'.$id_project.'/step/create';
+        $form->setForm('action', $formAction);
 		echo $form->render();
 
-        if (isset($_POST['type'])) {
+        if (!empty($_POST)) {
             $res = $this->model('step')->create($id_project);
             if (isset($res['errors'])) {
                 $this->register('errors', $res['errors']);
@@ -60,6 +62,24 @@ class StepController extends WalrusController
 
     public function edit($id_project, $id_step)
     {
+        $this->setView('edit');
+
+        $form = new WalrusForm('form_step_edit');
+        $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/edit';
+        $form->setForm('action', $formAction);
+
+        $step = $this->model('step')->show($id_step);
+        foreach ($form->getFields() as $field => $arrayOfAttribute) {
+            if ($arrayOfAttribute['type'] == 'textarea') {
+                $arrayOfAttribute['text'] = $step->getProperties()[$field];
+            } else {
+                $arrayOfAttribute['value'] = $step->getProperties()[$field];
+            }
+            $form->setFields($field, $arrayOfAttribute);
+        }
+
+        echo $form->render();
+
         if(!empty($_POST))
         {
             $res = $this->model('step')->edit($id_step);
@@ -79,12 +99,5 @@ class StepController extends WalrusController
         {
             $this->register('error', 'Step doesnt exist');
         }
-        else
-        {
-            $this->register('step', $step);
-            $this->register('project_id', $id_project);
-        }
-
-        $this->setView('edit');
     }
 }

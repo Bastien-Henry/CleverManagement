@@ -1,8 +1,8 @@
-form_task_create:
+form_step_edit:
   form:
     method: POST
-    action: /clevermanagement/id_project/step/id_step/task/create
-    submit: Valider
+    action: /clevermanagement/id_project/step/id_step/edit
+    submit: Editer
     structure: table
 
   fields:
@@ -16,11 +16,6 @@ form_task_create:
       label: Description
       check:
         min: 50
-    urgent:
-      type: checkbox
-      options:
-        1:
-          label: 'Urgent'
     startline:
       type: date
       required: true

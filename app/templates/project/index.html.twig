@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-<head>
+	<head>
+	    <meta charset="UTF-8">
   		<title>Clever Management - Make your projects crystal</title>
   		<link rel="stylesheet" type="text/css" href="main.css">
   		<!-- Latest compiled and minified CSS -->
@@ -14,6 +15,7 @@
 		    <ul class="nav">
 		      <li><a href="signup">Log In</a></li>
 		      <li><a href="">Dashboard</a></li>
+		      <li><a href="deconnection">Deconnexion</a></li>
 		    </ul>
 		  </div>
 		</div>
@@ -59,27 +61,29 @@
 		    	</ul>
 		      <!--Sidebar content-->
 		    </div>
-	<table>
-	{% for project in projects %}
-<!-- 		<tr>
-			<td>{{project.name}}</td>
-			<td><a href="/CleverManagement/{{project.id}}/show">Voir</a></td>
-			<td><a href="/CleverManagement/{{project.id}}/delete">Supprimer</a></td>
-			<td><a href="/CleverManagement/{{project.id}}/edit">Editer</a></td>
-		</tr> -->
-		<a href="/CleverManagement/{{project.id}}/show">
-			<div class="span2 directory">
-		      	<div class="title-directory">
-		      		<span style='position:relative;top:5px;'>{{project.name}}</span>
-		      	</div>
-		      	<div class="descr-directory">
-		      		<p>
-			      		{{project.description}}
-			      	</p>
-		      	</div>
-		      </div>
-		</a>
-	{% endfor %}
-	</table>
-</body>
+		<div>
+			<table>
+			{% for project in projects %}
+		<!-- 		<tr>
+					<td>{{project.name}}</td>
+					<td><a href="/CleverManagement/{{project.id}}/show">Voir</a></td>
+					<td><a href="/CleverManagement/{{project.id}}/delete">Supprimer</a></td>
+					<td><a href="/CleverManagement/{{project.id}}/edit">Editer</a></td>
+				</tr> -->
+				<a href="/CleverManagement/{{project.id}}/show">
+					<div class="span2 directory">
+				      	<div class="title-directory">
+				      		<span style='position:relative;top:5px;'>{{project.name}}</span>
+				      	</div>
+				      	<div class="descr-directory">
+				      		<p>
+					      		{{project.description}}
+					      	</p>
+				      	</div>
+				      </div>
+				</a>
+			{% endfor %}
+			</table>
+		</div>
+	</body>
 </html>

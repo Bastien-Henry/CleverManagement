@@ -1,0 +1,27 @@
+# Form exemple
+
+form_project_edit:
+  form:
+    method: POST
+    action: /clevermanagement/id_project/edit
+    submit: Editer
+    structure: table
+
+  fields:
+    name:
+      type: text
+      label: Name
+      required: false
+    startline:
+      type: date
+      label: Startline
+      required: false
+    deadline:
+      type: date
+      label: Deadline
+      required: false
+    description:
+      type: textarea
+      label: Description
+      required: false
+
