@@ -24,4 +24,15 @@ form_project_edit:
       type: textarea
       label: Description
       required: false
+    members:
+      type: hidden
+      id: members-project
+      placeholder: Members
+      style: width:300px;;height:30px;
+    additionalAdmins:
+      type: hidden
+      id: add-admin-project
+      label: Additional Admin-Project
+      placeholder: Additional Admin-Project
+      style: width:300px;;height:30px;
 

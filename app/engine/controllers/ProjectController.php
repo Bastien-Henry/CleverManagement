@@ -14,14 +14,6 @@ class ProjectController extends WalrusController
     public function index()
     {
         $res = $this->model('project')->index();
-        // if empty($res) {
-        // $this->register('message', 'no project found');
-        // } else {
-        // $this->register('message', 'All projects :');
-        // }
-
-        // var_dump($res);
-        // exit();
 
         $this->register('projects', $res);
 
