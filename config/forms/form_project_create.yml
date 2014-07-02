@@ -27,16 +27,17 @@ form_project_create:
       type: textarea
       label: Description
       required: false
-      style: width:300px;height:100px;
+      rows: "5"
+      cols: "100"
     members:
       type: hidden
       id: members-project
       placeholder: Members
-      style: width:300px;;height:30px;
+      style: width:300px;height:100px;
     additionalAdmins:
       type: hidden
       id: add-admin-project
       label: Additional Admin-Project
       placeholder: Additional Admin-Project
-      style: width:300px;;height:30px;
+      style: width:300px;height:100px;
 

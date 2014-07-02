@@ -104,6 +104,11 @@ class Project
                     continue;
                 }
 
+                $relation = R::findOne('projects_users', 'id_user = ? AND id_project = ? AND admin = ?', array($member->getProperties()['id'], $id_project, $boolAdmin));
+                if ($relation != null) {
+                    continue;
+                }
+                
                 $exec = R::exec('INSERT INTO projects_users (id_user, id_project, admin) VALUES (:user, :project, :admin)', array(
                     ':user'     => $member->getProperties()['id'], 
                     ':project'  => $id_project,
@@ -181,26 +186,49 @@ class Project
 
         $project->name = $_POST['name'];
         $project->description = $_POST['description'];
+        $project->startline = $_POST['startline'];
+        $project->deadline = $_POST['deadline'];
+
+        // link to specified members
+        $membersErrors = $this->membersFlush($_POST['members'], $id, 0);
+        $adminsErrors = $this->membersFlush($_POST['additionalAdmins'], $id, 1);
 
         R::store($project);
         return $project;
     }
 
-    public function retrieveUsers($id_project, $field)
+    public function retrieveUsers($id_project, $field = null)
     {
-        if ($field == "additionalAdmins") {
-            $status = 1;
-        } else {
-            $status = 0;
+        $query = 'SELECT * FROM projects_users WHERE id_project = :project';
+        $params = array(':project' => $id_project);
+
+        if ($field != null) {
+            if ($field == "additionalAdmins") {
+                $status = 1;
+            } else {
+                $status = 0;
+            }
+
+            $query .= ' AND admin = :status';
+            $params[':status'] = $status;
         }
 
-        $relations = R::getAll('SELECT * FROM projects_users WHERE id_project = :project AND admin = :status',
-            [':project' => $id_project, ':status' => $status]
-        );
+        $relations = R::getAll($query, $params);
+
+        $users = array();
+        foreach ($relations as $key => $object) {
+            $users[] = R::load('users', $object['id_user']);
+        }
+
+        return $users;
+    }
+
+    public function retrieveUsersEmails($id_project, $field = null)
+    {
+        $users = $this->retrieveUsers($id_project, $field);
 
         $usersEmail = array();
-        foreach ($relations as $key => $object) {
-            $user = R::load('users', $object['id_user']);
+        foreach ($users as $key => $user) {
             $usersEmail[] = $user->getProperties()['email'];
         }
 

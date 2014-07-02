@@ -296,7 +296,7 @@ class WalrusForm
 
         foreach ($fields as $key => $field) {
 
-            // contain a label + input combo
+            // contain a label input combo
             $row = array();
 
             // separate known data and attributes
@@ -648,10 +648,22 @@ class WalrusForm
     }
 
     /**
-* @return array
-*/
+    * @return array
+    */
     public function getFields()
     {
         return $this->fields;
+    }
+
+    /**
+    * Set a particular field value.
+    *
+    * @param string $field
+    * @param string $key
+    * @param string $value
+    */
+    public function setFieldValue($field, $key, $value)
+    {
+        $this->fields[$field][$key] = $value;
     }
 }

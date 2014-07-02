@@ -20,7 +20,7 @@ form_task_create:
       type: checkbox
       options:
         1:
-          label: 'Urgent'
+          label: ' '
     startline:
       type: date
       required: true
@@ -29,3 +29,13 @@ form_task_create:
       type: date
       required: true
       label: Deadline
+    members:
+      type: select
+      required: false
+      label: Membres
+      multiple: true
+      name: 'members[]'
+      options:
+        - email1
+        - email2
+        - email3

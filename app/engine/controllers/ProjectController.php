@@ -14,7 +14,7 @@ class ProjectController extends WalrusController
     public function index()
     {
         if (empty($_SESSION)) {
-            $this->setView('user/login');
+            $this->go('/CleverManagement/signin');
         }
         else {
             $res = $this->model('project')->index();
@@ -48,51 +48,47 @@ class ProjectController extends WalrusController
     {
         if (empty($_SESSION)) {
             $this->go('/CleverManagement/');
+            return;
         }
-        else
+
+        $this->setView('edit');
+
+        $form = new WalrusForm('form_project_edit');
+        $formAction = '/clevermanagement/'.$id.'/edit';
+        $form->setForm('action', $formAction);
+
+        $project = $this->model('project')->show($id);
+        foreach ($form->getFields() as $field => $arrayOfAttributes) {
+            if ($field == 'members' || $field == 'additionalAdmins') {
+                $usersEmail = $this->model('project')->retrieveUsersEmails($id, $field);
+                $form->setFieldValue($field, 'value', implode(',', $usersEmail));
+            } elseif ($arrayOfAttributes['type'] == 'textarea') {
+                $form->setFieldValue($field, 'text', $project->getProperties()[$field]);
+            } else {
+                $form->setFieldValue($field, 'value', $project->getProperties()[$field]);
+            }
+        }
+
+        $this->register('myFormEdit', $form->render());
+
+        if(!empty($_POST))
         {
-            $this->setView('edit');
-
-            $form = new WalrusForm('form_project_edit');
-            $formAction = '/clevermanagement/'.$id.'/edit';
-            $form->setForm('action', $formAction);
-
-            $project = $this->model('project')->show($id);
-            foreach ($form->getFields() as $field => $arrayOfAttribute) {
-                if ($arrayOfAttribute['type'] == 'textarea') {
-                    $arrayOfAttribute['text'] = $project->getProperties()[$field];
-                } else {
-                    if ($field == 'members' || $field == 'additionalAdmins') {
-                        $usersEmail = $this->model('project')->retrieveUsers($id, $field);
-                        $arrayOfAttribute['value'] = implode(',', $usersEmail);
-                    } else {
-                        $arrayOfAttribute['value'] = $project->getProperties()[$field];
-                    }
-                }
-                
-                $form->setFields($field, $arrayOfAttribute);
-            }
-            $this->register('myFormEdit', $form->render());
-
-            if(!empty($_POST))
+            $res = $this->model('project')->edit($id);
+            if(!empty($res['name.empty']))
             {
-                $res = $this->model('project')->edit($id);
-                if(!empty($res['name.empty']))
-                {
-                    $this->register('errors', $res);
-                }
-                else
-                {
-                    $this->go('/CleverManagement');
-                }
+                $this->register('errors', $res);
             }
-
-            $res = $this->model('project')->show($id);
-
-            if(is_array($res))
+            else
             {
-                $this->register('error', 'Project doesnt exist');
+                $this->go('/CleverManagement');
             }
+        }
+
+        $res = $this->model('project')->show($id);
+
+        if(is_array($res))
+        {
+            $this->register('error', 'Project doesnt exist');
         }
     }
 
@@ -113,27 +109,28 @@ class ProjectController extends WalrusController
     {
         if (empty($_SESSION)) {
             $this->go('/CleverManagement/');
+            return;
         }
-        else
-        {
-            $res = $this->model('project')->show($id);
 
-            $this->register('project', $res);
+        $res = $this->model('project')->show($id);
+        $this->register('project', $res);
 
-            $step = $this->model('step')->index($id);
-            if (empty($step)) {
-                $this->register('message', "Pas d'etape trouvee pour ce projet");
-            } else {
-                $this->register('message', 'Etapes :');
-            }
-
-            $this->register('steps', $step);
-
-            $status = $this->model('project')->status($id);
-
-            $this->register('status', $status);
-
-            $this->setView('show');
+        $step = $this->model('step')->index($id);
+        if (empty($step)) {
+            $this->register('message', "Pas d'etape trouvee pour ce projet");
+        } else {
+            $this->register('message', 'Etapes :');
         }
+
+        $admins = $this->model('project')->retrieveUsers($id, 'additionalAdmins');
+        $members = $this->model('project')->retrieveUsers($id, 'members');
+        $status = $this->model('project')->status($id);
+
+        $this->register('steps', $step);
+        $this->register('admins', $admins);
+        $this->register('members', $members);
+        $this->register('status', $status);
+
+        $this->setView('show');
     }
 }
