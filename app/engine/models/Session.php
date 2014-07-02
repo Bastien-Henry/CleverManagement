@@ -32,9 +32,13 @@ class Session
         R::trash($session);
     }
 
-    public function edit($id)
+    public function edit($id_task, $id_session)
     {
-        $session = R::load('sessions', $id);
+        $task = R::load('tasks', $id_task);
+        $task->percent = $_POST['percent'];
+        R::store($task);
+
+        $session = R::load('sessions', $id_session);
         $session->hour_number = $_POST['hour_number'];
         $session->percent = $_POST['percent'];
         $session->comment = $_POST['comment'];

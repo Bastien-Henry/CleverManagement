@@ -59,7 +59,7 @@ class SessionController extends WalrusController
 
         if(!empty($_POST))
         {
-            $session = $this->model('session')->edit($id_session);
+            $session = $this->model('session')->edit($id_task, $id_session);
             $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
         }
 
