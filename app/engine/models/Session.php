@@ -51,6 +51,7 @@ class Session
     {
         $task = R::load('tasks', $id_task);
         $task->percent = $_POST['percent'];
+        $task->total_hour = $task->getProperties()['total_hour']+$_POST['hour_number'];
         R::store($task);
 
         $session = R::dispense('sessions');
