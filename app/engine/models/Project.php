@@ -38,11 +38,32 @@ class Project
         $value = 0;
         foreach($tasks as $task)
         {
-            $value += $task->getProperties()['total_hour'];
+            $value += $this->time_task($task->getProperties()['id']);
         }
 
         return $value;
     }
+
+    
+    public function time_task($id_task)
+    {
+        $sessions = R::find(
+            'sessions',
+            ' id_task = :id_task',
+            array(
+                ':id_task' => $id_task
+            )
+        );
+
+        $value = 0;
+        foreach($sessions as $session)
+        {
+            $value += $session->getProperties()['hour_number'];
+        }
+
+        return $value;
+    }
+
 
     public function status($id_project)
     {

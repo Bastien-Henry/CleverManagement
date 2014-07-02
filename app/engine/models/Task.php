@@ -6,6 +6,25 @@ use R;
 
 class Task
 {
+    public function time_task($id_task)
+    {
+        $sessions = R::find(
+            'sessions',
+            ' id_task = :id_task',
+            array(
+                ':id_task' => $id_task
+            )
+        );
+
+        $value = 0;
+        foreach($sessions as $session)
+        {
+            $value += $session->getProperties()['hour_number'];
+        }
+
+        return $value;
+    }
+
     public function show($id)
     {
         $task = R::load('tasks', $id);
