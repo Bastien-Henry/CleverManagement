@@ -32,6 +32,25 @@ class Step
         return $result;
     }
 
+    public function time_step($id_step)
+    {
+        $tasks = R::find(
+            'tasks',
+            ' id_step = :id_step',
+            array(
+                ':id_step' => $id_step
+            )
+        );
+
+        $value = 0;
+        foreach($tasks as $task)
+        {
+            $value += $task->getProperties()['total_hour'];
+        }
+
+        return $value;
+    }
+
     public function show($id)
     {
         $step = R::load('steps', $id);
