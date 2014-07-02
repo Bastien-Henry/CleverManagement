@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-	<title>CleverManagement - Make your projects crystal</title>
-	<link rel="stylesheet" type="text/css" href="main.css">
-		<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="../assets/styles/bootstrap.css">
-	<link rel="stylesheet" href="../assets/styles/main.css">
+	<head>
+	    <meta charset="UTF-8">
+  		<title>Clever Management - Make your projects crystal</title>
+  		<link rel="stylesheet" type="text/css" href="main.css">
+  		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="/CleverManagement/assets/styles/bootstrap.css">
+		<link rel="stylesheet" href="/CleverManagement/assets/styles/main.css">
 	</head>
  	<body>
  		<div class="navbar">
 		  <div class="navbar-inner">
-		    <a class="brand" href="#"><img src="assets/images/logo.png"></a>
+		    <a class="brand" href="/CleverManagement/"><img src="/CleverManagement/assets/images/logo.png"></a>
 		    <ul class="nav">
-		      <li><a href="signup">Log In</a></li>
-		      <li><a href="">Dashboard</a></li>
+		      <li><a href="/CleverManagement/">Accueil</a></li>
+		      <li><a href="/CleverManagement/deconnection">Deconnexion</a></li>
 		    </ul>
 		  </div>
 		</div>
@@ -60,25 +60,56 @@
 		    	</ul>
 		      <!--Sidebar content-->
 		    </div>
-    <div>
-		<h3>{{step.name|raw}}</h3>
+	<div>
+			<div class="name-step"><span style="position:relative;top:5px;">Etape : {{step.name|raw}}</span></div>
 
-		<p>
-			{{step.description|raw}}
-		</p>
-		<br><br>
-		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/edit">Editer</a> | <a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/delete">Supprimer</a><br>
-		<strong>Tasks</strong><br><br>
-		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/task/create">Nouvelle tache</a><br><br>
-		<strong>{{message}}</strong><br>
-		<br>
-		{% for task in tasks %}
-			Nom : {{ task.name }}<br>
-			Description : {{ task.description }}<br>
-			<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/delete">Supprimer</a><br>
-			<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/edit">Editer</a><br>
-			<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/show">Voir</a><br>
-		{% endfor %}
-	</div>
+			<div class="description-step">
+				<p>
+					<h3>Description de l'etape : </h3>
+					{{step.description|raw}}
+				</p>
+				<p>
+					Debut : {{step.startline}} <br>
+					Fin : {{step.deadline}}
+				</p>
+			</div>
+			<div class="action-step">
+				<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/edit" title="Editer l'etape">
+	      			<span>
+	      				<img src="/CleverManagement/assets/images/edit.png">
+	      			</span>
+	      		</a>
+	      		<a href="/Clevermanagement/{{project_id}}//{{step.id}}/delete" title="Supprimer l'etape'">
+		  			<span>
+		  				<img src="/CleverManagement/assets/images/delete.png">
+		  			</span>
+		  		</a>
+	  		</div>
+	  		<div class="task-step">
+	  			<div class="task">
+		  			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/task/create" style="color:#fff;">Nouvelle tache</a></button>
+	  			</div>
+
+				<br><br>
+				<strong>{{message}}</strong><br>
+				<br><br>
+				{% for task in tasks %}
+				<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/show">
+					<div class="one-task">
+						<div class="title-task-step">
+							<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}}</span>
+						</div>
+						<div class="description-task-step">
+							<span style="position:relative;top:10px;">{{ task.description }}</span>
+						</div>
+						
+	<!-- 					<a href="/Clevermanagement/{{project.id}}/{{step.id}}/delete">Supprimer</a><br>
+						<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/edit">Editer</a><br>
+						<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/show">Voir</a><br> -->
+					</div>
+				</a>
+				{% endfor %}
+	  		</div>
+		</div>
 </body>
 </html>

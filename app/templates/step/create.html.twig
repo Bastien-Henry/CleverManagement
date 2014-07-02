@@ -5,15 +5,16 @@
   		<title>Clever Management - Make your projects crystal</title>
   		<link rel="stylesheet" type="text/css" href="main.css">
   		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="assets/styles/bootstrap.css">
-		<link rel="stylesheet" href="assets/styles/main.css">
+		<link rel="stylesheet" href="/CleverManagement/assets/styles/bootstrap.css">
+		<link rel="stylesheet" href="/CleverManagement/assets/styles/main.css">
 	</head>
  	<body>
  		<div class="navbar">
 		  <div class="navbar-inner">
-		    <a class="brand" href="#"><img src="assets/images/logo.png"></a>
+		    <a class="brand" href="#"><img src="/CleverManagement/assets/images/logo.png"></a>
 		    <ul class="nav">
-		      <li><a href="">Dashboard</a></li>
+		      <li><a href="/CleverManagement">Accueil</a></li>
+		      <li><a href="deconnection">Deconnexion</a></li>
 		    </ul>
 		  </div>
 		</div>
@@ -59,7 +60,10 @@
 		    	</ul>
 		      <!--Sidebar content-->
 		    </div>
-		    <div>
+
+		    <div class="name-project"><span style="position:relative;top:5px;">Créer une étape</span></div>
+		    <div class="my-form">
+		    	{{myFormCreate | raw}}
 		    </div>
-	</body>
+		    	</body>
 </html>

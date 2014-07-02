@@ -56,8 +56,7 @@ class ProjectController extends WalrusController
                 $form->setFieldValue($field, 'value', $project->getProperties()[$field]);
             }
         }
-
-        echo $form->render();
+        $this->register('myFormEdit', $form->render());
 
         if(!empty($_POST))
         {

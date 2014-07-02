@@ -150,7 +150,7 @@ a:hover
 	top: 5px;
 }
 
-.name-project
+.name-project, .name-step, .name-task
 {
 	color: #2980b9;
 	font-size: 20px;
@@ -168,7 +168,7 @@ a:hover
 	bottom: 21px;
 }
 
-.description-project, .action-project,	.steps
+.description-project, .action-project,	.steps, .description-step, .action-step, .task, .description-task, .action-task
 {
 	margin-left: 282px;
 	padding: 10px;
@@ -176,7 +176,7 @@ a:hover
 	padding-right: 100px;
 }
 
-.one-step
+.one-step, .one-task
 {
 	color:#252f56;
 	font-size: 20px;
@@ -191,20 +191,20 @@ a:hover
 	height: 75px;
 }
 
-.title-steps-project
+.title-steps-project, .title-task-step
 {
 	padding-left:40px;
 	background-color: #beccff;
 	height: 30px;
 }
 
-.description-steps-project
+.description-steps-project, .description-task-step
 {
 	padding-left:40px;
 	color: #4e556f;
 }
 
-.my-form-create
+.my-form
 {
 	margin-left: 500px;
 }

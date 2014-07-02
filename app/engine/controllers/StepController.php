@@ -21,11 +21,11 @@ class StepController extends WalrusController
         $task = $this->model('task')->index($id_step);
         if (empty($task))
         {
-            $this->register('message', 'no task found');
+            $this->register('message', 'Pas de tâches trouvées');
         }
         else
         {
-            $this->register('message', 'All tasks :');
+            $this->register('message', 'Tâches :');
         }
 
         $this->register('tasks', $task);
@@ -40,7 +40,7 @@ class StepController extends WalrusController
 	    $form = new WalrusForm('form_step_create');
         $formAction = '/clevermanagement/'.$id_project.'/step/create';
         $form->setForm('action', $formAction);
-		echo $form->render();
+        $this->register('myFormCreate', $form->render());
 
         if (!empty($_POST)) {
             $res = $this->model('step')->create($id_project);
@@ -67,6 +67,7 @@ class StepController extends WalrusController
         $form = new WalrusForm('form_step_edit');
         $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/edit';
         $form->setForm('action', $formAction);
+        
 
         $step = $this->model('step')->show($id_step);
         foreach ($form->getFields() as $field => $arrayOfAttribute) {
@@ -78,8 +79,7 @@ class StepController extends WalrusController
             $form->setFields($field, $arrayOfAttribute);
         }
 
-        echo $form->render();
-
+        $this->register('myFormEdit', $form->render());
         if(!empty($_POST))
         {
             $res = $this->model('step')->edit($id_step);

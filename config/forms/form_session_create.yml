@@ -2,20 +2,20 @@ form_session_create:
   form:
     method: POST
     action: /clevermanagement/id_project/step/id_step/task/id_task/session/create
-    submit: Create
+    submit: Cr&eacute;er une session
     structure: table
 
   fields:
     hour_number:
       type: text
       required: true
-      label: Heures travaillé
+      label: Heure(s) travaill&eacute;(s)
     percent:
       type: text
       required: true
-      label: éstimer la tache en %
+      label: Estimer la tache en %
     comment:
       type: text
       required: true
-      label: commentaire
+      label: Commentaire
 
