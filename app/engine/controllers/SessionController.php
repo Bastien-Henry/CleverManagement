@@ -22,7 +22,7 @@ class SessionController extends WalrusController
             $this->model('session')->create($id_task);
             $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
         }
-        echo $form->render();
+        $this->register('myFormCreate', $form->render());
 
         $this->setView('create');
     }
@@ -55,7 +55,7 @@ class SessionController extends WalrusController
             $form->setFields($field, $arrayOfAttribute);
         }
 
-        echo $form->render();
+        $this->register('myFormEdit', $form->render());
 
         if(!empty($_POST))
         {
