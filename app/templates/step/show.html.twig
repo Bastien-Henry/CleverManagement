@@ -61,12 +61,21 @@
 		      <!--Sidebar content-->
 		    </div>
     <div>
-    	<div class="name-project"><span style="position:relative;top:5px;">Etape : {{step.name|raw}}</span></div>
+    	<div class="name-project">
+    		
+    		<span style="position:relative;top:5px;">Etape : {{step.name|raw}}</span></div>
 
 		<p>
 			{{step.description|raw}}
 		</p>
 		<br><br>
+		{% if status == 1 %}
+			<span style='background-color: red'>statut</span>
+		{% elseif status == 2 %}
+			<span style='background-color: orange'>statut</span>
+		{% else %}
+			<span style='background-color: green'>statut</span>
+		{% endif %}<br>
 		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/edit">Editer</a> | <a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/delete">Supprimer</a><br>
 		<strong>Tasks</strong><br><br>
 		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/task/create">Nouvelle tache</a><br><br>

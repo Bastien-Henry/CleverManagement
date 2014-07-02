@@ -8,6 +8,17 @@
 	<h3>{{task.name|raw}}</h3>
 
 	<p>
+			Project réalisé a {{ task.percent }} %
+			{% if task.percent == 0 %}
+				<span style='background-color: red'>statut</span>
+			{% elseif task.percent >= 100 %}
+				<span style='background-color: green'>statut</span>
+			{% else %}
+				<span style='background-color: orange'>statut</span>
+			{% endif %}
+	</p>
+
+	<p>
 		{{task.description|raw}}
 	</p>
 	<br><br>

@@ -45,10 +45,13 @@ class Session
 
     public function create($id_task)
     {
+        $task = R::load('tasks', $id_task);
+        $task->percent = $_POST['percent'];
+        R::store($task);
+
         $session = R::dispense('sessions');
         $session->created_at = date('Y-m-d H:i:s.');
         $session->hour_number = $_POST['hour_number'];
-        $session->percent = $_POST['percent'];
         $session->comment = $_POST['comment'];
         $session->id_user = $_SESSION['user']['id'];
         $session->id_task = $id_task;
