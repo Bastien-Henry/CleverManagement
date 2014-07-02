@@ -1,10 +1,68 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Editer une Tache</title>
-</head>
-<body>
-	<h3>Editer une Tache</h3>
+	<head>
+    	<meta charset="UTF-8">
+  		<title>Clever Management - Make your projects crystal</title>
+  		<link rel="stylesheet" type="text/css" href="main.css">
+  		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="/CleverManagement/assets/styles/bootstrap.css">
+		<link rel="stylesheet" href="/CleverManagement/assets/styles/main.css">
+	</head>
+ 	<body>
+ 		<div class="navbar">
+		  <div class="navbar-inner">
+		    <a class="brand" href="#"><img src="/CleverManagement/assets/images/logo.png"></a>
+		    <ul class="nav">
+		      <li><a href="/CleverManagement/">Accueil</a></li>
+		      <li><a href="/CleverManagement/deconnection">Deconnexion</a></li>
+		    </ul>
+		  </div>
+		</div>
+		<div class="container-fluid">
+		  <div class="row-fluid">
+		    <div class="span2 sidebar">
+		    	<ul class="span2 sidebar-menu">
+		    		<a href="new-project.php">
+		    			<li class="current">
+		    				<span class="text-li-sidebar">
+		    					<a href="/CleverManagement/create" class="text-li-sidebar">Nouveau projet</a>
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Add Directory
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Directory 1
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Directory 2
+		    				</span>
+		    			</li>
+		    		</a>
+		    		<a href="">
+		    			<li>
+		    				<span class="text-li-sidebar">
+		    					Directory 3
+		    				</span>
+		    			</li>
+		    		</a>
+		    	</ul>
+		      <!--Sidebar content-->
+		    </div>
+		    <div class="name-project"><span style="position:relative;top:5px;">Editer la step</span></div>
+		    <div class="my-form">
+				{{myFormEdit | raw}}
+			</div>
 </body>
 </html>

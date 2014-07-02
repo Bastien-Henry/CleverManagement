@@ -22,11 +22,11 @@ class TaskController extends WalrusController
         $session = $this->model('session')->index($id_task);
         if (empty($session))
         {
-            $this->register('message', 'no session found');
+            $this->register('message', 'Pas de sessions pour cette tâche');
         }
         else
         {
-            $this->register('message', 'All sessions :');
+            $this->register('message', 'Toutes les sessions :');
         }
 
         $this->register('sessions', $session);
@@ -41,7 +41,7 @@ class TaskController extends WalrusController
 	    $form = new WalrusForm('form_task_create');
         $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/create';
         $form->setForm('action', $formAction);
-		echo $form->render();
+        $this->register('myFormCreate', $form->render());
 
         if (!empty($_POST)) {
             $res = $this->model('task')->create($id_step);
@@ -83,7 +83,7 @@ class TaskController extends WalrusController
             $form->setFields($field, $arrayOfAttribute);
         }
 
-        echo $form->render();
+        $this->register('myFormEdit', $form->render());
 
         if(!empty($_POST))
         {
