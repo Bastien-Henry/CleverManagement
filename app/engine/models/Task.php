@@ -18,6 +18,11 @@ class Task
         return $task;
     }
 
+    public function retrieveMembers($id)
+    {
+        $task = R::load('tasks', $id);
+    }
+
     public function index($id_step)
     {
         $tasks = R::findAll('tasks', 'id_step = ?', array($id_step));
@@ -56,6 +61,9 @@ class Task
 
     public function create($id_step)
     {
+        var_dump($_POST['members']);
+        die('test');
+
         $task = R::dispense('tasks');
 
         if(empty($_POST['name']))

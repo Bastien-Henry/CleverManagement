@@ -145,17 +145,23 @@ class Project
         return $project;
     }
 
-    public function retrieveUsers($id_project, $field)
+    public function retrieveUsers($id_project, $field = null)
     {
-        if ($field == "additionalAdmins") {
-            $status = 1;
-        } else {
-            $status = 0;
+        $query = 'SELECT * FROM projects_users WHERE id_project = :project';
+        $params = array(':project' => $id_project);
+
+        if ($field != null) {
+            if ($field == "additionalAdmins") {
+                $status = 1;
+            } else {
+                $status = 0;
+            }
+
+            $query .= ' AND admin = :status';
+            $params[':status'] = $status;
         }
 
-        $relations = R::getAll('SELECT * FROM projects_users WHERE id_project = :project AND admin = :status',
-            [':project' => $id_project, ':status' => $status]
-        );
+        $relations = R::getAll($query, $params);
 
         $users = array();
         foreach ($relations as $key => $object) {
@@ -165,7 +171,7 @@ class Project
         return $users;
     }
 
-    public function retrieveUsersEmails($id_project, $field)
+    public function retrieveUsersEmails($id_project, $field = null)
     {
         $users = $this->retrieveUsers($id_project, $field);
 

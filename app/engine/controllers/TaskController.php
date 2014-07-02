@@ -14,10 +14,12 @@ class TaskController extends WalrusController
     public function show($id_project, $id_step, $id_task)
     {
         $task = $this->model('task')->show($id_task);
+        $members = $this->model('task')->retrieveMembers($id_task);
 
         $this->register('task', $task);
         $this->register('step_id', $id_step);
         $this->register('project_id', $id_project);
+        $this->register('members', $members);
 
         $session = $this->model('session')->index($id_task);
         if (empty($session))
@@ -41,6 +43,9 @@ class TaskController extends WalrusController
 	    $form = new WalrusForm('form_task_create');
         $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/create';
         $form->setForm('action', $formAction);
+        $availableMembers = $this->model('project')->retrieveUsersEmails($id_project, null);
+        $preparedArray = array_combine($availableMembers, $availableMembers);
+        $form->setFieldValue('members', 'options', $preparedArray);
         $this->register('myFormCreate', $form->render());
 
         if (!empty($_POST)) {

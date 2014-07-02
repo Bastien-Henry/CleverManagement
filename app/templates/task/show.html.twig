@@ -75,6 +75,16 @@
 						Debut : {{task.startline}} <br>
 						Fin : {{task.deadline}}
 					</p>
+					<p>
+						Membres assignes : 
+						{% for member in members %}
+							{% if loop.first %}
+								{{ member.email }}
+							{% else %}
+								<span>|</span> {{ member.email }}
+							{% endif %}
+						{% endfor %}
+					</p>
 				</div>
 				<div class="action-task">
 					<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit" title="Editer l'etape">
