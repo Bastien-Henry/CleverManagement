@@ -27,19 +27,6 @@ class Task
 
     public function delete($id)
     {
-        $find_session = R::find(
-            'sessions',
-            ' id_task = :id_task',
-            array(
-                ':id_task' => $id
-            )
-        );
-
-        foreach($find_session as $session)
-        {
-            R::trash($session);
-        }
-
         $task = $this->show($id);
 
         R::trash($task);
@@ -56,7 +43,10 @@ class Task
 
         $task->name = $_POST['name'];
         $task->description = $_POST['description'];
-        $task->urgent = $_POST['urgent'];
+        if(isset($_POST['urgent']))
+            $task->urgent = $_POST['urgent'][0];
+        else
+            $task->urgent = 0;
         $task->startline = $_POST['startline'];
         $task->deadline = $_POST['deadline'];
 
@@ -73,12 +63,13 @@ class Task
             return array('name.empty' => 'Name can\'t be empty');
         }
 
-        //___________________________________
-
         $task->name = $_POST['name'];
         $task->id_step = $id_step;
         $task->description = $_POST['description'];
-        // $task->urgent = $_POST['urgent'];
+        if(isset($_POST['urgent']))
+            $task->urgent = $_POST['urgent'][0];
+        else
+            $task->urgent = 0;
         $task->startline = $_POST['startline'];
         $task->deadline = $_POST['deadline'];
 

@@ -29,11 +29,6 @@ class Step
     {
         $step = $this->show($id);
 
-        if($_SESSION['user']['id'] != $step->getProperties()['users_id'])
-        {
-            return array('user.forbidden' => 'Vous n\'avez pas les droits de faire ca');
-        }
-
         R::trash($step);
     }
 
