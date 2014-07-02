@@ -73,12 +73,18 @@
 					Fin : {{step.deadline}}
 				</p>
 				{% if status == 1 %}
-					<span style='background-color: red'>statut</span>
+					<div class="alert alert-error" style="width:200px;text-align:center;">
+						Statut : To Do
+					</div>
 				{% elseif status == 2 %}
-					<span style='background-color: orange'>statut</span>
+					<div class="alert alert-warning" style="width:200px;text-align:center;">
+						Statut : Doing
+					</div>
 				{% else %}
-					<span style='background-color: green'>statut</span>
-				{% endif %}<br>
+					<div class="alert alert-success" style="width:200px;text-align:center;">
+						Statut : Done
+					</div>
+				{% endif %}
 			</div>
 			<div class="action-step">
 				<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/edit" title="Editer l'etape">
