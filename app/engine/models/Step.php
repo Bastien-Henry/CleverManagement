@@ -22,7 +22,7 @@ class Step
             $value += $task->getProperties()['percent'];
         }
 
-        if(count($tasks)*100 == $value)
+        if((count($tasks)*100 == $value) && (count($tasks) != 0) && ($value != 0))
             $result = 3;
         elseif($value != 0)
             $result = 2;

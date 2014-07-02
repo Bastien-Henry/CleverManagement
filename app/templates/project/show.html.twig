@@ -94,12 +94,18 @@
 					{% endfor %}
 				</p>
 				{% if status == 1 %}
-					<span style='background-color: red'>statut</span>
+					<div class="alert alert-error" style="width:200px;text-align:center;">
+						Statut : To Do
+					</div>
 				{% elseif status == 2 %}
-					<span style='background-color: orange'>statut</span>
+					<div class="alert alert-warning" style="width:200px;text-align:center;">
+						Statut : Doing
+					</div>
 				{% else %}
-					<span style='background-color: green'>statut</span>
-				{% endif %}<br>
+					<div class="alert alert-success" style="width:200px;text-align:center;">
+						Statut : Done
+					</div>
+				{% endif %}
 			</div>
 			<div class="action-project">
 				<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet">
@@ -126,6 +132,16 @@
 					<div class="one-step">
 						<div class="title-steps-project">
 							<span style="position:relative;top:5px;">{{ step.name }} du {{step.startline}} au {{step.deadline}}</span>
+							<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/edit" title="Editer l'&eacute;tape">
+				      			<span>
+				      				<img src="/CleverManagement/assets/images/edit.png">
+				      			</span>
+				      		</a>
+				      		<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/delete" title="Supprimer le projet">
+					  			<span>
+					  				<img src="/CleverManagement/assets/images/delete.png">
+					  			</span>
+					  		</a>
 						</div>
 						<div class="description-steps-project">
 							<span style="position:relative;top:10px;">{{ step.description }}</span>

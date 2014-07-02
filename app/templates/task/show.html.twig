@@ -102,18 +102,28 @@
 	  			<div class="task">
 		  			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
 	  			</div>
+		  			<p>
+					Project réalisé à : <br>
+					<div class="progress progress-striped">
+					  <div class="bar" style="width: {{task.percent}}%;text-align:center;">{{task.percent}} %</div>
+					</div>
+					{% if task.percent == 0 %}
+						<div class="alert alert-error" style="text-align:center;margin-left:283px;">
+							Statut : To Do
+						</div>
+					{% elseif task.percent >= 100 %}
+						<div class="alert alert-success" style="text-align:center;margin-left:283px;">
+							Statut : Done
+						</div>
+					{% else %}
+						<div class="alert alert-warning" style="text-align:center;margin-left:283px;">
+							Statut : Doing
+						</div>
+					{% endif %}
+				</p>
 		    </div>
 
-			<p>
-				Project réalisé a {{ task.percent }} %
-				{% if task.percent == 0 %}
-					<span style='background-color: red'>statut</span>
-				{% elseif task.percent >= 100 %}
-					<span style='background-color: green'>statut</span>
-				{% else %}
-					<span style='background-color: orange'>statut</span>
-				{% endif %}
-			</p>
+			
 
 		    <br><br>
 			<strong>{{message}}</strong><br>
@@ -122,6 +132,16 @@
 				<div class="one-task">
 					<div class="title-task-step">
 						<span style="position:relative;top:5px;">Date : {{ session.created_at }} | Heure(s) travaillée(s) : {{session.hour_number}}</span>
+						<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/edit" title="Editer l'etape">
+			      			<span>
+			      				<img src="/CleverManagement/assets/images/edit.png">
+			      			</span>
+			      		</a>
+			      		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/delete" title="Supprimer l'etape'">
+				  			<span>
+				  				<img src="/CleverManagement/assets/images/delete.png">
+				  			</span>
+				  		</a>
 					</div>
 					<div class="description-task-step">
 						<span style="position:relative;top:10px;">Commentaire : {{ session.comment }}</span>
@@ -129,14 +149,5 @@
 				</div>
 			{% endfor %}
 	  		</div>
-
-	<!-- {% for session in sessions %}
-		Date : {{ session.created_at }}&nbsp;
-		Heure travaillé : {{ session.hour_number }}&nbsp;
-		Avancement : {{ session.percent }}<br>
-		Commentaire : {{ session.comment }}&nbsp;
-		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/edit">editer</a> | <a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/delete">supprimer</a>
-		<br>
-	{% endfor %} -->
 </body>
 </html>

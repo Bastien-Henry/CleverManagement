@@ -13,6 +13,11 @@ class TaskController extends WalrusController
 {
     public function show($id_project, $id_step, $id_task)
     {
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
+            return;
+        }
+
         $task = $this->model('task')->show($id_task);
         $members = $this->model('task')->retrieveMembers($id_task);
 
@@ -39,40 +44,56 @@ class TaskController extends WalrusController
 
     public function create($id_project, $id_step)
     {
-        $this->setView('create');
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
+        }
+        else
+        {
+            $this->setView('create');
 
-	    $form = new WalrusForm('form_task_create');
-        $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/create';
-        $form->setForm('action', $formAction);
-        $availableMembers = $this->model('project')->retrieveUsersEmails($id_project, null);
-        $preparedArray = array_combine($availableMembers, $availableMembers);
-        $form->setFieldValue('members', 'options', $preparedArray);
-        $this->register('myFormCreate', $form->render());
+            $form = new WalrusForm('form_task_create');
+            $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/create';
+            $form->setForm('action', $formAction);
+            $availableMembers = $this->model('project')->retrieveUsersEmails($id_project, null);
+            $preparedArray = array_combine($availableMembers, $availableMembers);
+            $form->setFieldValue('members', 'options', $preparedArray);
+            $this->register('myFormCreate', $form->render());
 
-        if (!empty($_POST)) {
-            $res = $this->model('task')->create($id_step);
-            
-            if (isset($res['errors']))
-            {
-                $this->register('errors', $res['errors']);
-            }
-            else
-            {
-                $this->go('/clevermanagement/'.$id_project.'/step/'.$id_step.'/show');
+            if (!empty($_POST)) {
+                $res = $this->model('task')->create($id_step);
+                
+                if (isset($res['errors']))
+                {
+                    $this->register('errors', $res['errors']);
+                }
+                else
+                {
+                    $this->go('/clevermanagement/'.$id_project.'/step/'.$id_step.'/show');
+                }
             }
         }
     }
 
     public function delete($id_project, $id_step, $id_task)
     {
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
+        }
+        else
+        {
+            $this->model('task')->delete($id_task);
 
-        $this->model('task')->delete($id_task);
-
-        $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/show');
+            $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/show');
+        }
     }
 
     public function edit($id_project, $id_step, $id_task)
     {
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
+            return;
+        }
+
         $this->setView('edit');
 
         $form = new WalrusForm('form_task_edit');
@@ -89,8 +110,9 @@ class TaskController extends WalrusController
             } else {
                 $arrayOfAttribute['value'] = $task->getProperties()[$field];
             }
-            $form->setFields($field, $arrayOfAttribute);
         }
+        
+        $form->setFields($field, $arrayOfAttribute);
 
         $this->register('myFormEdit', $form->render());
 

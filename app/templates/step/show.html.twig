@@ -73,12 +73,18 @@
 					Fin : {{step.deadline}}
 				</p>
 				{% if status == 1 %}
-					<span style='background-color: red'>statut</span>
+					<div class="alert alert-error" style="width:200px;text-align:center;">
+						Statut : To Do
+					</div>
 				{% elseif status == 2 %}
-					<span style='background-color: orange'>statut</span>
+					<div class="alert alert-warning" style="width:200px;text-align:center;">
+						Statut : Doing
+					</div>
 				{% else %}
-					<span style='background-color: green'>statut</span>
-				{% endif %}<br>
+					<div class="alert alert-success" style="width:200px;text-align:center;">
+						Statut : Done
+					</div>
+				{% endif %}
 			</div>
 			<div class="action-step">
 				<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/edit" title="Editer l'etape">
@@ -86,7 +92,7 @@
 	      				<img src="/CleverManagement/assets/images/edit.png">
 	      			</span>
 	      		</a>
-	      		<a href="/Clevermanagement/{{project_id}}//{{step.id}}/delete" title="Supprimer l'etape'">
+	      		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/delete" title="Supprimer l'etape'">
 		  			<span>
 		  				<img src="/CleverManagement/assets/images/delete.png">
 		  			</span>
@@ -105,6 +111,16 @@
 					<div class="one-task">
 						<div class="title-task-step">
 							<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}}</span>
+							<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/edit" title="Editer l'etape">
+				      			<span>
+				      				<img src="/CleverManagement/assets/images/edit.png">
+				      			</span>
+				      		</a>
+				      		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/task/{{ task.id }}/delete" title="Supprimer l'etape'">
+					  			<span>
+					  				<img src="/CleverManagement/assets/images/delete.png">
+					  			</span>
+					  		</a>
 						</div>
 						<div class="description-task-step">
 							<span style="position:relative;top:10px;">{{ task.description }}</span>

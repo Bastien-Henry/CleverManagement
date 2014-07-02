@@ -70,8 +70,6 @@ body
 	background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
 	background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
 	background-repeat: repeat-x;
-	position: relative;
-	top: 150px;
 }
 
 .edit-project
@@ -98,6 +96,7 @@ body
 {
 	color: #fff;
 	padding: 10px;
+	height: 185px !important;
 }
 
 ul

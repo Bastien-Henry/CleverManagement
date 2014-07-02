@@ -22,7 +22,7 @@ class Project
             $value += $this->status_task($step->getProperties()['id']);
         }
 
-        if(count($steps)*3 == $value)
+        if((count($steps)*3 == $value) && (count($steps) != 0))
             $result = 3;
         elseif(count($steps) == $value)
             $result = 1;
@@ -48,7 +48,7 @@ class Project
             $value += $task->getProperties()['percent'];
         }
 
-        if(count($tasks)*100 == $value)
+        if(count($tasks)*100 == $value && (count($tasks) != 0))
             $result = 3;
         elseif($value != 0)
             $result = 2;

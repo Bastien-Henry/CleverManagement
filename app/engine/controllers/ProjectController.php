@@ -25,20 +25,32 @@ class ProjectController extends WalrusController
 
     public function create()
     {
-        $form = new WalrusForm('form_project_create');
-        $this->register('myFormCreate', $form->render());
-        // $form->check();
-        if(!empty($_POST))
-        {
-            $this->model('project')->create();
-            $this->go('/CleverManagement');
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
         }
+        else
+        {
+            $form = new WalrusForm('form_project_create');
+            $this->register('myFormCreate', $form->render());
+            // $form->check();
+            if(!empty($_POST))
+            {
+                $this->model('project')->create();
+                $this->go('/CleverManagement');
+            }
 
-        $this->setView('create');
+            $this->setView('create');
+
+        }
     }
 
     public function edit($id)
     {
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
+            return;
+        }
+
         $this->setView('edit');
 
         $form = new WalrusForm('form_project_edit');
@@ -56,6 +68,7 @@ class ProjectController extends WalrusController
                 $form->setFieldValue($field, 'value', $project->getProperties()[$field]);
             }
         }
+
         $this->register('myFormEdit', $form->render());
 
         if(!empty($_POST))
@@ -81,13 +94,24 @@ class ProjectController extends WalrusController
 
     public function delete($id)
     {
-        $res = $this->model('project')->delete($id);
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
+        }
+        else
+        {
+            $res = $this->model('project')->delete($id);
 
-        $this->go('/CleverManagement');
+            $this->go('/CleverManagement');
+        }
     }
 
     public function show($id)
     {
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
+            return;
+        }
+
         $res = $this->model('project')->show($id);
         $this->register('project', $res);
 
@@ -100,13 +124,11 @@ class ProjectController extends WalrusController
 
         $admins = $this->model('project')->retrieveUsers($id, 'additionalAdmins');
         $members = $this->model('project')->retrieveUsers($id, 'members');
+        $status = $this->model('project')->status($id);
 
         $this->register('steps', $step);
         $this->register('admins', $admins);
         $this->register('members', $members);
-
-        $status = $this->model('project')->status($id);
-
         $this->register('status', $status);
 
         $this->setView('show');
