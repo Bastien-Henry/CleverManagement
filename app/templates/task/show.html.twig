@@ -112,6 +112,16 @@
 				<div class="one-task">
 					<div class="title-task-step">
 						<span style="position:relative;top:5px;">Date : {{ session.created_at }} | Heure(s) travaillée(s) : {{session.hour_number}}</span>
+						<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/edit" title="Editer l'etape">
+			      			<span>
+			      				<img src="/CleverManagement/assets/images/edit.png">
+			      			</span>
+			      		</a>
+			      		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/delete" title="Supprimer l'etape'">
+				  			<span>
+				  				<img src="/CleverManagement/assets/images/delete.png">
+				  			</span>
+				  		</a>
 					</div>
 					<div class="description-task-step">
 						<span style="position:relative;top:10px;">Commentaire : {{ session.comment }}</span>
@@ -119,14 +129,5 @@
 				</div>
 			{% endfor %}
 	  		</div>
-
-	<!-- {% for session in sessions %}
-		Date : {{ session.created_at }}&nbsp;
-		Heure travaillé : {{ session.hour_number }}&nbsp;
-		Avancement : {{ session.percent }}<br>
-		Commentaire : {{ session.comment }}&nbsp;
-		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/edit">editer</a> | <a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/delete">supprimer</a>
-		<br>
-	{% endfor %} -->
 </body>
 </html>

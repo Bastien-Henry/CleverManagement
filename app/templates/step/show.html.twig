@@ -105,6 +105,16 @@
 					<div class="one-task">
 						<div class="title-task-step">
 							<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}}</span>
+							<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/edit" title="Editer l'etape">
+				      			<span>
+				      				<img src="/CleverManagement/assets/images/edit.png">
+				      			</span>
+				      		</a>
+				      		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/task/{{ task.id }}/delete" title="Supprimer l'etape'">
+					  			<span>
+					  				<img src="/CleverManagement/assets/images/delete.png">
+					  			</span>
+					  		</a>
 						</div>
 						<div class="description-task-step">
 							<span style="position:relative;top:10px;">{{ task.description }}</span>
