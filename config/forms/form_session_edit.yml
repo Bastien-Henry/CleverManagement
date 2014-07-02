@@ -9,12 +9,12 @@ form_session_edit:
     hour_number:
       type: text
       required: true
-      label: Heures travaillé
+      label: Heure(s) travaillée(s)
     percent:
       type: text
       required: true
-      label: éstimer la tache en %
+      label: Estimer la tache en %
     comment:
       type: text
       required: true
-      label: commentaire
+      label: Commentaire

@@ -13,91 +13,115 @@ class StepController extends WalrusController
 {
     public function show($id_project, $id_step)
     {
-        $step = $this->model('step')->show($id_step);
-
-        $this->register('step', $step);
-        $this->register('project_id', $id_project);
-
-        $task = $this->model('task')->index($id_step);
-        if (empty($task))
-        {
-            $this->register('message', 'Pas de tâches trouvées');
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
         }
         else
         {
-            $this->register('message', 'Tâches :');
+            $step = $this->model('step')->show($id_step);
+
+            $this->register('step', $step);
+            $this->register('project_id', $id_project);
+
+            $task = $this->model('task')->index($id_step);
+            if (empty($task))
+            {
+                $this->register('message', 'Pas de tâches trouvées');
+            }
+            else
+            {
+                $this->register('message', 'Tâches :');
+            }
+
+            $this->register('tasks', $task);
+
+            $this->setView('show');
         }
-
-        $this->register('tasks', $task);
-
-        $this->setView('show');
     }
 
     public function create($id_project)
     {
-        $this->setView('create');
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
+        }
+        else
+        {
+            $this->setView('create');
 
-	    $form = new WalrusForm('form_step_create');
-        $formAction = '/clevermanagement/'.$id_project.'/step/create';
-        $form->setForm('action', $formAction);
-        $this->register('myFormCreate', $form->render());
+    	    $form = new WalrusForm('form_step_create');
+            $formAction = '/clevermanagement/'.$id_project.'/step/create';
+            $form->setForm('action', $formAction);
+            $this->register('myFormCreate', $form->render());
 
-        if (!empty($_POST)) {
-            $res = $this->model('step')->create($id_project);
-            if (isset($res['errors'])) {
-                $this->register('errors', $res['errors']);
-            }
-            else
-            {
-                $this->go('/clevermanagement/'.$id_project.'/show');
+            if (!empty($_POST)) {
+                $res = $this->model('step')->create($id_project);
+                if (isset($res['errors'])) {
+                    $this->register('errors', $res['errors']);
+                }
+                else
+                {
+                    $this->go('/clevermanagement/'.$id_project.'/show');
+                }
             }
         }
     }
 
     public function delete($id_project, $id_step)
     {
-        $res = $this->model('step')->delete($id_step);
-        $this->go('/CleverManagement/'.$id_project.'/show');
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
+        }
+        else
+        {
+            $res = $this->model('step')->delete($id_step);
+            $this->go('/CleverManagement/'.$id_project.'/show');
+        }
     }
 
     public function edit($id_project, $id_step)
     {
-        $this->setView('edit');
-
-        $form = new WalrusForm('form_step_edit');
-        $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/edit';
-        $form->setForm('action', $formAction);
-        
-
-        $step = $this->model('step')->show($id_step);
-        foreach ($form->getFields() as $field => $arrayOfAttribute) {
-            if ($arrayOfAttribute['type'] == 'textarea') {
-                $arrayOfAttribute['text'] = $step->getProperties()[$field];
-            } else {
-                $arrayOfAttribute['value'] = $step->getProperties()[$field];
-            }
-            $form->setFields($field, $arrayOfAttribute);
+        if (empty($_SESSION)) {
+            $this->go('/CleverManagement/');
         }
-
-        $this->register('myFormEdit', $form->render());
-        if(!empty($_POST))
+        else
         {
-            $res = $this->model('step')->edit($id_step);
-            if(!empty($res['name.empty']))
-            {
-                $this->register('errors', $res);
-            }
-            else
-            {
-                $this->go('/CleverManagement/'.$id_project.'/show');
-            }
-        }
+            $this->setView('edit');
 
-        $step = $this->model('step')->show($id_step);
+            $form = new WalrusForm('form_step_edit');
+            $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/edit';
+            $form->setForm('action', $formAction);
+            
 
-        if(is_array($step))
-        {
-            $this->register('error', 'Step doesnt exist');
+            $step = $this->model('step')->show($id_step);
+            foreach ($form->getFields() as $field => $arrayOfAttribute) {
+                if ($arrayOfAttribute['type'] == 'textarea') {
+                    $arrayOfAttribute['text'] = $step->getProperties()[$field];
+                } else {
+                    $arrayOfAttribute['value'] = $step->getProperties()[$field];
+                }
+                $form->setFields($field, $arrayOfAttribute);
+            }
+
+            $this->register('myFormEdit', $form->render());
+            if(!empty($_POST))
+            {
+                $res = $this->model('step')->edit($id_step);
+                if(!empty($res['name.empty']))
+                {
+                    $this->register('errors', $res);
+                }
+                else
+                {
+                    $this->go('/CleverManagement/'.$id_project.'/show');
+                }
+            }
+
+            $step = $this->model('step')->show($id_step);
+
+            if(is_array($step))
+            {
+                $this->register('error', 'Step doesnt exist');
+            }
         }
     }
 }
