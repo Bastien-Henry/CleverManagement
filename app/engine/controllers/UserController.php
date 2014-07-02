@@ -35,7 +35,6 @@ class UserController extends WalrusController
     {
         $form = new WalrusForm('form_signin');
         echo $form->render();
-            
         if (!empty($_POST)) 
         {
 	        if(!$this->model('user')->signin())

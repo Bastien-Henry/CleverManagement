@@ -134,9 +134,25 @@ class Project
         return $project;
     }
 
-    private function retrieveMembers($field, $attributes)
+    public function retrieveUsers($id_project, $field)
     {
-        
+        if ($field == "additionalAdmins") {
+            $status = 1;
+        } else {
+            $status = 0;
+        }
+
+        $relations = R::getAll('SELECT * FROM projects_users WHERE id_project = :project AND admin = :status',
+            [':project' => $id_project, ':status' => $status]
+        );
+
+        $usersEmail = array();
+        foreach ($relations as $key => $object) {
+            $user = R::load('users', $object['id_user']);
+            $usersEmail[] = $user->getProperties()['email'];
+        }
+
+        return $usersEmail;
     }
 
     public function delete($id)
