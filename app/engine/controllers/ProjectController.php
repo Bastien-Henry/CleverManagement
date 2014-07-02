@@ -60,8 +60,7 @@ class ProjectController extends WalrusController
             
             $form->setFields($field, $arrayOfAttribute);
         }
-
-        echo $form->render();
+        $this->register('myFormEdit', $form->render());
 
         if(!empty($_POST))
         {
