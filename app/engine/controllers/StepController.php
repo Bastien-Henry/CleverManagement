@@ -40,7 +40,7 @@ class StepController extends WalrusController
 	    $form = new WalrusForm('form_step_create');
         $formAction = '/clevermanagement/'.$id_project.'/step/create';
         $form->setForm('action', $formAction);
-		echo $form->render();
+        $this->register('myFormCreate', $form->render());
 
         if (!empty($_POST)) {
             $res = $this->model('step')->create($id_project);
