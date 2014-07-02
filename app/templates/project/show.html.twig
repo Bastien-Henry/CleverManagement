@@ -73,6 +73,26 @@
 					Debut : {{project.startline}} <br>
 					Fin : {{project.deadline}}
 				</p>
+				<p>
+					Admins : 
+					{% for admin in admins %}
+						{% if loop.first %}
+							{{ admin.email }}
+						{% else %}
+							<span style="font-weight:bold;font-size:20px">|</span> {{ admin.email }}
+						{% endif %}
+					{% endfor %}
+				</p>
+				<p>
+					Membres : 
+					{% for member in members %}
+						{% if loop.first %}
+							{{ member.email }}
+						{% else %}
+							<span>|</span> {{ member.email }}
+						{% endif %}
+					{% endfor %}
+				</p>
 			</div>
 			<div class="action-project">
 				<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet">
@@ -103,10 +123,6 @@
 						<div class="description-steps-project">
 							<span style="position:relative;top:10px;">{{ step.description }}</span>
 						</div>
-						
-	<!-- 					<a href="/Clevermanagement/{{project.id}}/{{step.id}}/delete">Supprimer</a><br>
-						<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/edit">Editer</a><br>
-						<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/show">Voir</a><br> -->
 					</div>
 				</a>
 				{% endfor %}

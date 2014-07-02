@@ -29,3 +29,8 @@ form_task_create:
       type: date
       required: true
       label: Deadline
+    members:
+      type: hidden
+      id: members-task
+      placeholder: Members
+      style: width:300px;height:100px;

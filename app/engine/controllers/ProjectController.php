@@ -14,7 +14,7 @@ class ProjectController extends WalrusController
     public function index()
     {
         if (empty($_SESSION)) {
-            $this->setView('user/login');
+            $this->go('/CleverManagement/signin');
         }
         else {
             $res = $this->model('project')->index();
@@ -46,19 +46,15 @@ class ProjectController extends WalrusController
         $form->setForm('action', $formAction);
 
         $project = $this->model('project')->show($id);
-        foreach ($form->getFields() as $field => $arrayOfAttribute) {
-            if ($arrayOfAttribute['type'] == 'textarea') {
-                $arrayOfAttribute['text'] = $project->getProperties()[$field];
+        foreach ($form->getFields() as $field => $arrayOfAttributes) {
+            if ($field == 'members' || $field == 'additionalAdmins') {
+                $usersEmail = $this->model('project')->retrieveUsersEmails($id, $field);
+                $form->setFieldValue($field, 'value', implode(',', $usersEmail));
+            } elseif ($arrayOfAttributes['type'] == 'textarea') {
+                $form->setFieldValue($field, 'text', $project->getProperties()[$field]);
             } else {
-                if ($field == 'members' || $field == 'additionalAdmins') {
-                    $usersEmail = $this->model('project')->retrieveUsers($id, $field);
-                    $arrayOfAttribute['value'] = implode(',', $usersEmail);
-                } else {
-                    $arrayOfAttribute['value'] = $project->getProperties()[$field];
-                }
+                $form->setFieldValue($field, 'value', $project->getProperties()[$field]);
             }
-            
-            $form->setFields($field, $arrayOfAttribute);
         }
 
         echo $form->render();
@@ -94,7 +90,6 @@ class ProjectController extends WalrusController
     public function show($id)
     {
         $res = $this->model('project')->show($id);
-
         $this->register('project', $res);
 
         $step = $this->model('step')->index($id);
@@ -104,7 +99,12 @@ class ProjectController extends WalrusController
             $this->register('message', 'Etapes :');
         }
 
+        $admins = $this->model('project')->retrieveUsers($id, 'additionalAdmins');
+        $members = $this->model('project')->retrieveUsers($id, 'members');
+
         $this->register('steps', $step);
+        $this->register('admins', $admins);
+        $this->register('members', $members);
 
         $this->setView('show');
     }
