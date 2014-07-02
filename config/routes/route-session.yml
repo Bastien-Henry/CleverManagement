@@ -2,3 +2,19 @@ _session_create:
     path: 'clevermanagement/:id_project/step/:id_step/task/:id_task/session/create'
     controller: 'SessionController'
     action: 'create'
+
+_session_delete:
+    path: 'clevermanagement/:id_project/step/:id_step/task/:id_task/session/:id_session/delete'
+    controller: 'SessionController'
+    action: 'delete'
+    filters:
+        require:
+            id: '[0-9]+'
+
+_session_edit:
+    path: 'clevermanagement/:id_project/step/:id_step/task/:id_task/session/:id_session/edit'
+    controller: 'SessionController'
+    action: 'edit'
+    filters:
+        require:
+            id: '[0-9]+'

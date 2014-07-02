@@ -27,12 +27,20 @@ class Task
 
     public function delete($id)
     {
-        $task = $this->show($id);
+        $find_session = R::find(
+            'sessions',
+            ' id_task = :id_task',
+            array(
+                ':id_task' => $id
+            )
+        );
 
-        // if($_SESSION['user']['id'] != $task->getProperties()['users_id'])
-        // {
-        //     return array('user.forbidden' => 'Vous n\'avez pas les droits de faire ca');
-        // }
+        foreach($find_session as $session)
+        {
+            R::trash($session);
+        }
+
+        $task = $this->show($id);
 
         R::trash($task);
     }
@@ -65,8 +73,6 @@ class Task
             return array('name.empty' => 'Name can\'t be empty');
         }
 
-        if(!empty($errors))
-            return $errors;
         //___________________________________
 
         $task->name = $_POST['name'];

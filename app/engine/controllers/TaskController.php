@@ -19,6 +19,18 @@ class TaskController extends WalrusController
         $this->register('step_id', $id_step);
         $this->register('project_id', $id_project);
 
+        $session = $this->model('session')->index($id_task);
+        if (empty($session))
+        {
+            $this->register('message', 'no session found');
+        }
+        else
+        {
+            $this->register('message', 'All sessions :');
+        }
+
+        $this->register('sessions', $session);
+
         $this->setView('show');
     }
 

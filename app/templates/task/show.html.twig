@@ -11,6 +11,17 @@
 		{{task.description|raw}}
 	</p>
 	<br><br>
-	<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit">Editer</a> | <a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/delete">Supprimer</a><br>
+	<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit">Editer</a> | <a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/delete">Supprimer</a><br><br>
+
+	<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/create">nouvelle session</a><br>
+
+	{% for session in sessions %}
+		Date : {{ session.created_at }}&nbsp;
+		Heure travaillé : {{ session.hour_number }}&nbsp;
+		Avancement : {{ session.percent }}<br>
+		Commentaire : {{ session.comment }}&nbsp;
+		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/edit">editer</a> | <a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/delete">supprimer</a>
+		<br>
+	{% endfor %}
 </body>
 </html>

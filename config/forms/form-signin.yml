@@ -6,10 +6,6 @@ form_signin:
     structure: table
 
   fields:
-    type:
-      type: hidden
-      value: signin
-      label: false
     email:
       type: text
       required: true
