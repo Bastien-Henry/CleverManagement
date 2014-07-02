@@ -35,6 +35,10 @@ class StepController extends WalrusController
 
             $this->register('tasks', $task);
 
+            $status = $this->model('step')->status($id_step);
+
+            $this->register('status', $status);
+
             $this->setView('show');
         }
     }

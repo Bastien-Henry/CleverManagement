@@ -47,7 +47,8 @@ class SessionController extends WalrusController
 
     public function edit($id_project, $id_step, $id_task, $id_session)
     {
-        if (empty($_SESSION)) {
+        if (empty($_SESSION)) 
+        {
             $this->go('/CleverManagement/');
         }
         else
@@ -76,7 +77,7 @@ class SessionController extends WalrusController
 
             if(!empty($_POST))
             {
-                $session = $this->model('session')->edit($id_session);
+                $session = $this->model('session')->edit($id_task, $id_session);
                 $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
             }
 

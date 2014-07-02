@@ -6,6 +6,32 @@ use R;
 
 class Step
 {
+    public function status($id_step)
+    {
+        $tasks = R::find(
+            'tasks',
+            ' id_step = :id_step',
+            array(
+                ':id_step' => $id_step
+            )
+        );
+
+        $value = 0;
+        foreach($tasks as $task)
+        {
+            $value += $task->getProperties()['percent'];
+        }
+
+        if(count($tasks)*100 == $value)
+            $result = 3;
+        elseif($value != 0)
+            $result = 2;
+        else
+            $result = 1;
+
+        return $result;
+    }
+
     public function show($id)
     {
         $step = R::load('steps', $id);

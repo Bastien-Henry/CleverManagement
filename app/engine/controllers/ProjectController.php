@@ -129,6 +129,10 @@ class ProjectController extends WalrusController
 
             $this->register('steps', $step);
 
+            $status = $this->model('project')->status($id);
+
+            $this->register('status', $status);
+
             $this->setView('show');
         }
     }
