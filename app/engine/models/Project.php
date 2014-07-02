@@ -159,16 +159,6 @@ class Project
     {
         $project = R::load('projects', $id);
 
-        if($project->getProperties()['id'] == 0)
-        {
-            return array('project.not_found' => 'Project doesnt exist');
-        }
-
-        // if($_SESSION['user']['id'] != $project->getProperties()['users_id'])
-        // {
-        // return array('user.forbidden' => 'Vous n\'avez pas les droits de faire ca');
-        // }
-
         R::trash($project);
     }
 }
