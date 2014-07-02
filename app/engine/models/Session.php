@@ -51,10 +51,14 @@ class Session
     {
         $task = R::load('tasks', $id_task);
         $task->percent = $_POST['percent'];
-        $task->total_hour = $task->getProperties()['total_hour']+$_POST['hour_number'];
         R::store($task);
 
         $session = R::dispense('sessions');
+
+        $user = R::load('users', $_SESSION['user']['id']);
+        $price_hour = $user->getProperties()['hour_price'];
+
+        $session->price = $price_hour*$_POST['hour_number'];
         $session->created_at = date('Y-m-d H:i:s.');
         $session->hour_number = $_POST['hour_number'];
         $session->comment = $_POST['comment'];

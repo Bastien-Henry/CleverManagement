@@ -41,7 +41,8 @@ class StepController extends WalrusController
 
             $time_step = $this->model('step')->time_step($id_step);
 
-            $this->register('time_step', $time_step);
+            $this->register('hour_step', $time_step['hour']);
+            $this->register('price_step', $time_step['price']);
 
             $this->setView('show');
         }

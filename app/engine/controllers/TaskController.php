@@ -22,7 +22,8 @@ class TaskController extends WalrusController
         $members = $this->model('task')->retrieveMembers($id_task);
         $time_task = $this->model('task')->time_task($id_task);
 
-        $this->register('time_task', $time_task);
+        $this->register('hour_task', $time_task['hour']);
+        $this->register('price_task', $time_task['price']);
         $this->register('task', $task);
         $this->register('step_id', $id_step);
         $this->register('project_id', $id_project);

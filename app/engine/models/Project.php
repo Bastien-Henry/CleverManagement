@@ -16,13 +16,20 @@ class Project
             )
         );
 
-        $value = 0;
+        $hour = 0;
+        $price = 0;
         foreach($steps as $step)
         {
-            $value += $this->time_step($step->getProperties()['id']);
+            $value = $this->time_step($step->getProperties()['id']);
+            $hour += $value['price'];
+            $price += $value['hour'];
         }
 
-        return $value;
+        $tab = array();
+        $tab['price'] = $price;
+        $tab['hour'] = $hour;
+
+        return $tab;
     }
 
     public function time_step($id_step)
@@ -35,13 +42,20 @@ class Project
             )
         );
 
-        $value = 0;
+        $hour = 0;
+        $price = 0;
         foreach($tasks as $task)
         {
-            $value += $this->time_task($task->getProperties()['id']);
+            $value = $this->time_task($task->getProperties()['id']);
+            $hour += $value['price'];
+            $price += $value['hour'];
         }
 
-        return $value;
+        $tab = array();
+        $tab['price'] = $price;
+        $tab['hour'] = $hour;
+
+        return $tab;
     }
 
     
@@ -55,13 +69,19 @@ class Project
             )
         );
 
-        $value = 0;
+        $hour = 0;
+        $price = 0;
         foreach($sessions as $session)
-        {
-            $value += $session->getProperties()['hour_number'];
+        {    
+            $hour += $session->getProperties()['hour_number'];
+            $price += $session->getProperties()['price'];
         }
 
-        return $value;
+        $tab = array();
+        $tab['price'] = $price;
+        $tab['hour'] = $hour;
+
+        return $tab;
     }
 
 

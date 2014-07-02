@@ -127,7 +127,8 @@ class ProjectController extends WalrusController
         $status = $this->model('project')->status($id);
         $time_project = $this->model('project')->time_project($id);
 
-        $this->register('time_project', $time_project);
+        $this->register('hour_project', $time_project['hour']);
+        $this->register('price_project', $time_project['price']);
         $this->register('steps', $step);
         $this->register('admins', $admins);
         $this->register('members', $members);

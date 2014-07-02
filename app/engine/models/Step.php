@@ -42,13 +42,21 @@ class Step
             )
         );
 
-        $value = 0;
+        $hour = 0;
+        $price = 0;
         foreach($tasks as $task)
         {
-            $value += $this->time_task($task->getProperties()['id']);
+            $value = $this->time_task($task->getProperties()['id']);
+            $hour += $value['hour'];
+            $price += $value['price'];
+
         }
 
-        return $value;
+        $tab = array();
+        $tab['price'] = $price;
+        $tab['hour'] = $hour;
+
+        return $tab;
     }
 
     public function time_task($id_task)
@@ -61,13 +69,19 @@ class Step
             )
         );
 
-        $value = 0;
+        $hour = 0;
+        $price = 0;
         foreach($sessions as $session)
         {
-            $value += $session->getProperties()['hour_number'];
+            $hour += $session->getProperties()['hour_number'];
+            $price += $session->getProperties()['price'];
         }
 
-        return $value;
+        $tab = array();
+        $tab['price'] = $price;
+        $tab['hour'] = $hour;
+
+        return $tab;
     }
 
     public function show($id)

@@ -16,13 +16,20 @@ class Task
             )
         );
 
+        $hour = 0;
+        $price = 0;
         $value = 0;
         foreach($sessions as $session)
         {
-            $value += $session->getProperties()['hour_number'];
+            $hour += $session->getProperties()['hour_number'];
+            $price += $session->getProperties()['price'];
         }
 
-        return $value;
+        $tab = array();
+        $tab['price'] = $price;
+        $tab['hour'] = $hour;
+
+        return $tab;
     }
 
     public function show($id)
