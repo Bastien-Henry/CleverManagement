@@ -81,7 +81,7 @@
 							{% if loop.first %}
 								{{ member.email }}
 							{% else %}
-								<span>|</span> {{ member.email }}
+								<span style="font-weight:bold;font-size:20px">|</span> {{ member.email }}
 							{% endif %}
 						{% endfor %}
 					</p>
@@ -103,6 +103,17 @@
 		  			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
 	  			</div>
 		    </div>
+
+			<p>
+				Project réalisé a {{ task.percent }} %
+				{% if task.percent == 0 %}
+					<span style='background-color: red'>statut</span>
+				{% elseif task.percent >= 100 %}
+					<span style='background-color: green'>statut</span>
+				{% else %}
+					<span style='background-color: orange'>statut</span>
+				{% endif %}
+			</p>
 
 		    <br><br>
 			<strong>{{message}}</strong><br>

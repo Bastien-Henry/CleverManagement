@@ -6,6 +6,58 @@ use R;
 
 class Project
 {
+    public function status($id_project)
+    {
+        $steps = R::find(
+            'steps',
+            ' id_project = :id_project',
+            array(
+                ':id_project' => $id_project
+            )
+        );
+
+        $value = 0;
+        foreach($steps as $step)
+        {
+            $value += $this->status_task($step->getProperties()['id']);
+        }
+
+        if(count($steps)*3 == $value)
+            $result = 3;
+        elseif(count($steps) == $value)
+            $result = 1;
+        else
+            $result = 2;
+
+        return $result;
+    }
+
+    public function status_task($id_step)
+    {
+        $tasks = R::find(
+            'tasks',
+            ' id_step = :id_step',
+            array(
+                ':id_step' => $id_step
+            )
+        );
+
+        $value = 0;
+        foreach($tasks as $task)
+        {
+            $value += $task->getProperties()['percent'];
+        }
+
+        if(count($tasks)*100 == $value)
+            $result = 3;
+        elseif($value != 0)
+            $result = 2;
+        else
+            $result = 1;
+
+        return $result;
+    }
+
     public function create()
     {
         // project creation

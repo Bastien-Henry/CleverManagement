@@ -105,6 +105,10 @@ class ProjectController extends WalrusController
         $this->register('admins', $admins);
         $this->register('members', $members);
 
+        $status = $this->model('project')->status($id);
+
+        $this->register('status', $status);
+
         $this->setView('show');
     }
 }

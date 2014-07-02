@@ -22,6 +22,7 @@ class TaskController extends WalrusController
         $this->register('members', $members);
 
         $session = $this->model('session')->index($id_task);
+
         if (empty($session))
         {
             $this->register('message', 'Pas de sessions pour cette tâche');
@@ -80,7 +81,10 @@ class TaskController extends WalrusController
 
         $task = $this->model('task')->show($id_task);
         foreach ($form->getFields() as $field => $arrayOfAttribute) {
-            if ($arrayOfAttribute['type'] == 'textarea') {
+            if ($field == 'members') {
+                $usersEmail = $this->model('task')->retrieveMembers($id_task);
+                $form->setFieldValue($field, 'value', implode(',', $usersEmail));
+            } elseif ($arrayOfAttribute['type'] == 'textarea') {
                 $arrayOfAttribute['text'] = $task->getProperties()[$field];
             } else {
                 $arrayOfAttribute['value'] = $task->getProperties()[$field];

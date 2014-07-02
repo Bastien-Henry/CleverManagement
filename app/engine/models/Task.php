@@ -20,7 +20,16 @@ class Task
 
     public function retrieveMembers($id)
     {
-        $task = R::load('tasks', $id);
+        $query = 'SELECT * FROM tasks_users WHERE id_task = :task';
+        $params = array(':task' => $id);
+        $relations = R::getAll($query, $params);
+
+        $members = array();
+        foreach ($relations as $key => $object) {
+            $members[] = R::load('users', $object['id_user']);
+        }
+
+        return $members;
     }
 
     public function index($id_step)
@@ -61,9 +70,6 @@ class Task
 
     public function create($id_step)
     {
-        var_dump($_POST['members']);
-        die('test');
-
         $task = R::dispense('tasks');
 
         if(empty($_POST['name']))
@@ -81,7 +87,15 @@ class Task
         $task->startline = $_POST['startline'];
         $task->deadline = $_POST['deadline'];
 
-        R::store($task);
+        $id_task = R::store($task);
+
+        foreach ($_POST['members'] as $email) {
+            $user = R::findOne('users', 'email = ?', [$email]);
+            R::exec('INSERT INTO tasks_users (id_user, id_task) VALUES (:user, :task)', array(
+                    ':user'     => $user->getProperties()['id'], 
+                    ':task'  => $id_task
+                ));
+        }
 
         return true;
     }

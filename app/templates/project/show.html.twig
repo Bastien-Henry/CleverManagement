@@ -89,10 +89,17 @@
 						{% if loop.first %}
 							{{ member.email }}
 						{% else %}
-							<span>|</span> {{ member.email }}
+							<span style="font-weight:bold;font-size:20px">|</span> {{ member.email }}
 						{% endif %}
 					{% endfor %}
 				</p>
+				{% if status == 1 %}
+					<span style='background-color: red'>statut</span>
+				{% elseif status == 2 %}
+					<span style='background-color: orange'>statut</span>
+				{% else %}
+					<span style='background-color: green'>statut</span>
+				{% endif %}<br>
 			</div>
 			<div class="action-project">
 				<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet">
