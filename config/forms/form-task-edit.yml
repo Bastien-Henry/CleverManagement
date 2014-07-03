@@ -33,8 +33,13 @@ form_task_edit:
       type: select
       multiple: true
       required: false
+      label: 'Rajouter membres'
       name: 'members[]'
       options:
         - email1
         - email2
         - email3
+    registeredMembers:
+      type: checkbox
+      label: 'Supprimer membres'
+      function: 'TaskController::getRegisteredMembers(id_task)'

@@ -238,7 +238,7 @@ class WalrusForm
                     $errors[$name] = $isOk;
                 }
             }
-        }
+        }die;
 
         if ($_ENV['W']['is_ajax']) {
             echo JSON_encode($errors);
@@ -317,7 +317,7 @@ class WalrusForm
             $field = array_diff_key($field, array_flip($removeKeys));
 
             if ($field['type'] == 'select') {
-
+                
                 if (!($options xor $function)) {
                     continue;
                 }
@@ -388,6 +388,12 @@ class WalrusForm
 
                 array_push($inputs, $row);
             } elseif ($field['type'] == 'radio' || $field['type'] == 'checkbox') {
+
+                // function cal
+                if ($function) {
+                    $cb = explode('::', $function);
+                    $options = WalrusRouter::reroute($cb[0], $cb[1]);
+                }
 
                 if (!$options) {
                     continue;

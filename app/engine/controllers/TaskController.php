@@ -45,6 +45,14 @@ class TaskController extends WalrusController
         $this->setView('show');
     }
 
+    /*
+        For the form :
+            Get email addresses of every member of the project via the 
+            retrieveUsersEmails method from project model
+            Set the members field options (it is multiple select) with email addresses
+            as key and value (using array_combine php method) with WalrusForm
+            setFieldValue() method
+    */
     public function create($id_project, $id_step)
     {
         if (empty($_SESSION)) {
@@ -90,6 +98,14 @@ class TaskController extends WalrusController
         }
     }
 
+    /*
+        For the form :
+            Set value to every field with registered values in database
+            Get every member of the task to give the possibility to unlink them 
+            (registeredMembers)
+            Get every member of the project who are not related to the task to
+            give the possibility to add them (members)
+    */
     public function edit($id_project, $id_step, $id_task)
     {
         if (empty($_SESSION)) {
@@ -100,23 +116,29 @@ class TaskController extends WalrusController
         $this->setView('edit');
 
         $form = new WalrusForm('form_task_edit');
+
         $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/edit';
         $form->setForm('action', $formAction);
 
         $task = $this->model('task')->show($id_task);
         foreach ($form->getFields() as $field => $arrayOfAttribute) {
-            if ($field == 'members') {
-                $usersEmail = $this->model('task')->retrieveMembers($id_task);
-                $form->setFieldValue($field, 'value', implode(',', $usersEmail));
+            if ($field == 'registeredMembers') {
+                $function = 'TaskController::getRegisteredMembers('.$id_task.')';
+                $form->setFieldValue('registeredMembers', 'function', $function);
+            } elseif ($field == 'members') {
+                $membersProject = $this->model('project')->retrieveUsers($id_project, null);
+                $membersTask = $this->model('task')->retrieveMembers($id_task);
+                $availableMembers = $this->model('task')->availableMembersEmails($membersProject, $membersTask);
+                $preparedArray = array_combine($availableMembers, $availableMembers);
+                $form->setFieldValue('members', 'options', $preparedArray);
             } elseif ($arrayOfAttribute['type'] == 'textarea') {
-                $arrayOfAttribute['text'] = $task->getProperties()[$field];
+                $form->setFieldValue($field, 'text', $task->getProperties()[$field]);
             } else {
-                $arrayOfAttribute['value'] = $task->getProperties()[$field];
+                $form->setFieldValue($field, 'value', $task->getProperties()[$field]);
             }
         }
-        
-        $form->setFields($field, $arrayOfAttribute);
 
+        $form->check();
         $this->register('myFormEdit', $form->render());
 
         if(!empty($_POST))
@@ -138,5 +160,12 @@ class TaskController extends WalrusController
         {
             $this->register('error', 'Task doesnt exist');
         }
+    }
+
+    public function getRegisteredMembers($id_task)
+    {
+        $members = $this->model('task')->retrieveMembers($id_task);
+        $options = $this->model('task')->formatMembers($members);
+        return $options;
     }
 }

@@ -33,6 +33,42 @@ class Task extends Common
         return $members;
     }
 
+    public function formatMembers($members)
+    {
+        $options = array();
+        foreach ($members as $key => $object) {
+            $email = $object->getProperties()['email'];
+            $options[$email] = array(
+                    'label' => $email
+                );
+        }
+
+        return $options;
+    }
+
+    public function availableMembers($projectMembers, $taskMembers)
+    {
+        $availableMembers = array();
+        foreach ($projectMembers as $key => $member) {
+            if (!in_array($member, $taskMembers)) {
+                $availableMembers[] = $member;
+            }
+        }
+
+        return $availableMembers;
+    }
+
+    public function availableMembersEmails($projectMembers, $taskMembers)
+    {
+        $emails = array();
+        $availableMembers = $this->availableMembers($projectMembers, $taskMembers);
+        foreach ($availableMembers as $key => $member) {
+            $emails[] = $member->getProperties()['email'];
+        }
+
+        return $emails;
+    }
+
     public function index($id_step)
     {
         $tasks = R::findAll('tasks', 'id_step = ?', array($id_step));
