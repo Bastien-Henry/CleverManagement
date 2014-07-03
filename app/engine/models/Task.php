@@ -3,35 +3,10 @@
 namespace app\engine\models;
 
 use R;
+use app\engine\models\Common;
 
-class Task
+class Task extends Common
 {
-    public function time_task($id_task)
-    {
-        $sessions = R::find(
-            'sessions',
-            ' id_task = :id_task',
-            array(
-                ':id_task' => $id_task
-            )
-        );
-
-        $hour = 0;
-        $price = 0;
-        $value = 0;
-        foreach($sessions as $session)
-        {
-            $hour += $session->getProperties()['hour_number'];
-            $price += $session->getProperties()['price'];
-        }
-
-        $tab = array();
-        $tab['price'] = $price;
-        $tab['hour'] = $hour;
-
-        return $tab;
-    }
-
     public function show($id)
     {
         $task = R::load('tasks', $id);

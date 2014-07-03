@@ -124,7 +124,7 @@ class ProjectController extends WalrusController
 
         $admins = $this->model('project')->retrieveUsers($id, 'additionalAdmins');
         $members = $this->model('project')->retrieveUsers($id, 'members');
-        $status = $this->model('project')->status($id);
+        $status = $this->model('project')->status_step($id);
         $time_project = $this->model('project')->time_project($id);
 
         $this->register('hour_project', $time_project['hour']);

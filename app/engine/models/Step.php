@@ -3,87 +3,10 @@
 namespace app\engine\models;
 
 use R;
+use app\engine\models\Common;
 
-class Step
+class Step extends Common
 {
-    public function status($id_step)
-    {
-        $tasks = R::find(
-            'tasks',
-            ' id_step = :id_step',
-            array(
-                ':id_step' => $id_step
-            )
-        );
-
-        $value = 0;
-        foreach($tasks as $task)
-        {
-            $value += $task->getProperties()['percent'];
-        }
-
-        if((count($tasks)*100 == $value) && (count($tasks) != 0))
-            $result = 3;
-        elseif($value != 0)
-            $result = 2;
-        else
-            $result = 1;
-
-        return $result;
-    }
-
-    public function time_step($id_step)
-    {
-        $tasks = R::find(
-            'tasks',
-            ' id_step = :id_step',
-            array(
-                ':id_step' => $id_step
-            )
-        );
-
-        $hour = 0;
-        $price = 0;
-        foreach($tasks as $task)
-        {
-            $value = $this->time_task($task->getProperties()['id']);
-            $hour += $value['hour'];
-            $price += $value['price'];
-
-        }
-
-        $tab = array();
-        $tab['price'] = $price;
-        $tab['hour'] = $hour;
-
-        return $tab;
-    }
-
-    public function time_task($id_task)
-    {
-        $sessions = R::find(
-            'sessions',
-            ' id_task = :id_task',
-            array(
-                ':id_task' => $id_task
-            )
-        );
-
-        $hour = 0;
-        $price = 0;
-        foreach($sessions as $session)
-        {
-            $hour += $session->getProperties()['hour_number'];
-            $price += $session->getProperties()['price'];
-        }
-
-        $tab = array();
-        $tab['price'] = $price;
-        $tab['hour'] = $hour;
-
-        return $tab;
-    }
-
     public function show($id)
     {
         $step = R::load('steps', $id);
