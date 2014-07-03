@@ -23,6 +23,11 @@ class Step extends Common
     {
         $steps = R::findAll('steps', 'id_project = ?', array($id_project));
 
+        foreach($steps as $step)
+        {
+            $this->status_task($step->getProperties()['id']);
+        }
+
         return $steps;
     }
 

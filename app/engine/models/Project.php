@@ -119,6 +119,7 @@ class Project extends Common
         $projects = array();
         foreach ($relations as $key => $object) {
             $projects[] = R::load('projects', $object['id_project']);
+            $this->status_step($object['id_project']);
         }
 
         return $projects;

@@ -108,6 +108,10 @@ class Common
         else
             $result = 2;
 
+        $project_status = R::load('projects', $id_project);
+        $project_status->status = $result;
+        R::store($project_status);
+
         return $result;
     }
 
@@ -133,6 +137,10 @@ class Common
             $result = 2;
         else
             $result = 1;
+
+        $step_status = R::load('steps', $id_step);
+        $step_status->status = $result;
+        R::store($step_status);
 
         return $result;
     }

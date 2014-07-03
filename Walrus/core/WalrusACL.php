@@ -133,7 +133,7 @@ class WalrusACL
         if (!isset($_ENV['W']['acls'][$userRole])) {
             throw new WalrusException('The "' . $userRole . '" role doesn\'t exist');
         }
-
+        
         return in_array($task, $_ENV['W']['acls'][$userRole]['tasks']);
     }
 

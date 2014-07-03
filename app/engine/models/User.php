@@ -36,6 +36,7 @@ class User
         $user->password = hash("sha256", 'salt' . $_POST['password']);
         $user->job = $_POST['job'];
         $user->hourPrice = $_POST['hour_price'];
+        $user->acl = 'member';
 
         R::store($user);
 
@@ -67,5 +68,6 @@ class User
     {
         $_SESSION['user']['id'] = (string)$bean->id;
         $_SESSION['user']['email'] = (string)$bean->email;
+        $_SESSION['acl'] = (string)$bean->acl;
     }
 }
