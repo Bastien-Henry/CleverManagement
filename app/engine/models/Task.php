@@ -108,6 +108,9 @@ class Task extends Common
         $task->deadline = $_POST['deadline'];
 
         R::store($task);
+        $this->registerMember($_POST['members'], $id_task);
+        $this->deleteMember($_POST['registeredMembers'], $id_task);
+
         return $task;
     }
 
@@ -132,15 +135,30 @@ class Task extends Common
         $task->deadline = $_POST['deadline'];
 
         $id_task = R::store($task);
+        $this->registerMember($_POST['members'], $id_task);
 
-        foreach ($_POST['members'] as $email) {
+        return true;
+    }
+
+    private function deleteMember($members, $id_task)
+    {
+        foreach ($members as $email) {
+            $user = R::findOne('users', 'email = ?', [$email]);
+            R::exec('DELETE FROM tasks_users WHERE id_user = :user AND id_task = :task', array(
+                    ':user'     => $user->getProperties()['id'], 
+                    ':task'  => $id_task
+                ));
+        }
+    }
+
+    private function registerMember($members, $id_task)
+    {
+        foreach ($members as $email) {
             $user = R::findOne('users', 'email = ?', [$email]);
             R::exec('INSERT INTO tasks_users (id_user, id_task) VALUES (:user, :task)', array(
                     ':user'     => $user->getProperties()['id'], 
                     ':task'  => $id_task
                 ));
         }
-
-        return true;
     }
 }

@@ -1,0 +1,28 @@
+<?php
+
+// RDBMS: mysql|SQLite|PostgreSQL|Oracle
+$_ENV['W']['RDBMS'] = "%rdbms%";
+
+// RDBMS host
+$_ENV['W']['host'] = "%host%";
+
+// Database name
+$_ENV['W']['database'] = "%database%";
+
+// Database connexion user name
+$_ENV['W']['name'] = "%name%";
+
+// Database connexion password
+$_ENV['W']['password'] = "%password%";
+
+// Base url:
+$_ENV['W']['base_url'] = "%url%";
+
+// Templating language: haml|smarty|twig|php
+$_ENV['W']['templating'] = "%templating%";
+
+// Environment: development|production
+$_ENV['W']['environment'] = "%environment%";
+
+// I18n: default|user-value
+$_ENV['W']['language'] = "default";

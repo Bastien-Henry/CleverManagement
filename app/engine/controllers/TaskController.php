@@ -113,34 +113,6 @@ class TaskController extends WalrusController
             return;
         }
 
-        $this->setView('edit');
-
-        $form = new WalrusForm('form_task_edit');
-
-        $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/edit';
-        $form->setForm('action', $formAction);
-
-        $task = $this->model('task')->show($id_project, $id_task);
-        foreach ($form->getFields() as $field => $arrayOfAttribute) {
-            if ($field == 'registeredMembers') {
-                $function = 'TaskController::getRegisteredMembers('.$id_task.')';
-                $form->setFieldValue('registeredMembers', 'function', $function);
-            } elseif ($field == 'members') {
-                $membersProject = $this->model('project')->retrieveUsers($id_project, null);
-                $membersTask = $this->model('task')->retrieveMembers($id_task);
-                $availableMembers = $this->model('task')->availableMembersEmails($membersProject, $membersTask);
-                $preparedArray = array_combine($availableMembers, $availableMembers);
-                $form->setFieldValue('members', 'options', $preparedArray);
-            } elseif ($arrayOfAttribute['type'] == 'textarea') {
-                $form->setFieldValue($field, 'text', $task->getProperties()[$field]);
-            } else {
-                $form->setFieldValue($field, 'value', $task->getProperties()[$field]);
-            }
-        }
-
-        $form->check();
-        $this->register('myFormEdit', $form->render());
-
         if(!empty($_POST))
         {
             $task = $this->model('task')->edit($id_project, $id_task);
@@ -152,13 +124,50 @@ class TaskController extends WalrusController
             {
                 $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/show');
             }
-        }
 
-        $task = $this->model('task')->show($id_project, $id_task);
+            $task = $this->model('task')->show($id_project, $id_task);
 
-        if(is_array($task))
-        {
-            $this->register('error', 'Task doesnt exist');
+            if(is_array($task))
+            {
+                $this->register('error', 'Task doesnt exist');
+            }
+        } else {
+            $this->setView('edit');
+
+            $form = new WalrusForm('form_task_edit');
+
+            $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/edit';
+            $form->setForm('action', $formAction);
+
+            $task = $this->model('task')->show($id_project, $id_task);
+
+            // filling fields with values registered in database
+            // different treatment depending on type of field
+            foreach ($form->getFields() as $field => $arrayOfAttribute) {
+                if ($field == 'registeredMembers') {
+                    $function = 'TaskController::getRegisteredMembers([ 0:'.$id_task.'])';
+                    $form->setFieldValue('registeredMembers', 'function', $function);
+                } elseif ($field == 'members') {
+                    $membersProject = $this->model('project')->retrieveUsers($id_project, null);
+                    $membersTask = $this->model('task')->retrieveMembers($id_task);
+                    $availableMembers = $this->model('task')->availableMembersEmails($membersProject, $membersTask);
+                    $preparedArray = array_combine($availableMembers, $availableMembers);
+                    $form->setFieldValue('members', 'options', $preparedArray);
+                } elseif ($arrayOfAttribute['type'] == 'date') {
+                    //to do
+                    //$form->setFieldValue($field, '', $task->getProperties()[$field]);
+                } elseif ($arrayOfAttribute['type'] == 'checkbox') {
+                    //to do
+                    //$form->setFieldValue($field, '', $task->getProperties()[$field]);
+                } elseif ($arrayOfAttribute['type'] == 'textarea') {
+                    $form->setFieldValue($field, 'text', $task->getProperties()[$field]);
+                } else {
+                    $form->setFieldValue($field, 'value', $task->getProperties()[$field]);
+                }
+            }
+
+            $form->check();
+            $this->register('myFormEdit', $form->render());
         }
     }
 
