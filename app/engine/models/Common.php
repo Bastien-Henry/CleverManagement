@@ -6,6 +6,26 @@ use R;
 
 class Common
 {
+    protected function permission_exec($id_project)
+    {
+        $permission = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
+            [':user' => $_SESSION['user']['id']]
+        );
+
+        if($permission['admin'] == 0)
+            die('Vous n\'avez pas les droits pour effectuer cette action.');
+    }
+
+    protected function permission_access($id_project)
+    {
+        $permission = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
+            [':user' => $_SESSION['user']['id']]
+        );
+
+        if(!$permission)
+            die('Vous n\'avez pas les droits pour acceder a ces information.');
+    }
+
     public function time_project($id_project)
     {
         $steps = R::find(
@@ -108,6 +128,10 @@ class Common
         else
             $result = 2;
 
+        $project_status = R::load('projects', $id_project);
+        $project_status->status = $result;
+        R::store($project_status);
+
         return $result;
     }
 
@@ -133,6 +157,10 @@ class Common
             $result = 2;
         else
             $result = 1;
+
+        $step_status = R::load('steps', $id_step);
+        $step_status->status = $result;
+        R::store($step_status);
 
         return $result;
     }

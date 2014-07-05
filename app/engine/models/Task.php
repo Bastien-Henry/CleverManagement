@@ -7,9 +7,10 @@ use app\engine\models\Common;
 
 class Task extends Common
 {
-    public function show($id)
+    public function show($id_project, $id_task)
     {
-        $task = R::load('tasks', $id);
+        $this->permission_access($id_project);
+        $task = R::load('tasks', $id_task);
 
         if($task->getProperties()['id'] == 0)
         {
@@ -69,23 +70,28 @@ class Task extends Common
         return $emails;
     }
 
-    public function index($id_step)
+    public function index($id_project, $id_step)
     {
+        $this->permission_access($id_project);
         $tasks = R::findAll('tasks', 'id_step = ?', array($id_step));
 
         return $tasks;
     }
 
-    public function delete($id)
+    public function delete($id_project, $id_task)
     {
-        $task = $this->show($id);
+        $this->permission_exec($id_project);
+
+        $task = $this->show($id_task);
 
         R::trash($task);
     }
 
-    public function edit($id)
+    public function edit($id_project, $id_task)
     {
-        $task = R::load('tasks', $id);
+        $this->permission_exec($id_project);
+
+        $task = R::load('tasks', $id_task);
 
         if(empty($_POST['name']))
         {
@@ -105,8 +111,9 @@ class Task extends Common
         return $task;
     }
 
-    public function create($id_step)
+    public function create($id_project, $id_step)
     {
+        $this->permission_access($id_project);
         $task = R::dispense('tasks');
 
         if(empty($_POST['name']))

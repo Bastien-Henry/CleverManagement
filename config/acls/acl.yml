@@ -1,3 +1,4 @@
-connected: 'navigate'
-	admin-project: 'supervisor'
-		member: 'work'
+admin:
+	'supervisor'
+	member:
+	  'work'

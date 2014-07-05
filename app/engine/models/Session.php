@@ -3,12 +3,14 @@
 namespace app\engine\models;
 
 use R;
+use app\engine\models\Common;
 
-class Session
+class Session extends Common
 {
-    public function show($id)
+    public function show($id_project, $id_session)
     {
-        $session = R::load('sessions', $id);
+        $this->permission_access($id_project);
+        $session = R::load('sessions', $id_session);
 
         if($session->getProperties()['id'] == 0)
         {
@@ -18,22 +20,27 @@ class Session
         return $session;
     }
 
-    public function index($task)
+    public function index($id_project, $task)
     {
+        $this->permission_access($id_project);
         $sessions = R::findAll('sessions', 'id_task = ?', array($task));
 
         return $sessions;
     }
 
-    public function delete($id)
+    public function delete($id_project, $id_session)
     {
-        $session = $this->show($id);
+        $this->permission_exec($id_project);
+
+        $session = $this->show($id_session);
 
         R::trash($session);
     }
 
-    public function edit($id_task, $id_session)
+    public function edit($id_project, $id_task, $id_session)
     {
+        $this->permission_exec($id_project);
+
         $task = R::load('tasks', $id_task);
         $task->percent = $_POST['percent'];
         R::store($task);
@@ -47,8 +54,9 @@ class Session
         return $session;
     }
 
-    public function create($id_task)
+    public function create($id_project, $id_task)
     {
+        $this->permission_access($id_project);
         $task = R::load('tasks', $id_task);
         $task->percent = $_POST['percent'];
         R::store($task);

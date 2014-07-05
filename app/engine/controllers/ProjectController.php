@@ -4,6 +4,7 @@ namespace app\engine\controllers;
  
 use Walrus\core\WalrusController;
 use Walrus\core\WalrusForm;
+use Walrus\core\WalrusACL;
 
 /**
 * Class ProjectController
@@ -13,10 +14,17 @@ class ProjectController extends WalrusController
 {
     public function index()
     {
-        if (empty($_SESSION)) {
+        // var_dump($_SESSION['acl']);
+        // $test = WalrusACL::hasRight('member', 'supervisor');
+        // var_dump($test);
+
+        // die();
+        if (empty($_SESSION))
+        {
             $this->go('/CleverManagement/signin');
         }
-        else {
+        else
+        {
             $res = $this->model('project')->index();
             $this->register('projects', $res);
             $this->setView('index');
@@ -25,7 +33,8 @@ class ProjectController extends WalrusController
 
     public function create()
     {
-        if (empty($_SESSION)) {
+        if (empty($_SESSION))
+        {
             $this->go('/CleverManagement/');
         }
         else
@@ -107,7 +116,8 @@ class ProjectController extends WalrusController
 
     public function show($id)
     {
-        if (empty($_SESSION)) {
+        if (empty($_SESSION))
+        {
             $this->go('/CleverManagement/');
             return;
         }
@@ -116,9 +126,12 @@ class ProjectController extends WalrusController
         $this->register('project', $res);
 
         $step = $this->model('step')->index($id);
-        if (empty($step)) {
+        if (empty($step))
+        {
             $this->register('message', "Pas d'etape trouvee pour ce projet");
-        } else {
+        }
+        else
+        {
             $this->register('message', 'Etapes :');
         }
 

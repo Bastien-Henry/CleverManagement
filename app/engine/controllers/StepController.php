@@ -18,12 +18,12 @@ class StepController extends WalrusController
         }
         else
         {
-            $step = $this->model('step')->show($id_step);
+            $step = $this->model('step')->show($id_project, $id_step);
 
             $this->register('step', $step);
             $this->register('project_id', $id_project);
 
-            $task = $this->model('task')->index($id_step);
+            $task = $this->model('task')->index($id_project, $id_step);
             if (empty($task))
             {
                 $this->register('message', 'Pas de tâches trouvées');
@@ -82,7 +82,7 @@ class StepController extends WalrusController
         }
         else
         {
-            $res = $this->model('step')->delete($id_step);
+            $res = $this->model('step')->delete($id_project, $id_step);
             $this->go('/CleverManagement/'.$id_project.'/show');
         }
     }
@@ -101,7 +101,7 @@ class StepController extends WalrusController
             $form->setForm('action', $formAction);
             
 
-            $step = $this->model('step')->show($id_step);
+            $step = $this->model('step')->show($id_project, $id_step);
             foreach ($form->getFields() as $field => $arrayOfAttribute) {
                 if ($arrayOfAttribute['type'] == 'textarea') {
                     $arrayOfAttribute['text'] = $step->getProperties()[$field];
@@ -114,7 +114,7 @@ class StepController extends WalrusController
             $this->register('myFormEdit', $form->render());
             if(!empty($_POST))
             {
-                $res = $this->model('step')->edit($id_step);
+                $res = $this->model('step')->edit($id_project, $id_step);
                 if(!empty($res['name.empty']))
                 {
                     $this->register('errors', $res);
@@ -125,7 +125,7 @@ class StepController extends WalrusController
                 }
             }
 
-            $step = $this->model('step')->show($id_step);
+            $step = $this->model('step')->show($id_project, $id_step);
 
             if(is_array($step))
             {

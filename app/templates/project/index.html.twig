@@ -72,6 +72,9 @@
 				      		<p>
 					      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
 					      	</p>
+					      	<p>
+					      		status = {{ project.status }}
+					      	</p>
 				      	</div>
 				      	<div class="menu-directory">
 				      		<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet" class="edit-project">

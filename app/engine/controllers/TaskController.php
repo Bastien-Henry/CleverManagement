@@ -18,7 +18,7 @@ class TaskController extends WalrusController
             return;
         }
 
-        $task = $this->model('task')->show($id_task);
+        $task = $this->model('task')->show($id_project, $id_task);
         $members = $this->model('task')->retrieveMembers($id_task);
         $time_task = $this->model('task')->time_task($id_task);
 
@@ -29,7 +29,7 @@ class TaskController extends WalrusController
         $this->register('project_id', $id_project);
         $this->register('members', $members);
 
-        $session = $this->model('session')->index($id_task);
+        $session = $this->model('session')->index($id_project, $id_task);
 
         if (empty($session))
         {
@@ -71,7 +71,7 @@ class TaskController extends WalrusController
             $this->register('myFormCreate', $form->render());
 
             if (!empty($_POST)) {
-                $res = $this->model('task')->create($id_step);
+                $res = $this->model('task')->create($id_project, $id_step);
                 
                 if (isset($res['errors']))
                 {
@@ -92,7 +92,7 @@ class TaskController extends WalrusController
         }
         else
         {
-            $this->model('task')->delete($id_task);
+            $this->model('task')->delete($id_project, $id_task);
 
             $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/show');
         }
@@ -120,7 +120,7 @@ class TaskController extends WalrusController
         $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/edit';
         $form->setForm('action', $formAction);
 
-        $task = $this->model('task')->show($id_task);
+        $task = $this->model('task')->show($id_project, $id_task);
         foreach ($form->getFields() as $field => $arrayOfAttribute) {
             if ($field == 'registeredMembers') {
                 $function = 'TaskController::getRegisteredMembers('.$id_task.')';
@@ -143,7 +143,7 @@ class TaskController extends WalrusController
 
         if(!empty($_POST))
         {
-            $task = $this->model('task')->edit($id_task);
+            $task = $this->model('task')->edit($id_project, $id_task);
             if(!empty($task['name.empty']))
             {
                 $this->register('errors', $task);
@@ -154,7 +154,7 @@ class TaskController extends WalrusController
             }
         }
 
-        $task = $this->model('task')->show($id_task);
+        $task = $this->model('task')->show($id_project, $id_task);
 
         if(is_array($task))
         {

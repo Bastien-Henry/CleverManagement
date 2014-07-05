@@ -7,9 +7,10 @@ use app\engine\models\Common;
 
 class Step extends Common
 {
-    public function show($id)
+    public function show($id_project, $id_step)
     {
-        $step = R::load('steps', $id);
+        $this->permission_access($id_project);
+        $step = R::load('steps', $id_step);
 
         if($step->getProperties()['id'] == 0)
         {
@@ -21,21 +22,31 @@ class Step extends Common
 
     public function index($id_project)
     {
+        $this->permission_access($id_project);
         $steps = R::findAll('steps', 'id_project = ?', array($id_project));
+
+        foreach($steps as $step)
+        {
+            $this->status_task($step->getProperties()['id']);
+        }
 
         return $steps;
     }
 
-    public function delete($id)
+    public function delete($id_project, $id_step)
     {
-        $step = $this->show($id);
+        $this->permission_exec($id_project);
+
+        $step = $this->show($id_step);
 
         R::trash($step);
     }
 
-    public function edit($id)
+    public function edit($id_project, $id_step)
     {
-        $step = R::load('steps', $id);
+        $this->permission_exec($id_project);
+
+        $step = R::load('steps', $id_step);
 
         if(empty($_POST['name']))
         {
@@ -53,6 +64,7 @@ class Step extends Common
 
     public function create($id_project)
     {
+        $this->permission_access($id_project);
         $step = R::dispense('steps');
 
         if(empty($_POST['name']))

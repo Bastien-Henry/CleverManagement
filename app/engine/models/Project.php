@@ -99,6 +99,7 @@ class Project extends Common
 
     public function show($id)
     {
+        $this->permission_access($id);
         $project = R::load('projects', $id);
 
         if($project->getProperties()['id'] == 0)
@@ -119,6 +120,7 @@ class Project extends Common
         $projects = array();
         foreach ($relations as $key => $object) {
             $projects[] = R::load('projects', $object['id_project']);
+            $this->status_step($object['id_project']);
         }
 
         return $projects;
@@ -126,6 +128,8 @@ class Project extends Common
 
     public function edit($id)
     {
+        $this->permission_exec($id);
+
         $project = R::load('projects', $id);
 
         if(empty($_POST['name']))
@@ -186,6 +190,8 @@ class Project extends Common
 
     public function delete($id)
     {
+        $this->permission_exec($id);
+
         $project = R::load('projects', $id);
 
         R::trash($project);
