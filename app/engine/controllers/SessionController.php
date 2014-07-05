@@ -2,14 +2,14 @@
 
 namespace app\engine\controllers;
  
-use Walrus\core\WalrusController;
+use app\engine\controllers\CommonController;
 use Walrus\core\WalrusForm;
 
 /**
 * Class ProjectController
 * @package engine\controllers
 */
-class SessionController extends WalrusController
+class SessionController extends CommonController
 {
     public function create($id_project, $id_step, $id_task)
     {
@@ -29,6 +29,7 @@ class SessionController extends WalrusController
             }
             $this->register('myFormCreate', $form->render());
 
+            $this->userDirectories();
             $this->setView('create');
         }
     }
@@ -81,6 +82,7 @@ class SessionController extends WalrusController
                 $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
             }
 
+            $this->userDirectories();
             $session = $this->model('session')->show($id_project, $id_session);
 
             if(is_array($session))

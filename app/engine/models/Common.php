@@ -6,7 +6,7 @@ use R;
 
 class Common
 {
-    protected function permission_exec($id_project)
+    protected function permission_exec($id_project, $type = 'project')
     {
         $permission = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
             [':user' => $_SESSION['user']['id']]
@@ -16,14 +16,25 @@ class Common
             die('Vous n\'avez pas les droits pour effectuer cette action.');
     }
 
-    protected function permission_access($id_project)
+    protected function permission_access($id_project, $type = 'project')
     {
-        $permission = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
-            [':user' => $_SESSION['user']['id']]
-        );
+        if ($type == 'project') {
+            $permission = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
+                [':user' => $_SESSION['user']['id']]
+            );
+        } else {
+            $permission = R::findOne('directories', 'id_user = ?', array($_SESSION['user']['id']));
+        }
 
         if(!$permission)
             die('Vous n\'avez pas les droits pour acceder a ces information.');
+    }
+
+    public function userDirectories()
+    {
+        $directories = R::find('directories', 'id_user = ?', array($_SESSION['user']['id']));
+        
+        return $directories;
     }
 
     public function time_project($id_project)

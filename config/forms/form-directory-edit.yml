@@ -1,8 +1,8 @@
-form_directory_create:
+form_directory_edit:
   form:
     method: POST
-    action: /clevermanagement/directory/create
-    submit: Valider
+    action: /clevermanagement/directory/id_directory/edit
+    submit: Editer
     structure: table
 
   fields:
@@ -10,7 +10,3 @@ form_directory_create:
       type: text
       required: true
       label: Nom
-    description:
-      type: textarea
-      required: false
-      label: Description

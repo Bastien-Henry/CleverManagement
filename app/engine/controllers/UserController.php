@@ -2,14 +2,14 @@
 
 namespace app\engine\controllers;
 
-use Walrus\core\WalrusController;
+use app\engine\controllers\CommonController;
 use Walrus\core\WalrusForm;
 
 /**
 * Class UserController
 * @package engine\controllers
 */
-class UserController extends WalrusController
+class UserController extends CommonController
 {
 
     public function signup()

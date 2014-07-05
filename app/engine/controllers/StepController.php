@@ -2,14 +2,14 @@
 
 namespace app\engine\controllers;
 
-use Walrus\core\WalrusController;
+use app\engine\controllers\CommonController;
 use Walrus\core\WalrusForm;
 
 /**
  * Class StepController
  * @package engine\controllers
  */
-class StepController extends WalrusController
+class StepController extends CommonController
 {
     public function show($id_project, $id_step)
     {
@@ -41,6 +41,7 @@ class StepController extends WalrusController
 
             $time_step = $this->model('step')->time_step($id_step);
 
+            $this->userDirectories();
             $this->register('hour_step', $time_step['hour']);
             $this->register('price_step', $time_step['price']);
 
@@ -55,6 +56,7 @@ class StepController extends WalrusController
         }
         else
         {
+            $this->userDirectories();
             $this->setView('create');
 
     	    $form = new WalrusForm('form_step_create');
@@ -94,6 +96,7 @@ class StepController extends WalrusController
         }
         else
         {
+            $this->userDirectories();
             $this->setView('edit');
 
             $form = new WalrusForm('form_step_edit');

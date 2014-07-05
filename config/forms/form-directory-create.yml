@@ -10,7 +10,3 @@ form_directory_create:
       type: text
       required: true
       label: Nom
-    description:
-      type: textarea
-      required: false
-      label: Description

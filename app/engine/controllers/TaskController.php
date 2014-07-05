@@ -2,14 +2,14 @@
 
 namespace app\engine\controllers;
 
-use Walrus\core\WalrusController;
+use app\engine\controllers\CommonController;
 use Walrus\core\WalrusForm;
 
 /**
  * Class TaskController
  * @package engine\controllers
  */
-class TaskController extends WalrusController
+class TaskController extends CommonController
 {
     public function show($id_project, $id_step, $id_task)
     {
@@ -22,6 +22,7 @@ class TaskController extends WalrusController
         $members = $this->model('task')->retrieveMembers($id_task);
         $time_task = $this->model('task')->time_task($id_task);
 
+        $this->userDirectories();
         $this->register('hour_task', $time_task['hour']);
         $this->register('price_task', $time_task['price']);
         $this->register('task', $task);
@@ -69,7 +70,8 @@ class TaskController extends WalrusController
             $preparedArray = array_combine($availableMembers, $availableMembers);
             $form->setFieldValue('members', 'options', $preparedArray);
             $this->register('myFormCreate', $form->render());
-
+            $this->userDirectories();
+            
             if (!empty($_POST)) {
                 $res = $this->model('task')->create($id_project, $id_step);
                 
@@ -112,6 +114,7 @@ class TaskController extends WalrusController
             $this->go('/CleverManagement/');
             return;
         }
+        $this->userDirectories();
 
         if(!empty($_POST))
         {
@@ -154,8 +157,9 @@ class TaskController extends WalrusController
                     $preparedArray = array_combine($availableMembers, $availableMembers);
                     $form->setFieldValue('members', 'options', $preparedArray);
                 } elseif ($arrayOfAttribute['type'] == 'date') {
-                    //to do
-                    //$form->setFieldValue($field, '', $task->getProperties()[$field]);
+                    //to do 
+                    //$date = date("d-m-Y", strtotime($task->getProperties()[$field]));
+                    //$form->setFieldValue($field, 'value', $date);
                 } elseif ($arrayOfAttribute['type'] == 'checkbox') {
                     //to do
                     //$form->setFieldValue($field, '', $task->getProperties()[$field]);

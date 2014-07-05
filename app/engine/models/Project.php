@@ -18,12 +18,9 @@ class Project extends Common
         $id = R::store($project);
 
         // link to current user as admin
-        $user = R::load('users', $_SESSION['user']['id']);
-        $newproject = R::load('projects', $id);
-        $id_project = $newproject->getProperties()['id'];
         R::exec('INSERT INTO projects_users (id_user, id_project, admin) VALUES (:user, :project, 1)', array(
-            ':user' => $user->getProperties()['id'], 
-            ':project' => $id_project)
+            ':user' => $_SESSION['user']['id'], 
+            ':project' => $id)
         );
 
         // link to specified members

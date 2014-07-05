@@ -13,7 +13,7 @@
 		  <div class="navbar-inner">
 		    <a class="brand" href="#"><img src="/CleverManagement/assets/images/logo.png"></a>
 		    <ul class="nav">
-		      <li><a href="/CleverManagement/">Accueil</a></li>
+		      <li><a href="/CleverManagement">Accueil</a></li>
 		      <li><a href="/CleverManagement/deconnection">Deconnexion</a></li>
 		    </ul>
 		  </div>
@@ -29,69 +29,57 @@
 		    				</span>
 		    			</li>
 		    		</a>
-		    		<a href="">
+		    		<a href="/CleverManagement/directory/create" class="text-li-sidebar">
 		    			<li>
-		    				<span class="text-li-sidebar">
-		    					Add Directory
+		    				<span class="text-li-sidebar">Nouveau dossier
 		    				</span>
 		    			</li>
 		    		</a>
-		    		<a href="">
+		    		{% for directory in directories %}
+		    		<a href="/CleverManagement/directory/{{directory.id}}/show" class="text-li-sidebar">
 		    			<li>
 		    				<span class="text-li-sidebar">
-		    					Directory 1
+		    					{{directory.name}}
 		    				</span>
 		    			</li>
 		    		</a>
-		    		<a href="">
-		    			<li>
-		    				<span class="text-li-sidebar">
-		    					Directory 2
-		    				</span>
-		    			</li>
-		    		</a>
-		    		<a href="">
-		    			<li>
-		    				<span class="text-li-sidebar">
-		    					Directory 3
-		    				</span>
-		    			</li>
-		    		</a>
+		    		{% endfor %}
 		    	</ul>
 		      <!--Sidebar content-->
 		    </div>
-		<div>
-			<table>
-			{% for project in projects %}
-				<a href="/CleverManagement/{{project.id}}/show">
-					<div class="span2 directory">
-				      	<div class="title-directory">
-				      		<span style='position:relative;top:5px;'>{{project.name}}</span>
-				      	</div>
-				      	<div class="descr-directory">
-				      		<p>
-					      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
-					      	</p>
-					      	<p>
-					      		status = {{ project.status }}
-					      	</p>
-				      	</div>
-				      	<div class="menu-directory">
-				      		<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet" class="edit-project">
-				      			<span>
-				      				<img src="/CleverManagement/assets/images/edit.png">
-				      			</span>
-				      		</a>
-				      		<a href="/CleverManagement/{{project.id}}/delete" title="Supprimer le projet" class="delete-project">
-				      			<span>
-				      				<img src="/CleverManagement/assets/images/delete.png">
-				      			</span>
-				      		</a>
-				      	</div>
-				    </div>
-				</a>
-			{% endfor %}
-			</table>
-		</div>
+<div>
+	<table>
+	{% for project in projects %}
+		<a href="/CleverManagement/{{project.id}}/show">
+			<div class="span2 directory">
+		      	<div class="title-directory">
+		      		<span style='position:relative;top:5px;'>{{project.name}}</span>
+		      	</div>
+		      	<div class="descr-directory">
+		      		<p>
+			      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
+			      	</p>
+			      	<p>
+			      		status = {{ project.status }}
+			      	</p>
+		      	</div>
+		      	<div class="menu-directory">
+		      		<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet" class="edit-project">
+		      			<span>
+		      				<img src="/CleverManagement/assets/images/edit.png">
+		      			</span>
+		      		</a>
+		      		<a href="/CleverManagement/{{project.id}}/delete" title="Supprimer le projet" class="delete-project">
+		      			<span>
+		      				<img src="/CleverManagement/assets/images/delete.png">
+		      			</span>
+		      		</a>
+		      	</div>
+		    </div>
+		</a>
+	{% endfor %}
+	</table>
+</div>
+
 	</body>
 </html>

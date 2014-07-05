@@ -2,7 +2,7 @@
 
 namespace app\engine\controllers;
  
-use Walrus\core\WalrusController;
+use app\engine\controllers\CommonController;
 use Walrus\core\WalrusForm;
 use Walrus\core\WalrusACL;
 
@@ -10,7 +10,7 @@ use Walrus\core\WalrusACL;
 * Class ProjectController
 * @package engine\controllers
 */
-class ProjectController extends WalrusController
+class ProjectController extends CommonController
 {
     public function index()
     {
@@ -26,6 +26,7 @@ class ProjectController extends WalrusController
         else
         {
             $res = $this->model('project')->index();
+            $this->userDirectories();
             $this->register('projects', $res);
             $this->setView('index');
         }
@@ -48,6 +49,7 @@ class ProjectController extends WalrusController
                 $this->go('/CleverManagement');
             }
 
+            $this->userDirectories();
             $this->setView('create');
 
         }
@@ -60,6 +62,7 @@ class ProjectController extends WalrusController
             return;
         }
 
+        $this->userDirectories();
         $this->setView('edit');
 
         $form = new WalrusForm('form_project_edit');
@@ -140,6 +143,7 @@ class ProjectController extends WalrusController
         $status = $this->model('project')->status_step($id);
         $time_project = $this->model('project')->time_project($id);
 
+        $this->userDirectories();
         $this->register('hour_project', $time_project['hour']);
         $this->register('price_project', $time_project['price']);
         $this->register('steps', $step);
