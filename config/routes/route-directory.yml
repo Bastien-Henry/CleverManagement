@@ -1,0 +1,24 @@
+_directory:
+    path: 'clevermanagement/directory'
+    controller: 'DirectoryController'
+    action: 'index'
+
+_directory_create:
+    path: 'clevermanagement/directory/create'
+    controller: 'DirectoryController'
+    action: 'create'
+    method: 'POST'
+
+_directory_delete:
+    path: 'clevermanagement/directory/:id/delete'
+    controller: 'DirectoryController'
+    action: 'delete'
+    filters:
+        require:
+            id: '[0-9]+'
+
+_directory_edit:
+    path: 'clevermanagement/directory/:id/edit'
+    controller: 'DirectoryController'
+    action: 'edit'
+    method: 'POST'
