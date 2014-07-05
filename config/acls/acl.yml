@@ -1,4 +1,4 @@
-admin-project:
+admin:
 	'supervisor'
 	member:
 	  'work'

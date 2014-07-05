@@ -24,7 +24,7 @@ class SessionController extends WalrusController
             
             if(!empty($_POST))
             {
-                $this->model('session')->create($id_task);
+                $this->model('session')->create($id_project, $id_task);
                 $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
             }
             $this->register('myFormCreate', $form->render());
@@ -40,7 +40,7 @@ class SessionController extends WalrusController
         }
         else
         {
-            $res = $this->model('session')->delete($id_session);
+            $res = $this->model('session')->delete($id_project, $id_session);
             $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
         }
     }
@@ -59,7 +59,7 @@ class SessionController extends WalrusController
             $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/session/'.$id_session.'/edit';
             $form->setForm('action', $formAction);
 
-            $session = $this->model('session')->show($id_session);
+            $session = $this->model('session')->show($id_project, $id_session);
             foreach ($form->getFields() as $field => $arrayOfAttribute)
             {
                 if ($arrayOfAttribute['type'] == 'textarea')
@@ -77,11 +77,11 @@ class SessionController extends WalrusController
 
             if(!empty($_POST))
             {
-                $session = $this->model('session')->edit($id_task, $id_session);
+                $session = $this->model('session')->edit($id_project, $id_task, $id_session);
                 $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
             }
 
-            $session = $this->model('session')->show($id_session);
+            $session = $this->model('session')->show($id_project, $id_session);
 
             if(is_array($session))
             {
