@@ -12,9 +12,9 @@
  	<body>
  		<div class="navbar">
 		  <div class="navbar-inner">
-		    <a class="brand" href="/CleverManagement/"><img src="/CleverManagement/assets/images/logo.png"></a>
+		    <a class="brand" href="#"><img src="/CleverManagement/assets/images/logo.png"></a>
 		    <ul class="nav">
-		      <li><a href="/CleverManagement/">Accueil</a></li>
+		      <li><a href="/CleverManagement">Accueil</a></li>
 		      <li><a href="/CleverManagement/deconnection">Deconnexion</a></li>
 		    </ul>
 		  </div>
@@ -30,34 +30,21 @@
 		    				</span>
 		    			</li>
 		    		</a>
-		    		<a href="">
+		    		<a href="/CleverManagement/directory/create" class="text-li-sidebar">
 		    			<li>
-		    				<span class="text-li-sidebar">
-		    					Add Directory
+		    				<span class="text-li-sidebar">Nouveau dossier
 		    				</span>
 		    			</li>
 		    		</a>
-		    		<a href="">
+		    		{% for directory in directories %}
+		    		<a href="/CleverManagement/directory/{{directory.id}}/show" class="text-li-sidebar">
 		    			<li>
 		    				<span class="text-li-sidebar">
-		    					Directory 1
+		    					{{directory.name}}
 		    				</span>
 		    			</li>
 		    		</a>
-		    		<a href="">
-		    			<li>
-		    				<span class="text-li-sidebar">
-		    					Directory 2
-		    				</span>
-		    			</li>
-		    		</a>
-		    		<a href="">
-		    			<li>
-		    				<span class="text-li-sidebar">
-		    					Directory 3
-		    				</span>
-		    			</li>
-		    		</a>
+		    		{% endfor %}
 		    	</ul>
 		      <!--Sidebar content-->
 		    </div>
@@ -189,7 +176,7 @@
 				<strong>{{message}}</strong><br>
 				<br><br>
 				{% for step in steps['admin'] %}
-				<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/show">
+				<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
 					<div class="one-step">
 						<div class="title-steps-project">
 							<span style="position:relative;top:5px;">{{ step.name }} du {{step.startline}} au {{step.deadline}} status = {{ step.status }}</span>

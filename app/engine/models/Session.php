@@ -3,6 +3,7 @@
 namespace app\engine\models;
 
 use R;
+use app\engine\models\Common;
 
 class Session extends Common
 {
@@ -26,6 +27,7 @@ class Session extends Common
             [':user' => $_SESSION['user']['id']]
         );  
 
+         $sessions = array();
         if($relation['admin'])
         {
             $sessions['admin'] = R::findAll('sessions', 'id_task = ?', array($task));

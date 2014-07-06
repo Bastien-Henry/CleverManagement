@@ -14,7 +14,7 @@
 		    <a class="brand" href="#"><img src="/CleverManagement/assets/images/logo.png"></a>
 		    <ul class="nav">
 		      <li><a href="/CleverManagement">Accueil</a></li>
-		      <li><a href="deconnection">Deconnexion</a></li>
+		      <li><a href="/CleverManagement/deconnection">Deconnexion</a></li>
 		    </ul>
 		  </div>
 		</div>
@@ -29,34 +29,21 @@
 		    				</span>
 		    			</li>
 		    		</a>
-		    		<a href="">
+		    		<a href="/CleverManagement/directory/create" class="text-li-sidebar">
 		    			<li>
-		    				<span class="text-li-sidebar">
-		    					Add Directory
+		    				<span class="text-li-sidebar">Nouveau dossier
 		    				</span>
 		    			</li>
 		    		</a>
-		    		<a href="">
+		    		{% for directory in directories %}
+		    		<a href="/CleverManagement/directory/{{directory.id}}/show" class="text-li-sidebar">
 		    			<li>
 		    				<span class="text-li-sidebar">
-		    					Directory 1
+		    					{{directory.name}}
 		    				</span>
 		    			</li>
 		    		</a>
-		    		<a href="">
-		    			<li>
-		    				<span class="text-li-sidebar">
-		    					Directory 2
-		    				</span>
-		    			</li>
-		    		</a>
-		    		<a href="">
-		    			<li>
-		    				<span class="text-li-sidebar">
-		    					Directory 3
-		    				</span>
-		    			</li>
-		    		</a>
+		    		{% endfor %}
 		    	</ul>
 		      <!--Sidebar content-->
 		    </div>
