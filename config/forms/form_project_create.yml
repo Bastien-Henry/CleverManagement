@@ -37,7 +37,12 @@ form_project_create:
     additionalAdmins:
       type: hidden
       id: add-admin-project
-      label: Additional Admin-Project
+      label: Ajouter des Admin-Project
       placeholder: Additional Admin-Project
       style: width:300px;height:100px;
+    dierctory:
+      type: hidden
+      id: directory-project
+      label: Ranger dans le dossier
+      placeholder: Nom de dossier
 
