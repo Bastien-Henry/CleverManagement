@@ -4,7 +4,7 @@ namespace app\engine\models;
 
 use R;
 
-class Session
+class Session extends Common
 {
     public function show($id_project, $id_session)
     {
@@ -22,23 +22,41 @@ class Session
     public function index($id_project, $task)
     {
         $this->permission_access($id_project);
-        $sessions = R::findAll('sessions', 'id_task = ?', array($task));
+         $relation = R::getrow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
+            [':user' => $_SESSION['user']['id']]
+        );  
+
+        if($relation['admin'])
+        {
+            $sessions['admin'] = R::findAll('sessions', 'id_task = ?', array($task));
+        }
+        else
+        {
+            $tab = R::findAll('sessions', 'id_task = ?', array($task));
+            foreach($tab as $value)
+            {
+                if($value['id_user'] == $_SESSION['user']['id'])
+                    $sessions['admin'][] = $value;
+                else
+                    $sessions['member'][] = $value;
+            }
+        }
 
         return $sessions;
     }
 
     public function delete($id_project, $id_session)
     {
-        $this->permission_exec($id_project);
+        $this->permission_exec($id_project, 'sessions', $id_session);
 
-        $session = $this->show($id_session);
+        $session = $this->show($id_project, $id_session);
 
         R::trash($session);
     }
 
     public function edit($id_project, $id_task, $id_session)
     {
-        $this->permission_exec($id_project);
+        $this->permission_exec($id_project, 'sessions', $id_session);
 
         $task = R::load('tasks', $id_task);
         $task->percent = $_POST['percent'];

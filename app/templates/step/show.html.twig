@@ -91,16 +91,18 @@
 				{% endif %}
 			</div>
 			<div class="action-step">
-				<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/edit" title="Editer l'etape">
-	      			<span>
-	      				<img src="/CleverManagement/assets/images/edit.png">
-	      			</span>
-	      		</a>
-	      		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/delete" title="Supprimer l'etape'">
-		  			<span>
-		  				<img src="/CleverManagement/assets/images/delete.png">
-		  			</span>
-		  		</a>
+				{% if step['admin'] %}
+					<a href="/Clevermanagement/{{project_id}}/step/{{step['admin'].id}}/edit" title="Editer l'etape">
+		      			<span>
+		      				<img src="/CleverManagement/assets/images/edit.png">
+		      			</span>
+		      		</a>
+		      		<a href="/Clevermanagement/{{project_id}}/step/{{step['admin'].id}}/delete" title="Supprimer l'etape'">
+			  			<span>
+			  				<img src="/CleverManagement/assets/images/delete.png">
+			  			</span>
+			  		</a>
+		  		{% endif %}
 	  		</div>
 	  		<div class="task-step">
 	  			<div class="task">
@@ -110,32 +112,44 @@
 				<br><br>
 				<strong>{{message}}</strong><br>
 				<br><br>
-				{% for task in tasks %}
-				<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/show">
-					<div class="one-task">
-						<div class="title-task-step">
-							<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}} status = Faire par apport au poucentage de la tache</span>
-							<a href="/Clevermanagement/{{ project_id }}/step/{{ step.id }}/task/{{ task.id }}/edit" title="Editer l'etape">
-				      			<span>
-				      				<img src="/CleverManagement/assets/images/edit.png">
-				      			</span>
-				      		</a>
-				      		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/task/{{ task.id }}/delete" title="Supprimer l'etape'">
-					  			<span>
-					  				<img src="/CleverManagement/assets/images/delete.png">
-					  			</span>
-					  		</a>
+				{% if tasks['admin'] %}
+					{% for task in tasks['admin'] %}
+					<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/show">
+						<div class="one-task">
+							<div class="title-task-step">
+								<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}} status = Faire par apport au poucentage de la tache</span>
+								<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit" title="Editer l'etape">
+					      			<span>
+					      				<img src="/CleverManagement/assets/images/edit.png">
+					      			</span>
+					      		</a>
+					      		<a href="/Clevermanagement/{{project_id}}/step/{{ step_id }}/task/{{ task.id }}/delete" title="Supprimer l'etape'">
+						  			<span>
+						  				<img src="/CleverManagement/assets/images/delete.png">
+						  			</span>
+						  		</a>
+							</div>
+							<div class="description-task-step">
+								<span style="position:relative;top:10px;">{{ task.description }}</span>
+							</div>
 						</div>
-						<div class="description-task-step">
-							<span style="position:relative;top:10px;">{{ task.description }}</span>
+					</a>
+					{% endfor %}
+				{% endif %}
+				{% if tasks['member'] %}
+					{% for task in tasks['member'] %}
+					<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/show">
+						<div class="one-task">
+							<div class="title-task-step">
+								<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}} status = Faire par apport au poucentage de la tache</span>
+							</div>
+							<div class="description-task-step">
+								<span style="position:relative;top:10px;">{{ task.description }}</span>
+							</div>
 						</div>
-						
-	<!-- 					<a href="/Clevermanagement/{{project.id}}/{{step.id}}/delete">Supprimer</a><br>
-						<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/edit">Editer</a><br>
-						<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/show">Voir</a><br> -->
-					</div>
-				</a>
-				{% endfor %}
+					</a>
+					{% endfor %}
+				{% endif %}
 	  		</div>
 		</div>
 </body>

@@ -22,6 +22,7 @@ class StepController extends WalrusController
 
             $this->register('step', $step);
             $this->register('project_id', $id_project);
+            $this->register('step_id', $id_step);
 
             $task = $this->model('task')->index($id_project, $id_step);
             if (empty($task))

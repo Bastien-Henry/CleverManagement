@@ -127,13 +127,9 @@ class ProjectController extends WalrusController
 
         $step = $this->model('step')->index($id);
         if (empty($step))
-        {
             $this->register('message', "Pas d'etape trouvee pour ce projet");
-        }
         else
-        {
             $this->register('message', 'Etapes :');
-        }
 
         $admins = $this->model('project')->retrieveUsers($id, 'additionalAdmins');
         $members = $this->model('project')->retrieveUsers($id, 'members');
@@ -142,6 +138,7 @@ class ProjectController extends WalrusController
 
         $this->register('hour_project', $time_project['hour']);
         $this->register('price_project', $time_project['price']);
+        $this->register('project_id', $id);
         $this->register('steps', $step);
         $this->register('admins', $admins);
         $this->register('members', $members);

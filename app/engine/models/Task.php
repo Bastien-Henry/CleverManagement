@@ -17,6 +17,28 @@ class Task extends Common
             return array('task.not_found' => 'task doesnt exist');
         }
 
+        $relation = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
+                [':user' => $_SESSION['user']['id']]
+            );
+
+        $tab = array();
+        if($relation['admin'] == 1)
+            $tab['admin'] = $task;
+        else
+            $tab['member'] = $task;
+    
+        return $tab;
+    }
+
+    public function find($id_task)
+    {
+        $task = R::load('tasks', $id_task);
+
+        if($task->getProperties()['id'] == 0)
+        {
+            return array('task.not_found' => 'task doesnt exist');
+        }
+
         return $task;
     }
 
@@ -37,23 +59,41 @@ class Task extends Common
     public function index($id_project, $id_step)
     {
         $this->permission_access($id_project);
-        $tasks = R::findAll('tasks', 'id_step = ?', array($id_step));
+        $relation = R::getrow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
+            [':user' => $_SESSION['user']['id']]
+        );  
+
+        if($relation['admin'])
+        {
+            $tasks['admin'] = R::findAll('tasks', 'id_step = ?', array($id_step));
+        }
+        else
+        {
+            $tab = R::findAll('tasks', 'id_step = ?', array($id_step));
+            foreach($tab as $value)
+            {
+                if($value['id_user'] == $_SESSION['user']['id'])
+                    $tasks['admin'][] = $value;
+                else
+                    $tasks['member'][] = $value;
+            }
+        }
 
         return $tasks;
     }
 
     public function delete($id_project, $id_task)
     {
-        $this->permission_exec($id_project);
+        $this->permission_exec($id_project, 'tasks', $id_task);
 
-        $task = $this->show($id_task);
+        $task = $this->find($id_task);
 
         R::trash($task);
     }
 
     public function edit($id_project, $id_task)
     {
-        $this->permission_exec($id_project);
+        $this->permission_exec($id_project, 'tasks', $id_task);
 
         $task = R::load('tasks', $id_task);
 
@@ -94,6 +134,7 @@ class Task extends Common
             $task->urgent = 0;
         $task->startline = $_POST['startline'];
         $task->deadline = $_POST['deadline'];
+        $task->id_user = $_SESSION['user']['id'];
 
         $id_task = R::store($task);
 
