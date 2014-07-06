@@ -6,23 +6,34 @@ use R;
 
 class Common
 {
-    protected function permission_exec($id_project, $type = 'project')
+    protected function permission_exec($id_project, $type = NULL, $id_type = NULL)
     {
         $permission = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
             [':user' => $_SESSION['user']['id']]
         );
 
         if($permission['admin'] == 0)
+        {
+            if($type)
+            {
+                $type_obj = R::load($type, $id_type);
+                if($type_obj->getProperties()['id_user'] == $_SESSION['user']['id'])
+                    return;
+            }
             die('Vous n\'avez pas les droits pour effectuer cette action.');
+        }
     }
 
     protected function permission_access($id_project, $type = 'project')
     {
-        if ($type == 'project') {
+        if ($type == 'project')
+        {
             $permission = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
                 [':user' => $_SESSION['user']['id']]
             );
-        } else {
+        }
+        else
+        {
             $permission = R::findOne('directories', 'id_user = ?', array($_SESSION['user']['id']));
         }
 

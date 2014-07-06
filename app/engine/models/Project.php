@@ -104,7 +104,16 @@ class Project extends Common
             return array('project.not_found' => 'project doesnt exist');
         }
 
-        return $project;
+        $relation = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id.'',
+                [':user' => $_SESSION['user']['id']]
+            );
+        $tab = array();
+        if($relation['admin'] == 1)
+            $tab['admin'] = $project;
+        else
+            $tab['member'] = $project;
+    
+        return $tab;
     }
 
     public function index()
@@ -115,8 +124,13 @@ class Project extends Common
         );
 
         $projects = array();
-        foreach ($relations as $key => $object) {
-            $projects[] = R::load('projects', $object['id_project']);
+        foreach ($relations as $key => $object)
+        {
+            if($object['admin'])
+                $projects['admin'][] = R::load('projects', $object['id_project']);
+            else
+                $projects['member'][] = R::load('projects', $object['id_project']);
+
             $this->status_step($object['id_project']);
         }
 

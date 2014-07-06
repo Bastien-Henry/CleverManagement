@@ -26,6 +26,7 @@ class TaskController extends CommonController
         $this->register('hour_task', $time_task['hour']);
         $this->register('price_task', $time_task['price']);
         $this->register('task', $task);
+        $this->register('task_id', $id_task);
         $this->register('step_id', $id_step);
         $this->register('project_id', $id_project);
         $this->register('members', $members);

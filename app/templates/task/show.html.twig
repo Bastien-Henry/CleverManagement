@@ -1,4 +1,5 @@
 {% include 'header/header.html.twig' %}
+
 <div>
 	<div class="name-task">
 		<span style="position:relative;top:5px;">
@@ -26,20 +27,22 @@
 		</p>
 	</div>
 	<div class="action-task">
-		<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit" title="Editer l'etape">
+	{% if task['admin'] %}
+		<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task_id }}/edit" title="Editer l'etape">
   			<span>
   				<img src="/CleverManagement/assets/images/edit.png">
   			</span>
   		</a>
-  		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/delete" title="Supprimer l'etape'">
+  		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/delete" title="Supprimer l'etape'">
   			<span>
   				<img src="/CleverManagement/assets/images/delete.png">
   			</span>
   		</a>
+		{% endif %}
 	</div>
 	<div class="task-step">
 		<div class="task">
-			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
+			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
 		</div>
 		<p>
 			Project réalisé à : <br>
@@ -62,22 +65,23 @@
 		</p>
 	</div>
 	<p>
-		Nombre d'heures passé sur la tache {{ hour_task }} h<br>
-		Prix consacré à la tache {{ price_task }} €<br>
+	Nombre d'heures passé sur la tache {{ hour_task }} h<br>
+	Prix consacré à la tache {{ price_task }} €<br>
 	</p>
 	<br><br>
 	<strong>{{message}}</strong><br>
 	<br><br>
-	{% for session in sessions %}
+	{% if sessions['admin'] %}
+	{% for session in sessions['admin'] %}
 	<div class="one-task">
 		<div class="title-task-step">
 			<span style="position:relative;top:5px;">Date : {{ session.created_at }} | Heure(s) travaillée(s) : {{session.hour_number}}</span>
-			<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/edit" title="Editer l'etape">
-      			<span>
-      				<img src="/CleverManagement/assets/images/edit.png">
-      			</span>
-      		</a>
-      		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task.id }}/session/{{ session.id }}/delete" title="Supprimer l'etape'">
+			<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/{{ session.id }}/edit" title="Editer l'etape">
+	  			<span>
+	  				<img src="/CleverManagement/assets/images/edit.png">
+	  			</span>
+	  		</a>
+	  		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/{{ session.id }}/delete" title="Supprimer l'etape'">
 	  			<span>
 	  				<img src="/CleverManagement/assets/images/delete.png">
 	  			</span>
@@ -88,6 +92,19 @@
 		</div>
 	</div>
 	{% endfor %}
+	{% endif %}
+	{% if sessions['member'] %}
+	{% for session in sessions['member'] %}
+		<div class="one-task">
+			<div class="title-task-step">
+				<span style="position:relative;top:5px;">Date : {{ session.created_at }} | Heure(s) travaillée(s) : {{session.hour_number}}</span>
+			</div>
+			<div class="description-task-step">
+				<span style="position:relative;top:10px;">Commentaire : {{ session.comment }}</span>
+			</div>
+		</div>
+	{% endfor %}
+	{% endif %}
 </div>
 
 {% include 'footer/footer.html.twig' %}

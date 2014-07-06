@@ -1,15 +1,17 @@
 {% include 'header/header.html.twig' %}
+
 <div>
-	<div class="name-project"><span style="position:relative;top:5px;">Projet : {{project.name|raw}}</span></div>
+	{% if project['admin'] %}
+	<div class="name-project"><span style="position:relative;top:5px;">Projet : {{project['admin'].name|raw}}</span></div>
 
 	<div class="description-project">
 		<p>
 			<h3>Description du projet : </h3>
-			{{project.description|raw}}
+			{{project['admin'].description|raw}}
 		</p>
 		<p>
-			Debut : {{project.startline}} <br>
-			Fin : {{project.deadline}}
+			Debut : {{project['admin'].startline}} <br>
+			Fin : {{project['admin'].deadline}}
 		</p>
 		<p>
 			Nombre d'heures passé sur le projet {{ hour_project }} h<br>
@@ -51,46 +53,114 @@
 	</div>
 	<div class="action-project">
 		<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet">
-  			<span>
-  				<img src="/CleverManagement/assets/images/edit.png">
-  			</span>
-  		</a>
-  		<a href="/CleverManagement/{{project.id}}/delete" title="Supprimer le projet">
-  			<span>
-  				<img src="/CleverManagement/assets/images/delete.png">
-  			</span>
-  		</a>
+			<span>
+				<img src="/CleverManagement/assets/images/edit.png">
+			</span>
+		</a>
+		<a href="/CleverManagement/{{project.id}}/delete" title="Supprimer le projet">
+			<span>
+				<img src="/CleverManagement/assets/images/delete.png">
+			</span>
+		</a>
+	</div>
+	<div class="steps-project">
+		<div class="steps">
+			<button class="btn btn-primary"><a href="/Clevermanagement/{{project['admin'].id}}/step/create" style="color:#fff;">Nouvelle etape</a></button>
+		</div>
+	{% endif %}
+	{% if project['member'] %}
+	<div class="name-project"><span style="position:relative;top:5px;">Projet : {{project['member'].name|raw}}</span></div>
+
+	<div class="description-project">
+		<p>
+			<h3>Description du projet : </h3>
+			{{project['member'].description|raw}}
+		</p>
+		<p>
+			Debut : {{project['member'].startline}} <br>
+			Fin : {{project['member'].deadline}}
+		</p>
+		<p>
+			Nombre d'heures passé sur le projet {{ hour_project }} h<br>
+			Prix consacré au projet {{ price_project }} €<br>
+		</p>
+		<p>
+			Admins : 
+			{% for admin in admins %}
+				{% if loop.first %}
+					{{ admin.email }}
+				{% else %}
+					<span style="font-weight:bold;font-size:20px">|</span> {{ admin.email }}
+				{% endif %}
+			{% endfor %}
+		</p>
+		<p>
+			Membres : 
+			{% for member in members %}
+				{% if loop.first %}
+					{{ member.email }}
+				{% else %}
+					<span style="font-weight:bold;font-size:20px">|</span> {{ member.email }}
+				{% endif %}
+			{% endfor %}
+		</p>
+		{% if status == 1 %}
+			<div class="alert alert-error" style="width:200px;text-align:center;">
+				Statut : To Do
+			</div>
+		{% elseif status == 2 %}
+			<div class="alert alert-warning" style="width:200px;text-align:center;">
+				Statut : Doing
+			</div>
+		{% else %}
+			<div class="alert alert-success" style="width:200px;text-align:center;">
+				Statut : Done
+			</div>
+		{% endif %}
+	</div>
+	<div class="action-project">
 		</div>
 		<div class="steps-project">
 			<div class="steps">
-  			<button class="btn btn-primary"><a href="/Clevermanagement/{{project.id}}/step/create" style="color:#fff;">Nouvelle etape</a></button>
 			</div>
-
-		<br><br>
-		<strong>{{message}}</strong><br>
-		<br><br>
-		{% for step in steps %}
-		<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/show">
-			<div class="one-step">
-				<div class="title-steps-project">
-					<span style="position:relative;top:5px;">{{ step.name }} du {{step.startline}} au {{step.deadline}} status = {{ step.status }}</span>
-					<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/edit" title="Editer l'&eacute;tape">
-		      			<span>
-		      				<img src="/CleverManagement/assets/images/edit.png">
-		      			</span>
-		      		</a>
-		      		<a href="/Clevermanagement/{{project.id}}/step/{{step.id}}/delete" title="Supprimer le projet">
-			  			<span>
-			  				<img src="/CleverManagement/assets/images/delete.png">
-			  			</span>
-			  		</a>
-				</div>
-				<div class="description-steps-project">
-					<span style="position:relative;top:10px;">{{ step.description }}</span>
-				</div>
+	{% endif %}
+	<br><br>
+	<strong>{{message}}</strong><br>
+	<br><br>
+	{% for step in steps['admin'] %}
+	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
+		<div class="one-step">
+			<div class="title-steps-project">
+				<span style="position:relative;top:5px;">{{ step.name }} du {{step.startline}} au {{step.deadline}} status = {{ step.status }}</span>
+				<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/edit" title="Editer l'&eacute;tape">
+	      			<span>
+	      				<img src="/CleverManagement/assets/images/edit.png">
+	      			</span>
+	      		</a>
+	      		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/delete" title="Supprimer le projet">
+		  			<span>
+		  				<img src="/CleverManagement/assets/images/delete.png">
+		  			</span>
+		  		</a>
 			</div>
-		</a>
-		{% endfor %}
+			<div class="description-steps-project">
+				<span style="position:relative;top:10px;">{{ step.description }}</span>
+			</div>
 		</div>
+	</a>
+	{% endfor %}
+	{% for step in steps['member'] %}
+	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
+		<div class="one-step">
+			<div class="title-steps-project">
+				<span style="position:relative;top:5px;">{{ step.name }} du {{step.startline}} au {{step.deadline}} status = {{ step.status }}</span>
+			</div>
+			<div class="description-steps-project">
+				<span style="position:relative;top:10px;">{{ step.description }}</span>
+			</div>
+		</div>
+	</a>
+	{% endfor %}
 </div>
+
 {% include 'footer/footer.html.twig' %}
