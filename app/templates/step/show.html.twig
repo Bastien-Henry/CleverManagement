@@ -93,7 +93,7 @@
 	  		</div>
 	  		<div class="task-step">
 	  			<div class="task">
-		  			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/task/create" style="color:#fff;">Nouvelle tache</a></button>
+		  			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/create" style="color:#fff;">Nouvelle tache</a></button>
 	  			</div>
 
 				<br><br>
@@ -105,16 +105,20 @@
 						<div class="one-task">
 							<div class="title-task-step">
 								<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}} status = Faire par apport au poucentage de la tache</span>
-								<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit" title="Editer l'etape">
-					      			<span>
-					      				<img src="/CleverManagement/assets/images/edit.png">
-					      			</span>
-					      		</a>
-					      		<a href="/Clevermanagement/{{project_id}}/step/{{ step_id }}/task/{{ task.id }}/delete" title="Supprimer l'etape'">
-						  			<span>
-						  				<img src="/CleverManagement/assets/images/delete.png">
-						  			</span>
-						  		</a>
+								{% if task.close == 0 %}
+									<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit" title="Editer l'etape">
+						      			<span>
+						      				<img src="/CleverManagement/assets/images/edit.png">
+						      			</span>
+						      		</a>
+						      		<a href="/Clevermanagement/{{project_id}}/step/{{ step_id }}/task/{{ task.id }}/delete" title="Supprimer l'etape'">
+							  			<span>
+							  				<img src="/CleverManagement/assets/images/delete.png">
+							  			</span>
+							  		</a>
+							  	{% else %}
+							  		TACHE CLOSE
+						  		{% endif %}
 							</div>
 							<div class="description-task-step">
 								<span style="position:relative;top:10px;">{{ task.description }}</span>

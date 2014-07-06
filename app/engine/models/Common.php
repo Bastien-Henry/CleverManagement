@@ -10,18 +10,34 @@ class Common
     {
         $permission = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
             [':user' => $_SESSION['user']['id']]
-        );
+        );  
 
         if($permission['admin'] == 0)
         {
             if($type)
             {
                 $type_obj = R::load($type, $id_type);
+
                 if($type_obj->getProperties()['id_user'] == $_SESSION['user']['id'])
+                {
+                    if($type == 'tasks')
+                        if($type_obj->getProperties()['close'] == 1)
+                            die('Cette tache est acctuelement fermé.');
                     return;
+                }
             }
             die('Vous n\'avez pas les droits pour effectuer cette action.');
         }
+        elseif($type)
+        {
+            $type_obj = R::load($type, $id_type);
+            if($type == 'tasks')
+            {
+                if($type_obj->getProperties()['close'] == 1)
+                    die('Cette tache est acctuelement fermé.');
+            }
+        }
+
     }
 
     protected function permission_access($id_project, $type = 'project')

@@ -7,6 +7,18 @@ use app\engine\models\Common;
 
 class Task extends Common
 {
+    public function task_done($id_project, $id_task)
+    {
+        $this->permission_exec($id_project);
+        $task = R::load('tasks', $id_task);
+        if($task->getProperties()['close'] == 0)
+            $task->close = 1;
+        else
+            $task->close = 0;
+
+        R::store($task);
+    }
+
     public function show($id_project, $id_task)
     {
         $this->permission_access($id_project);
