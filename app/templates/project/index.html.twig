@@ -1,103 +1,54 @@
-<!doctype html>
-<html lang="en">
-	<head>
-	    <meta charset="UTF-8">
-  		<title>Clever Management - Make your projects crystal</title>
-  		<link rel="stylesheet" type="text/css" href="main.css">
-  		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="/CleverManagement/assets/styles/bootstrap.css">
-		<link rel="stylesheet" href="/CleverManagement/assets/styles/main.css">
-	</head>
- 	<body>
- 		<div class="navbar">
-		  <div class="navbar-inner">
-		    <a class="brand" href="#"><img src="/CleverManagement/assets/images/logo.png"></a>
-		    <ul class="nav">
-		      <li><a href="/CleverManagement">Accueil</a></li>
-		      <li><a href="/CleverManagement/deconnection">Deconnexion</a></li>
-		    </ul>
-		  </div>
-		</div>
-		<div class="container-fluid">
-		  <div class="row-fluid">
-		    <div class="span2 sidebar">
-		    	<ul class="span2 sidebar-menu">
-		    		<a href="new-project.php">
-		    			<li class="current">
-		    				<span class="text-li-sidebar">
-		    					<a href="/CleverManagement/create" class="text-li-sidebar">Nouveau projet</a>
-		    				</span>
-		    			</li>
-		    		</a>
-		    		<a href="/CleverManagement/directory/create" class="text-li-sidebar">
-		    			<li>
-		    				<span class="text-li-sidebar">Nouveau dossier
-		    				</span>
-		    			</li>
-		    		</a>
-		    		{% for directory in directories %}
-		    		<a href="/CleverManagement/directory/{{directory.id}}/show" class="text-li-sidebar">
-		    			<li>
-		    				<span class="text-li-sidebar">
-		    					{{directory.name}}
-		    				</span>
-		    			</li>
-		    		</a>
-		    		{% endfor %}
-		    	</ul>
-		      <!--Sidebar content-->
-		    </div>
-		<div>
-			<table>
-			{% for project in projects['admin'] %}
-				<a href="/CleverManagement/{{project.id}}/show">
-					<div class="span2 directory">
-				      	<div class="title-directory">
-				      		<span style='position:relative;top:5px;'>{{project.name}}</span>
-				      	</div>
-				      	<div class="descr-directory">
-				      		<p>
-					      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
-					      	</p>
-					      	<p>
-					      		status = {{ project.status }}
-					      	</p>
-				      	</div>
-				      	<div class="menu-directory">
-				      		<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet" class="edit-project">
-				      			<span>
-				      				<img src="/CleverManagement/assets/images/edit.png">
-				      			</span>
-				      		</a>
-				      		<a href="/CleverManagement/{{project.id}}/delete" title="Supprimer le projet" class="delete-project">
-				      			<span>
-				      				<img src="/CleverManagement/assets/images/delete.png">
-				      			</span>
-				      		</a>
-				      	</div>
-				    </div>
-				</a>
-			{% endfor %}
-			{% for project in projects['member'] %}
-				<a href="/CleverManagement/{{project.id}}/show">
-					<div class="span2 directory">
-				      	<div class="title-directory">
-				      		<span style='position:relative;top:5px;'>{{project.name}}</span>
-				      	</div>
-				      	<div class="descr-directory">
-				      		<p>
-					      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
-					      	</p>
-					      	<p>
-					      		status = {{ project.status }}
-					      	</p>
-				      	</div>
-				      	<div class="menu-directory">
-				      	</div>
-				    </div>
-				</a>
-			{% endfor %}
-			</table>
-		</div>
-	</body>
-</html>
+{% include 'header/header.html.twig' %}
+
+<div>
+	{% for project in projects['admin'] %}
+	<a href="/CleverManagement/{{project.id}}/show">
+		<div class="span2 directory">
+	      	<div class="title-directory">
+	      		<span style='position:relative;top:5px;'>{{project.name}}</span>
+	      	</div>
+	      	<div class="descr-directory">
+	      		<p>
+		      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
+		      	</p>
+		      	<p>
+		      		status = {{ project.status }}
+		      	</p>
+	      	</div>
+	      	<div class="menu-directory">
+	      		<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet" class="edit-project">
+	      			<span>
+	      				<img src="/CleverManagement/assets/images/edit.png">
+	      			</span>
+	      		</a>
+	      		<a href="/CleverManagement/{{project.id}}/delete" title="Supprimer le projet" class="delete-project">
+	      			<span>
+	      				<img src="/CleverManagement/assets/images/delete.png">
+	      			</span>
+	      		</a>
+	      	</div>
+	    </div>
+	</a>
+	{% endfor %}
+	{% for project in projects['member'] %}
+	<a href="/CleverManagement/{{project.id}}/show">
+		<div class="span2 directory">
+	      	<div class="title-directory">
+	      		<span style='position:relative;top:5px;'>{{project.name}}</span>
+	      	</div>
+	      	<div class="descr-directory">
+	      		<p>
+		      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
+		      	</p>
+		      	<p>
+		      		status = {{ project.status }}
+		      	</p>
+	      	</div>
+	      	<div class="menu-directory">
+	      	</div>
+	    </div>
+	</a>
+	{% endfor %}
+</div>
+
+{% include 'footer/footer.html.twig' %}

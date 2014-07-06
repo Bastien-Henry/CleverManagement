@@ -8,4 +8,9 @@ $(function(){
 	          // specify tags
 	          tags: []
 	        });
+
+	        /*$('#directory-project').select2({
+	          // specify tags
+	          tags: []
+	        });*/
       });

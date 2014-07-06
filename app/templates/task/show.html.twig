@@ -1,77 +1,57 @@
-<!doctype html>
-<html lang="en">
-	<head>
-	    <meta charset="UTF-8">
-  		<title>Clever Management - Make your projects crystal</title>
-  		<link rel="stylesheet" type="text/css" href="main.css">
-  		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="/CleverManagement/assets/styles/bootstrap.css">
-		<link rel="stylesheet" href="/CleverManagement/assets/styles/main.css">
-	</head>
- 	<body>
- 		<div class="navbar">
-		  <div class="navbar-inner">
-		    <a class="brand" href="#"><img src="/CleverManagement/assets/images/logo.png"></a>
-		    <ul class="nav">
-		      <li><a href="/CleverManagement">Accueil</a></li>
-		      <li><a href="/CleverManagement/deconnection">Deconnexion</a></li>
-		    </ul>
-		  </div>
+{% include 'header/header.html.twig' %}
+
+<div>
+	<div class="name-task">
+		<span style="position:relative;top:5px;">
+			T&acirc;che : {{task.name|raw}}
+		</span>
+	</div>
+	<div class="description-task">
+		<p>
+			<h3>Description de la t&acirc;che : </h3>
+			{{task.description|raw}}
+		</p>
+		<p>
+			Debut : {{task.startline}} <br>
+			Fin : {{task.deadline}}
+		</p>
+		<p>
+			Membres assignes : 
+			{% for member in members %}
+				{% if loop.first %}
+					{{ member.email }}
+				{% else %}
+					<span style="font-weight:bold;font-size:20px">|</span> {{ member.email }}
+				{% endif %}
+			{% endfor %}
+		</p>
+	</div>
+	<div class="action-task">
+	{% if task['admin'] %}
+		<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task_id }}/edit" title="Editer l'etape">
+  			<span>
+  				<img src="/CleverManagement/assets/images/edit.png">
+  			</span>
+  		</a>
+  		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/delete" title="Supprimer l'etape'">
+  			<span>
+  				<img src="/CleverManagement/assets/images/delete.png">
+  			</span>
+  		</a>
+		{% endif %}
+	</div>
+	<div class="task-step">
+		<div class="task">
+			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
 		</div>
-		<div class="container-fluid">
-		  <div class="row-fluid">
-		    <div class="span2 sidebar">
-		    	<ul class="span2 sidebar-menu">
-		    		<a href="new-project.php">
-		    			<li class="current">
-		    				<span class="text-li-sidebar">
-		    					<a href="/CleverManagement/create" class="text-li-sidebar">Nouveau projet</a>
-		    				</span>
-		    			</li>
-		    		</a>
-		    		<a href="/CleverManagement/directory/create" class="text-li-sidebar">
-		    			<li>
-		    				<span class="text-li-sidebar">Nouveau dossier
-		    				</span>
-		    			</li>
-		    		</a>
-		    		{% for directory in directories %}
-		    		<a href="/CleverManagement/directory/{{directory.id}}/show" class="text-li-sidebar">
-		    			<li>
-		    				<span class="text-li-sidebar">
-		    					{{directory.name}}
-		    				</span>
-		    			</li>
-		    		</a>
-		    		{% endfor %}
-		    	</ul>
-		      <!--Sidebar content-->
-		    </div>
-		    <div>
-		    	<div class="name-task">
-		    		<span style="position:relative;top:5px;">
-		    			T&acirc;che : {{task.name|raw}}
-		    		</span>
-		    	</div>
-		    	<div class="description-task">
-					<p>
-						<h3>Description de la t&acirc;che : </h3>
-						{{task.description|raw}}
-					</p>
-					<p>
-						Debut : {{task.startline}} <br>
-						Fin : {{task.deadline}}
-					</p>
-					<p>
-						Membres assignes : 
-						{% for member in members %}
-							{% if loop.first %}
-								{{ member.email }}
-							{% else %}
-								<span style="font-weight:bold;font-size:20px">|</span> {{ member.email }}
-							{% endif %}
-						{% endfor %}
-					</p>
+		<p>
+			Project réalisé à : <br>
+			<div class="progress progress-striped">
+			  <div class="bar" style="width: {{task.percent}}%;text-align:center;">{{task.percent}} %</div>
+			</div>
+			{% if task.percent == 0 %}
+				<div class="alert alert-error" style="text-align:center;margin-left:283px;">
+					Statut : To Do
 				</div>
 				<div class="action-task">
 					{% if task['admin'] %}
@@ -159,21 +139,58 @@
 					<div class="description-task-step">
 						<span style="position:relative;top:10px;">Commentaire : {{ session.comment }}</span>
 					</div>
+			{% elseif task.percent >= 100 %}
+				<div class="alert alert-success" style="text-align:center;margin-left:283px;">
+					Statut : Done
 				</div>
-			{% endfor %}
+			{% else %}
+				<div class="alert alert-warning" style="text-align:center;margin-left:283px;">
+					Statut : Doing
+				</div>
 			{% endif %}
-			{% if sessions['member'] %}
-				{% for session in sessions['member'] %}
-					<div class="one-task">
-						<div class="title-task-step">
-							<span style="position:relative;top:5px;">Date : {{ session.created_at }} | Heure(s) travaillée(s) : {{session.hour_number}}</span>
-						</div>
-						<div class="description-task-step">
-							<span style="position:relative;top:10px;">Commentaire : {{ session.comment }}</span>
-						</div>
-					</div>
-				{% endfor %}
-			{% endif %}
-	  		</div>
-</body>
-</html>
+		</p>
+	</div>
+	<p>
+	Nombre d'heures passé sur la tache {{ hour_task }} h<br>
+	Prix consacré à la tache {{ price_task }} €<br>
+	</p>
+	<br><br>
+	<strong>{{message}}</strong><br>
+	<br><br>
+	{% if sessions['admin'] %}
+	{% for session in sessions['admin'] %}
+	<div class="one-task">
+		<div class="title-task-step">
+			<span style="position:relative;top:5px;">Date : {{ session.created_at }} | Heure(s) travaillée(s) : {{session.hour_number}}</span>
+			<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/{{ session.id }}/edit" title="Editer l'etape">
+	  			<span>
+	  				<img src="/CleverManagement/assets/images/edit.png">
+	  			</span>
+	  		</a>
+	  		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/{{ session.id }}/delete" title="Supprimer l'etape'">
+	  			<span>
+	  				<img src="/CleverManagement/assets/images/delete.png">
+	  			</span>
+	  		</a>
+		</div>
+		<div class="description-task-step">
+			<span style="position:relative;top:10px;">Commentaire : {{ session.comment }}</span>
+		</div>
+	</div>
+	{% endfor %}
+	{% endif %}
+	{% if sessions['member'] %}
+	{% for session in sessions['member'] %}
+		<div class="one-task">
+			<div class="title-task-step">
+				<span style="position:relative;top:5px;">Date : {{ session.created_at }} | Heure(s) travaillée(s) : {{session.hour_number}}</span>
+			</div>
+			<div class="description-task-step">
+				<span style="position:relative;top:10px;">Commentaire : {{ session.comment }}</span>
+			</div>
+		</div>
+	{% endfor %}
+	{% endif %}
+</div>
+
+{% include 'footer/footer.html.twig' %}
