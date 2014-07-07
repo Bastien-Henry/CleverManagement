@@ -16,8 +16,8 @@
 			{{project['admin'].description|raw}}
 		</p>
 		<p>
-			Debut : {{project['admin'].startline | date("m/d/Y")}} <br>
-			Fin : {{project['admin'].deadline | date("m/d/Y")}}
+			Debut : {{project['admin'].startline | date("d/m/Y")}} <br>
+			Fin : {{project['admin'].deadline | date("d/m/Y")}}
 		</p>
 		<p>
 			Nombre d'heures passé sur le projet {{ hour_project }} h<br>
@@ -83,8 +83,8 @@
 			{{project['member'].description|raw}}
 		</p>
 		<p>
-			Debut : {{project['member'].startline | date("m/d/Y")}} <br>
-			Fin : {{project['member'].deadline | date("m/d/Y")}}
+			Debut : {{project['member'].startline | date("d/m/Y")}} <br>
+			Fin : {{project['member'].deadline | date("d/m/Y")}}
 		</p>
 		<p>
 			Nombre d'heures passé sur le projet {{ hour_project }} h<br>
@@ -163,7 +163,7 @@
 	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
 		<div class="span2 step" {% if step.status == 1%}style="background-color:#b94a48;"{%elseif step.status == 2%}style="background-color:#e67e22;"{%elseif step.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
 	      	<div class="title-directory">
-	      		<span style='position:relative;top:5px;'>{{project[type].name}}</span>
+	      		<span style='position:relative;top:5px;'>{{step.name}}</span>
 	      	</div>
 	      	<div class="descr-directory">
 	      		<p>
