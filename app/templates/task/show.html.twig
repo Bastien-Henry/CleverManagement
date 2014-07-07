@@ -59,13 +59,13 @@
 				<p style="margin-left:100px;">
 					T&acirc;che réalisée à : <br>
 					<div class="progress progress-striped" style="margin-left:100px;">
-					  <div class="bar" style="width: {{task[type].percent}}%;text-align:center;">{{task[type].percent}} %</div>
+					  <div class="bar" style="width: {{percent}}%;text-align:center;">{{percent}} %</div>
 					</div>
-					{% if task[type].percent == 0 %}
+					{% if percent == 0 %}
 						<div class="alert alert-error status-task" style="text-align:center;margin-left:100px;">
 							Statut : To Do
 						</div>
-					{% elseif task[type].percent >= 100 %}
+					{% elseif percent == 100 %}
 						<div class="alert alert-success status-task" style="text-align:center;margin-left:100px;">
 							Statut : Done
 						</div>

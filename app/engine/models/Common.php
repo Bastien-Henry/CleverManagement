@@ -198,7 +198,7 @@ class Common
         $value = 0;
         foreach($tasks as $task)
         {
-            $value += $task->getProperties()['percent'];
+            $value = $this->get_percent($task->getProperties()['id']);
         }
 
         if(count($tasks)*100 == $value && (count($tasks) != 0))
@@ -213,5 +213,24 @@ class Common
         R::store($step_status);
 
         return $result;
+    }
+
+    public function get_percent($id_task)
+    {
+        $sessions = R::getAll('SELECT * FROM sessions WHERE id_task = '.$id_task.'');
+        $percent = 0;
+        foreach($sessions as $session)
+        {
+            if($session['percent'] > $percent)
+            {
+                $percent = $session['percent'];
+            }
+        }
+
+        $task = R::load('tasks', $id_task);
+        $task->percent = $percent;
+        R::store($task);
+
+        return $percent;
     }
 }

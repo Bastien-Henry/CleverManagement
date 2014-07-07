@@ -60,11 +60,20 @@ class Session extends Common
     {
         $this->permission_exec($id_project, 'sessions', $id_session);
 
-        $task = R::load('tasks', $id_task);
-        $task->percent = $_POST['percent'];
-        R::store($task);
+        //  $task = R::load('tasks', $id_task);
+
+        // if($task->getProperties()['percent'] < $_POST['percent'])
+        // {
+        //     $task->percent = $_POST['percent'];
+        //     R::store($task);
+        // }
 
         $session = R::load('sessions', $id_session);
+
+        $user = R::load('users', $_SESSION['user']['id']);
+        $price_hour = $user->getProperties()['hour_price'];
+
+        $session->price = $price_hour*$_POST['hour_number'];
         $session->hour_number = $_POST['hour_number'];
         $session->percent = $_POST['percent'];
         $session->comment = $_POST['comment'];
@@ -76,9 +85,9 @@ class Session extends Common
     public function create($id_project, $id_task)
     {
         $this->permission_access($id_project);
-        $task = R::load('tasks', $id_task);
-        $task->percent = $_POST['percent'];
-        R::store($task);
+        // $task = R::load('tasks', $id_task);
+        // $task->percent = $_POST['percent'];
+        // R::store($task);
 
         $session = R::dispense('sessions');
 
@@ -90,6 +99,7 @@ class Session extends Common
         $session->hour_number = $_POST['hour_number'];
         $session->comment = $_POST['comment'];
         $session->id_user = $_SESSION['user']['id'];
+        $session->percent = $_POST['percent'];
         $session->id_task = $id_task;
         $id = R::store($session);
         

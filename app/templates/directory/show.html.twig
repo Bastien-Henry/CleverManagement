@@ -1,7 +1,16 @@
 {% include 'header/header.html.twig' %}
 <div>
 	<div class="name-project"><span style="position:relative;top:5px;">Dossier : {{myDirectory.name|raw}}</span></div>
-	<a href="/CleverManagement/directory/{{myDirectory.id}}/delete" title="Supprimer le dossier" class="delete-directory btn btn-info" style="margin-left:35px;">Supprimer ce dossier</a>
+	<a href="/CleverManagement/directory/{{myDirectory.id}}/edit" title="Editer le directory">
+		<span>
+			<img src="/CleverManagement/assets/images/edit.png">
+		</span>
+	</a>
+	<a href="/CleverManagement/directory/{{myDirectory.id}}/delete" title="Supprimer le dossier'">
+		<span>
+			<img src="/CleverManagement/assets/images/delete.png">
+		</span>
+	</a>
 	<br><br>
 	{% if projects|length == 0 %}
 		Aucun projet dans ce dossier
