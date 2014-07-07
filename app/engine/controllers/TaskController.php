@@ -163,14 +163,15 @@ class TaskController extends CommonController
                     $availableMembers = $this->model('task')->availableMembersEmails($membersProject, $membersTask);
                     $preparedArray = array_combine($availableMembers, $availableMembers);
                     $form->setFieldValue('members', 'options', $preparedArray);
-                } elseif ($arrayOfAttribute['type'] == 'date') {
-                    //to do 
-                    //$date = date("d-m-Y", strtotime($task->getProperties()[$field]));
-                    //$form->setFieldValue($field, 'value', $date);
                 } elseif ($arrayOfAttribute['type'] == 'checkbox') {
                     //to do
                     //$form->setFieldValue($field, '', $task->getProperties()[$field]);
-                } elseif ($arrayOfAttribute['type'] == 'textarea') {
+                } 
+                elseif ($arrayOfAttribute['type'] == 'date') 
+                {
+                    $form->setFieldValue($field, 'value', date('Y-m-d',strtotime($task->getProperties()[$field])));
+                }
+                elseif ($arrayOfAttribute['type'] == 'textarea') {
                     $form->setFieldValue($field, 'text', $task->getProperties()[$field]);
                 } else {
                     $form->setFieldValue($field, 'value', $task->getProperties()[$field]);

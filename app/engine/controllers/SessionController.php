@@ -24,8 +24,11 @@ class SessionController extends CommonController
             
             if(!empty($_POST))
             {
-                $this->model('session')->create($id_project, $id_task);
-                $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
+               if (!isset($form->check()['hour_number']) && !isset($form->check()['percent']) && !isset($form->check()['comment']))
+               {
+                    $this->model('session')->create($id_project, $id_task);
+                    $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
+               }
             }
             $this->register('myFormCreate', $form->render());
 
@@ -78,8 +81,12 @@ class SessionController extends CommonController
 
             if(!empty($_POST))
             {
-                $session = $this->model('session')->edit($id_project, $id_task, $id_session);
-                $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
+                var_dump($form->check());
+                if (!isset($form->check()['hour_number']) && !isset($form->check()['percent']) && !isset($form->check()['comment']))
+                {
+                    $session = $this->model('session')->edit($id_project, $id_task, $id_session);
+                    $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
+                }
             }
 
             $this->userDirectories();

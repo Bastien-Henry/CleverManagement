@@ -56,17 +56,6 @@
 			{% endif %}
 		</div>
 			<div class="task-step">
-				<div class="task">
-				{% if task['admin'] %}
-					{% if task['admin'].close == 0 %}
-	  					<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
-	  				{% endif %}
-	  			{% else %}
-	  				{% if task['member'].close == 0 %}
-	  					<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
-	  				{% endif %}
-	  			{% endif %}
-				</div>
 				<p style="margin-left:100px;">
 					T&acirc;che réalisée à : <br>
 					<div class="progress progress-striped" style="margin-left:100px;">
@@ -92,6 +81,17 @@
 			Prix consacré à la tache <span class="hour">{{ price_task }}€</span><br>
 		</p>
     </div>
+    <div class="task" style="position:relative;left:285px;">
+	{% if task['admin'] %}
+		{% if task['admin'].close == 0 %}
+				<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
+			{% endif %}
+		{% else %}
+			{% if task['member'].close == 0 %}
+				<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
+			{% endif %}
+		{% endif %}
+	</div>
 	<strong style="margin-left:285px;">{{message}}</strong><br>
 	<br><br>
 	{% if sessions['admin'] %}

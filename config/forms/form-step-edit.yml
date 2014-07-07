@@ -10,12 +10,14 @@ form_step_edit:
       type: text
       required: true
       label: Name
+      check: 
+        min: 3
     description:
       type: textarea
       required: true
       label: Description
       check:
-        min: 50
+        min: 5
     startline:
       type: date
       required: true

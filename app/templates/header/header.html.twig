@@ -7,6 +7,8 @@
   		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="/CleverManagement/assets/styles/bootstrap.css">
 		<link rel="stylesheet" href="/CleverManagement/assets/styles/main.css">
+		<link rel="stylesheet" href="/CleverManagement/assets/styles/select2.css">
+
 	</head>
  	<body>
  		<div class="navbar">
@@ -30,13 +32,13 @@
 		    			</a>
 		    		</a>
 		    		<a href="/CleverManagement/directory/create" class="text-li-sidebar">
-		    			<li>
+		    			<li style="border-bottom:1px solid #d4d4d4;margin-bottom:10px;">
 		    				<span class="text-li-sidebar" style="font-style:italic">Nouveau dossier</span>
 		    			</li>
 		    		</a>
 		    		<a href="/CleverManagement" class="text-li-sidebar">
 		    			<li>
-		    				<span class="text-li-sidebar">- Tous les projets -</span>
+		    				<span class="text-li-sidebar">Voir tous les projets</span>
 		    			</li>
 		    		</a>
 		    		{% for directory in directories %}

@@ -65,14 +65,23 @@ class StepController extends CommonController
             $form->setForm('action', $formAction);
             $this->register('myFormCreate', $form->render());
 
-            if (!empty($_POST)) {
-                $res = $this->model('step')->create($id_project);
-                if (isset($res['errors'])) {
-                    $this->register('errors', $res['errors']);
-                }
-                else
+            if (!empty($_POST)){
+                
+                if (!isset($form->check()['name']) && !isset($form->check()['description'])) 
                 {
+                    $res = $this->model('step')->create($id_project);
                     $this->go('/clevermanagement/'.$id_project.'/show');
+                }
+                elseif (isset($form->check()['description']) && !isset($form->check()['name'])) {
+                    $this->register('errorName', '<div style="width: 400px;" class="alert alert-error">'.$form->check()['description'].'</div>');
+                }
+                elseif (isset($form->check()['name']) && !isset($form->check()['description'])) {
+                    $this->register('errorName', '<div style="width: 
+                        400px;" class="alert alert-error">'.$form->check()['name'].'</div>');
+                }
+                elseif (isset($form->check()['name']) && isset($form->check()['description'])) {
+                    $this->register('errorName', '<div style="width: 
+                        400px;" class="alert alert-error">'.$form->check()['name'].'</div>');
                 }
             }
         }
@@ -133,6 +142,11 @@ class StepController extends CommonController
                     if($arrayOfAttribute['type'] == 'textarea')
                     {
                         $arrayOfAttribute['text'] = $step->getProperties()[$field];
+                    }
+                    elseif ($arrayOfAttribute['type'] == 'date') 
+                    {
+                        $arrayOfAttribute['value'] = date('Y-m-d',strtotime($step->getProperties()[$field]));
+                    
                     }
                     else
                     {

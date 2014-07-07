@@ -36,16 +36,27 @@ class ProjectController extends CommonController
         else
         {
             $form = new WalrusForm('form_project_create');
-            
             $directories = $this->model('user')->getDirectoriesName();
             $form->setFieldValue('directory', 'options', $directories);
             $this->register('myFormCreate', $form->render());
             
             if(!empty($_POST))
             {
-                $form->check();
-                $this->model('project')->create();
-                $this->go('/CleverManagement');
+                if (isset($form->check()['name'])) 
+                {
+                    $this->register('errorName', '<div style="width: 
+                        400px;" class="alert alert-error">'.$form->check()['name'].'</div>');
+                }
+                elseif (isset($form->check()['description'])) {
+                    $this->register('errorName', '<div style="width: 400px;" class="alert alert-error">'.$form->check()['description'].'</div>');
+                }
+                else
+                {
+                     $this->model('project')->create();
+                    $this->go('/CleverManagement');
+                }
+                
+               
             }
 
             $this->userDirectories();
@@ -82,6 +93,9 @@ class ProjectController extends CommonController
                 //$form->setFieldValue($field, 'value', $directory);
             } elseif ($arrayOfAttributes['type'] == 'textarea') {
                 $form->setFieldValue($field, 'text', $project->getProperties()[$field]);
+            }
+            elseif ($field == 'startline' || $field == 'deadline') {
+                $form->setFieldValue($field, 'value', date('Y-m-d',strtotime($project->getProperties()[$field])));
             } else {
                 $form->setFieldValue($field, 'value', $project->getProperties()[$field]);
             }
@@ -92,13 +106,17 @@ class ProjectController extends CommonController
         if(!empty($_POST))
         {
             $res = $this->model('project')->edit($id);
-            if(!empty($res['name.empty']))
+            if (!isset($form->check()['name']) && !isset($form->check()['description'])) 
             {
-                $this->register('errors', $res);
-            }
-            else
-            {
+                $this->model('project')->create();
                 $this->go('/CleverManagement');
+            }
+            elseif (isset($form->check()['description'])) {
+                $this->register('errorName', '<div style="width: 400px;" class="alert alert-error">'.$form->check()['description'].'</div>');
+            }
+            elseif (isset($form->check()['name'])) {
+                $this->register('errorName', '<div style="width: 
+                    400px;" class="alert alert-error">'.$form->check()['name'].'</div>');
             }
         }
 

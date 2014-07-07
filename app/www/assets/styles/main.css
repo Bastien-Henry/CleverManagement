@@ -164,9 +164,15 @@ ul
 	text-align: center;
 }
 
-.sidebar-menu li:hover, .current
+.sidebar-menu li:hover
 {
 	background-color: #ecf0f1;
+	color: #000;
+}
+
+.current{
+	background-color: #2980b9;
+	color: #fff;
 }
 
 a:hover
@@ -318,4 +324,9 @@ a:hover
 	font-size: 35px;
 	margin-left: 500px;
 	margin-top: 50px;
+}
+
+.input-select
+{
+	margin-bottom: 20px;
 }

@@ -10,10 +10,14 @@ form_session_create:
       type: text
       required: true
       label: Heure(s) travaill&eacute;(s)
+      check:
+        max: 3
     percent:
       type: text
       required: true
       label: Estimer la tache en %
+      check:
+        max: 3
     comment:
       type: text
       required: true

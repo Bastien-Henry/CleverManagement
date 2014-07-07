@@ -1,10 +1,10 @@
 <?php
 
 /**
-* Walrus Framework
-* File maintained by: Nicolas Beauvais
-* Created: 15:43 12/06/14
-*/
+ * Walrus Framework
+ * File maintained by: Nicolas Beauvais
+ * Created: 15:43 12/06/14
+ */
 
 namespace Walrus\core;
 
@@ -12,35 +12,35 @@ use Walrus\core\WalrusException;
 use Walrus\core\objects\Tag;
 
 /**
-* Class WalrusForm
-* @package Walrus\core
-*/
+ * Class WalrusForm
+ * @package Walrus\core
+ */
 class WalrusForm
 {
     /**
-* @var string
-*/
+     * @var string
+     */
     private $name;
 
     /**
-* @var array
-*/
+     * @var array
+     */
     private $form;
 
     /**
-* @var array
-*/
+     * @var array
+     */
     private $fields;
 
     /**
-* @var array
-*/
+     * @var array
+     */
     private $errors;
 
     /**
-* @param $name
-* @throws WalrusException
-*/
+     * @param $name
+     * @throws WalrusException
+     */
     public function __construct($name)
     {
         if (!isset($_ENV['W']['forms'][$name])) {
@@ -59,20 +59,20 @@ class WalrusForm
     }
 
     /**
-* Check if a form as been submitted.
-* If a submitted form as been detected:
-* - check each field validation
-* - return an array of errors OR reroute if $controller & $action param are set, else return true
-* Else
-* - return null
-*
-*
-* @param string $controller a controller name
-* @param string $action an action of the controller
-* @param array $param an array of the parameter to pass to the controller
-*
-* @return mixed
-*/
+     * Check if a form as been submitted.
+     * If a submitted form as been detected:
+     *   - check each field validation
+     *   - return an array of errors OR reroute if $controller & $action param are set, else return true
+     * Else
+     *   - return null
+     *
+     *
+     * @param string $controller a controller name
+     * @param string $action an action of the controller
+     * @param array $param an array of the parameter to pass to the controller
+     *
+     * @return mixed
+     */
     public function check($controller = null, $action = null, $param = array())
     {
         $errors = array();
@@ -212,13 +212,13 @@ class WalrusForm
             }
             if (isset($check['max']) && strlen($data[$name]) > $check['max']) {// check max
                 $errors[$name] = WalrusI18n::get('errors', 'messages', 'max', array(
-                    'attribute' => $name,
+                    'attribute' => '<div class="alert alert-error" style="margin-left:30px;">'.$name,
                     'count' => $check['max']
                 ));
             }
-             if (isset($check['min']) && strlen($data[$name]) < $check['min']) {// check min
+            if (isset($check['min']) && strlen($data[$name]) < $check['min']) {// check min
                 $errors[$name] = WalrusI18n::get('errors', 'messages', 'min', array(
-                    'attribute' => $name,
+                    'attribute' => '<div class="alert alert-error" style="margin-left:30px;">'.$name,
                         'count' => $check['min']
                 ));
             }
@@ -260,8 +260,8 @@ class WalrusForm
     }
 
     /**
-* @return mixed
-*/
+     * @return mixed
+     */
     public function render()
     {
         $this->verify();
@@ -296,7 +296,7 @@ class WalrusForm
 
         foreach ($fields as $key => $field) {
 
-            // contain a label input combo
+            // contain a label + input combo
             $row = array();
 
             // separate known data and attributes
@@ -341,7 +341,7 @@ class WalrusForm
 
             if ($field['type'] == 'select') {
 
-                if (!($options)) {
+                if (!$options) {
                     continue;
                 }
 
@@ -600,10 +600,10 @@ class WalrusForm
     }
 
     /**
-* @param $name
-*
-* @return bool|Tag
-*/
+     * @param $name
+     *
+     * @return bool|Tag
+     */
     private function getError($name)
     {
         if (!isset($this->errors[$name])) {
@@ -621,8 +621,8 @@ class WalrusForm
     }
 
     /**
-* Check the conformity of the form datas.
-*/
+     * Check the conformity of the form datas.
+     */
     private function verify()
     {
         $form = $this->form;
@@ -639,46 +639,46 @@ class WalrusForm
     }
 
     /**
-* @param string $key
-* @param string $value
-*/
+     * @param string $key
+     * @param string $value
+     */
     public function setForm($key, $value)
     {
         $this->form[$key] = $value;
     }
 
     /**
-* @return array
-*/
+     * @return array
+     */
     public function getForm()
     {
         return $this->form;
     }
 
     /**
-* @param string $key
-* @param string $value
-*/
+     * @param string $key
+     * @param string $value
+     */
     public function setFields($key, $value)
     {
         $this->fields[$key] = $value;
     }
 
     /**
-    * @return array
-    */
+     * @return array
+     */
     public function getFields()
     {
         return $this->fields;
     }
 
     /**
-    * Set a particular field value.
-    *
-    * @param string $field
-    * @param string $key
-    * @param string $value
-    */
+     * Set a particular field value.
+     *
+     * @param string $field
+     * @param string $key
+     * @param string $value
+     */
     public function setFieldValue($field, $key, $value)
     {
         $this->fields[$field][$key] = $value;

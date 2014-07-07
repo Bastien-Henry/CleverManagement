@@ -11,11 +11,10 @@ form_project_create:
     name:
       type: text
       label: Name
-      required: false
       style: width:300px;height:30px;
+      required: true
       check:
-        required: true
-        min: 4
+        min: 5
     startline:
       type: date
       label: Startline
@@ -43,17 +42,16 @@ form_project_create:
       type: hidden
       id: members-project
       placeholder: Members
-      style: width:300px;height:100px;
+      style: width:300px;height:30px;margin-bottom:20px;
     additionalAdmins:
       type: hidden
       id: add-admin-project
       label: Ajouter des Admin-Project
       placeholder: Additional Admin-Project
-      style: width:300px;height:100px;
+      style: width:300px;height:30px;margin-bottom:20px;
     directory:
       type: select
       multiple: false
-      required: false
       label: 'Ranger dans un dossier'
       name: 'directory'
       options:

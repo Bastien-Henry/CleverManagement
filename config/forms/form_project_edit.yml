@@ -13,7 +13,7 @@ form_project_edit:
       label: Name
       required: false
       check:
-        min: 4
+        min: 5
     startline:
       type: date
       label: Startline
@@ -29,24 +29,25 @@ form_project_edit:
       rows: "5"
       cols: "100"
       check:
-        min: 4
+        min: 5
     members:
       type: hidden
       id: members-project
       placeholder: Members
-      style: width:300px;height:100px;
+      style: width:300px;height:30px;margin-bottom:20px;
     additionalAdmins:
       type: hidden
       id: add-admin-project
       label: Additional Admin-Project
       placeholder: Additional Admin-Project
-      style: width:300px;height:100px;
+      style: width:300px;height:30px;margin-bottom:20px;
     directory:
       type: select
       multiple: false
       required: false
       label: 'Ranger dans un dossier'
       name: 'directory'
+      style: margin-top:20px;
       options:
         - directory1
         - directory2
