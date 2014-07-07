@@ -125,11 +125,11 @@
 			</div>
 	{% endif %}
 	<br><br>
-	<strong>{{message}}</strong><br>
+	<strong style="margin-left:100px;">{{message}}</strong><br>
 	<br><br>
 	{% for step in steps['admin'] %}
 	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
-		<div class="span2 step" {% if step.status == 1%}style="background-color:#b94a48;"{%elseif step.status == 2%}style="background-color:#fcf8e3;"{%elseif step.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
+		<div class="span2 step" {% if step.status == 1%}style="background-color:#b94a48;"{%elseif step.status == 2%}style="background-color:#e67e22;"{%elseif step.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
 	      	<div class="title-directory">
 	      		<span style='position:relative;top:5px;'>{{step.name}}</span>
 	      	</div>
@@ -177,7 +177,7 @@
 	{% endfor %} -->
 	{% for step in steps['member'] %}
 	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
-		<div class="span2 step" {% if step.status == 1%}style="background-color:#b94a48;"{%elseif step.status == 2%}style="background-color:#fcf8e3;"{%elseif step.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
+		<div class="span2 step" {% if step.status == 1%}style="background-color:#b94a48;"{%elseif step.status == 2%}style="background-color:#e67e22;"{%elseif step.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
 	      	<div class="title-directory">
 	      		<span style='position:relative;top:5px;'>{{project.name}}</span>
 	      	</div>

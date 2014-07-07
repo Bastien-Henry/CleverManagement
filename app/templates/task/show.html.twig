@@ -87,9 +87,9 @@
 					{% endif %}
 				</p>
 		</div>
-		<p style="margin-left:100px;">
-			Nombre d'heures passé sur la tache {{ hour_task }} h<br>
-			Prix consacré à la tache {{ price_task }} €<br>
+		<p style="margin-left:100px;font-size:18px;">
+			Nombre d'heure(s) passée(s) sur la t&acirc;che <span class="hour">{{ hour_task }}h</span><br><br>
+			Prix consacré à la tache <span class="hour">{{ price_task }}€</span><br>
 		</p>
     </div>
 	<strong style="margin-left:285px;">{{message}}</strong><br>
@@ -118,7 +118,7 @@
 	{% endif %}
 	{% if sessions['member'] %}
 		{% for session in sessions['member'] %}
-			<div class="one-session">
+			<div class="one-session	">
 				<div class="title-task-step">
 					<span style="position:relative;top:5px;">Date : {{ session.created_at }} | Heure(s) travaillée(s) : {{session.hour_number}}</span>
 				</div>

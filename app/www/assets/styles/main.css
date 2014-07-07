@@ -304,3 +304,11 @@ a:hover
 	float: left;
 
 }
+
+.hour
+{
+	background-color: #3a87ad;
+	color:#fff;
+	border-radius: 3px;
+	padding: 5px;
+}
