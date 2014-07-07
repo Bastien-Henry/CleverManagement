@@ -97,8 +97,6 @@ class Project extends Common
 
     public function find($id)
     {
-        $this->permission_access($id);
-
         $project = R::load('projects', $id);
 
         if($project->getProperties()['id'] == 0)

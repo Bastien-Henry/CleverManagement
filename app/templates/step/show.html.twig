@@ -45,7 +45,7 @@
 	</div>
 	<div class="task-step">
 		<div class="task">
-			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/task/create" style="color:#fff;">Nouvelle tache</a></button>
+			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/create" style="color:#fff;">Nouvelle tache</a></button>
 		</div>
 
 		<br><br>
@@ -55,21 +55,29 @@
 			{% for task in tasks['admin'] %}
 			<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/show">
 				<div class="one-task">
-					<div class="title-task-step">
-						<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}} status = Faire par apport au poucentage de la tache</span>
+					<div class="title-task-step" {% if task.percent == 0%}style="background-color:#b94a48;"{%elseif task.percent == 100%}style="background-color:#468847;"{%else%}style="background-color:#fcf8e3;"{%endif%}>
+						<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}}</span>
 						<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit" title="Editer l'etape">
 			      			<span>
-			      				<img src="/CleverManagement/assets/images/edit.png">
+			      				<img src="/CleverManagement/assets/images/edit.png" style="height:28px;">
 			      			</span>
 			      		</a>
-			      		<a href="/Clevermanagement/{{project_id}}/step/{{ step_id }}/task/{{ task.id }}/delete" title="Supprimer l'etape'">
+			      		<a href="/Clevermanagement/{{project_id}}/step/{{ step_id }}/task/{{ task.id }}/delete" title="Supprimer l'etape">
 				  			<span>
-				  				<img src="/CleverManagement/assets/images/delete.png">
+				  				<img src="/CleverManagement/assets/images/delete.png" style="height:28px;">
 				  			</span>
 				  		</a>
 					</div>
 					<div class="description-task-step">
-						<span style="position:relative;top:10px;">{{ task.description }}</span>
+						<span style="position:relative;top:10px;">
+							{%if task.urgent == 1%}
+					  			<span>
+					  				<img src="/CleverManagement/assets/images/urgent.png" style="height:32px;" alt="Urgent" title="Urgent !">
+					  			</span>
+					  		{%endif%}
+
+							{{ task.description }}
+						</span>
 					</div>
 				</div>
 			</a>
@@ -79,8 +87,8 @@
 			{% for task in tasks['member'] %}
 				<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/show">
 					<div class="one-task">
-						<div class="title-task-step">
-							<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}} status = Faire par apport au poucentage de la tache</span>
+						<div class="title-task-step" {% if task.percent == 0%}style="background-color:#b94a48;"{%elseif task.percent == 100%}style="background-color:#468847;"{%else%}style="background-color:#fcf8e3;"{%endif%}>
+							<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}}</span>
 						</div>
 				</div>
 				<div class="action-step">
@@ -97,16 +105,18 @@
 				  		</a>
 			  		{% endif %}
 		  		</div>
-		  	{% endfor %}	
-	  		<div class="task-step">
-	  			<div class="task">
-		  			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/create" style="color:#fff;">Nouvelle tache</a></button>
-	  			</div>
+		  		<div class="description-task-step">
+						<span style="position:relative;top:10px;">
+							{%if task.urgent == 1%}
+					  			<span>
+					  				<img src="/CleverManagement/assets/images/urgent.png" style="height:32px;" alt="Urgent" title="Urgent !">
+					  			</span>
+					  		{%endif%}
 
-				<br><br>
-				<strong>{{message}}</strong><br>
-				<br><br>
-	  		</div>
+							{{ task.description }}
+						</span>
+					</div>
+		  	{% endfor %}
 		</div>
 		{% endif %}
 </body>

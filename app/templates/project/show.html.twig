@@ -129,6 +129,32 @@
 	<br><br>
 	{% for step in steps['admin'] %}
 	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
+		<div class="span2 step" {% if step.status == 1%}style="background-color:#b94a48;"{%elseif step.status == 2%}style="background-color:#fcf8e3;"{%elseif step.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
+	      	<div class="title-directory">
+	      		<span style='position:relative;top:5px;'>{{step.name}}</span>
+	      	</div>
+	      	<div class="descr-directory">
+	      		<p>
+		      		{{step.description | length > 350 ? step.description|slice(0, 350) ~ '(...)' : step.description}}
+		      	</p>
+	      	</div>
+	      	<div class="menu-step">
+	      		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/edit" title="Editer l'&eacute;tape'" class="edit-step">
+	      			<span>
+	      				<img src="/CleverManagement/assets/images/edit.png">
+	      			</span>
+	      		</a>
+	      		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/delete" title="Supprimer l'&eacute;tape'" class="delete-step">
+	      			<span>
+	      				<img src="/CleverManagement/assets/images/delete.png">
+	      			</span>
+	      		</a>
+	      	</div>
+	    </div>
+	</a>
+	{% endfor %}
+	<!-- {% for step in steps['admin'] %}
+	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
 		<div class="one-step">
 			<div class="title-steps-project">
 				<span style="position:relative;top:5px;">{{ step.name }} du {{step.startline}} au {{step.deadline}} status = {{ step.status }}</span>
@@ -148,17 +174,21 @@
 			</div>
 		</div>
 	</a>
-	{% endfor %}
+	{% endfor %} -->
 	{% for step in steps['member'] %}
 	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
-		<div class="one-step">
-			<div class="title-steps-project">
-				<span style="position:relative;top:5px;">{{ step.name }} du {{step.startline}} au {{step.deadline}} status = {{ step.status }}</span>
-			</div>
-			<div class="description-steps-project">
-				<span style="position:relative;top:10px;">{{ step.description }}</span>
-			</div>
-		</div>
+		<div class="span2 step" {% if step.status == 1%}style="background-color:#b94a48;"{%elseif step.status == 2%}style="background-color:#fcf8e3;"{%elseif step.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
+	      	<div class="title-directory">
+	      		<span style='position:relative;top:5px;'>{{project.name}}</span>
+	      	</div>
+	      	<div class="descr-directory">
+	      		<p>
+		      		{{step.description | length > 350 ? step.description|slice(0, 350) ~ '(...)' : step.description}}
+		      	</p>
+	      	</div>
+	      	<div class="menu-step">
+	      	</div>
+	    </div>
 	</a>
 	{% endfor %}
 </div>

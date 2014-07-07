@@ -186,7 +186,6 @@ class TaskController extends CommonController
     {
         $members = $this->model('task')->retrieveMembers($id_task);
         $options = $this->model('task')->formatMembers($members);
-        var_dump($options);die('options');
         return $options;
     }
 }
