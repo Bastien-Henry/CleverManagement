@@ -115,12 +115,17 @@ class Task extends Common
         if($relation['admin'])
         {
             $tasks['admin'] = R::findAll('tasks', 'id_step = ?', array($id_step));
+            foreach ($tasks['admin'] as $key => $object) {
+                $tasks['admin'][$key] = $object->getProperties();
+                $tasks['admin'][$key]['members'] = $this->retrieveMembers($tasks['admin'][$key]['id']);
+            }
         }
         else
         {
             $tab = R::findAll('tasks', 'id_step = ?', array($id_step));
             foreach($tab as $value)
             {
+                $value['members'] = $this->model('task')->retrieveMembers($value['id']);
                 if($value['id_user'] == $_SESSION['user']['id'])
                     $tasks['admin'][] = $value;
                 else

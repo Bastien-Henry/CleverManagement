@@ -24,11 +24,13 @@ class TaskController extends CommonController
             return;
         }
 
+        $percent = $this->model('task')->get_percent($id_task);
         $task = $this->model('task')->show($id_project, $id_task);
         $members = $this->model('task')->retrieveMembers($id_task);
         $time_task = $this->model('task')->time_task($id_task);
 
         $this->userDirectories();
+        $this->register('percent', $percent);
         $this->register('hour_task', $time_task['hour']);
         $this->register('price_task', $time_task['price']);
         $this->register('task', $task);

@@ -66,17 +66,14 @@ class SessionController extends CommonController
             $session = $this->model('session')->show($id_project, $id_session);
             foreach ($form->getFields() as $field => $arrayOfAttribute)
             {
-                if ($arrayOfAttribute['type'] == 'textarea')
-                {
+                if ($arrayOfAttribute['type'] == 'textarea') {
                     $arrayOfAttribute['text'] = $session->getProperties()[$field];
-                }
-                else
-                {
+                } else {
                     $arrayOfAttribute['value'] = $session->getProperties()[$field];
                 }
                 $form->setFields($field, $arrayOfAttribute);
             }
-
+            
             $this->register('myFormEdit', $form->render());
 
             if(!empty($_POST))
