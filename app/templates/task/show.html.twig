@@ -57,25 +57,25 @@
   				{% endif %}
   			{% endif %}
 			</div>
-			<p>
-			Project réalisé à : <br>
-			<div class="progress progress-striped">
-			  <div class="bar" style="width: {{task.percent}}%;text-align:center;">{{task.percent}} %</div>
-			</div>
-			{% if task.percent == 0 %}
-				<div class="alert alert-error" style="text-align:center;margin-left:283px;">
-					Statut : To Do
+			<p style="margin-left:100px;">
+				T&acirc;che réalisée à : <br>
+				<div class="progress progress-striped">
+				  <div class="bar" style="width: {{task[type].percent}}%;text-align:center;">{{task[type].percent}} %</div>
 				</div>
-			{% elseif task.percent >= 100 %}
-				<div class="alert alert-success" style="text-align:center;margin-left:283px;">
-					Statut : Done
-				</div>
-			{% else %}
-				<div class="alert alert-warning" style="text-align:center;margin-left:283px;">
-					Statut : Doing
-				</div>
-			{% endif %}
-		</p>
+				{% if task[type].percent == 0 %}
+					<div class="alert alert-error status-task" style="text-align:center;margin-left:283px;">
+						Statut : To Do
+					</div>
+				{% elseif task[type].percent >= 100 %}
+					<div class="alert alert-success status-task" style="text-align:center;margin-left:283px;">
+						Statut : Done
+					</div>
+				{% else %}
+					<div class="alert alert-warning status-task" style="text-align:center;margin-left:283px;">
+						Statut : Doing
+					</div>
+				{% endif %}
+			</p>
 	</div>
 	<p>
 		Nombre d'heures passé sur la tache {{ hour_task }} h<br>

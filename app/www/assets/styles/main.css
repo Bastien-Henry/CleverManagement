@@ -265,3 +265,13 @@ a:hover
 {
 	margin-left: 500px;
 }
+
+.progress
+{
+	width: 300px;
+}
+
+.status-task
+{
+	width: 250px;
+}
