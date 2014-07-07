@@ -38,8 +38,12 @@ form_project_edit:
       placeholder: Additional Admin-Project
       style: width:300px;height:100px;
     directory:
-      type: hidden
-      id: directory-project
-      label: Ranger dans le dossier
-      placeholder: Nom de dossier
-
+      type: select
+      multiple: false
+      required: false
+      label: 'Ranger dans un dossier'
+      name: 'directory'
+      options:
+        - directory1
+        - directory2
+        - directory3

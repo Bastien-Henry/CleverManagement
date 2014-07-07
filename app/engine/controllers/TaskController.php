@@ -149,13 +149,13 @@ class TaskController extends CommonController
             $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/edit';
             $form->setForm('action', $formAction);
 
-            $task = $this->model('task')->show($id_project, $id_task);
+            $task = $this->model('task')->find($id_task);
 
             // filling fields with values registered in database
             // different treatment depending on type of field
             foreach ($form->getFields() as $field => $arrayOfAttribute) {
                 if ($field == 'registeredMembers') {
-                    $function = 'TaskController::getRegisteredMembers([ 0:'.$id_task.'])';
+                    $function = 'TaskController::getRegisteredMembers([0:'.$id_task.'])';
                     $form->setFieldValue('registeredMembers', 'function', $function);
                 } elseif ($field == 'members') {
                     $membersProject = $this->model('project')->retrieveUsers($id_project, null);

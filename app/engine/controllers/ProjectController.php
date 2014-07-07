@@ -36,6 +36,8 @@ class ProjectController extends CommonController
         else
         {
             $form = new WalrusForm('form_project_create');
+            $directories = $this->model('user')->getDirectoriesName();
+            $form->setFieldValue('directory', 'options', $directories);
             $this->register('myFormCreate', $form->render());
             // $form->check();
             if(!empty($_POST))
@@ -52,35 +54,36 @@ class ProjectController extends CommonController
 
     public function edit($id)
     {
-        var_dump('test0');
         if (empty($_SESSION)) {
             $this->go('/CleverManagement/');
             return;
         }
-        var_dump('test1');
 
         $this->userDirectories();
         $this->setView('edit');
-        var_dump('test2');
 
         $form = new WalrusForm('form_project_edit');
         $formAction = '/clevermanagement/'.$id.'/edit';
+        $directories = $this->model('user')->getDirectoriesName();
+        $form->setFieldValue('directory', 'options', $directories);
+        
         $form->setForm('action', $formAction);
-        var_dump('test3');
 
         $project = $this->model('project')->find($id);
+
         foreach ($form->getFields() as $field => $arrayOfAttributes) {
             if ($field == 'members' || $field == 'additionalAdmins') {
                 $usersEmail = $this->model('project')->retrieveUsersEmails($id, $field);
                 $form->setFieldValue($field, 'value', implode(',', $usersEmail));
+            } elseif($field == 'directory') {
+                $directory = $this->model('project')->getDirectory($id);
+                $form->setFieldValue($field, 'value', $directory);
             } elseif ($arrayOfAttributes['type'] == 'textarea') {
                 $form->setFieldValue($field, 'text', $project->getProperties()[$field]);
             } else {
                 $form->setFieldValue($field, 'value', $project->getProperties()[$field]);
             }
         }
-
-        var_dump('test4');
 
         $this->register('myFormEdit', $form->render());
 
@@ -97,9 +100,7 @@ class ProjectController extends CommonController
             }
         }
 
-        $res = $this->model('project')->show($id);
-
-        var_dump('test5');
+        $res = $this->model('project')->find($id);
 
         if(is_array($res))
         {

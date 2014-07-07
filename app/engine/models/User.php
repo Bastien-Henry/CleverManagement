@@ -73,4 +73,23 @@ class User
         $_SESSION['user']['email'] = (string)$bean->email;
         $_SESSION['acl'] = (string)$bean->acl;
     }
+
+    public function getDirectories()
+    {
+        $userDirectories = R::getAll('SELECT * FROM directories WHERE id_user = :user', array(':user' => $_SESSION['user']['id']));
+        return $userDirectories;
+    }
+
+    public function getDirectoriesName()
+    {
+        $directories = $this->getDirectories();
+        $directoriesName = array();
+
+        foreach ($directories as $directory) {
+            $name = $directory['name'];
+            $directoriesName[$name] = $name;
+        }
+
+        return $directoriesName;
+    }
 }
