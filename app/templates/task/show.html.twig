@@ -33,16 +33,25 @@
 	</div>
 	<div class="action-task">
 		{% if task['admin'] %}
-			<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task_id }}/edit" title="Editer l'etape">
-	  			<span>
-	  				<img src="/CleverManagement/assets/images/edit.png">
-	  			</span>
-	  		</a>
-	  		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/delete" title="Supprimer l'etape'">
-	  			<span>
-	  				<img src="/CleverManagement/assets/images/delete.png">
-	  			</span>
-	  		</a>
+			{% if task['admin'].close == 0 %}
+				<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task_id }}/edit" title="Editer l'etape">
+		  			<span>
+		  				<img src="/CleverManagement/assets/images/edit.png">
+		  			</span>
+		  		</a>
+		  		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/delete" title="Supprimer l'etape'">
+		  			<span>
+		  				<img src="/CleverManagement/assets/images/delete.png">
+		  			</span>
+		  		</a>
+		  		<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/done" title="Supprimer l'etape'">
+		  			Clore la tache
+		  		</a>
+	  		{% else %}
+	  			<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/done" title="Supprimer l'etape'">
+		  			Ouvrir la tache
+		  		</a>
+	  		{% endif %}
 		{% endif %}
 	</div>
 		<div class="task-step">
