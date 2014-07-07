@@ -220,9 +220,16 @@ a:hover
 	bottom: 21px;
 }
 
-.description-project, .action-project,	.steps, .description-step, .action-step, .task, .description-task, .action-task
+.description-project, .action-project,	.steps, .description-step, .action-step
 {
 	margin-left: 282px;
+	padding: 10px;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.task, .description-task, .action-task
+{
 	padding: 10px;
 	padding-left: 100px;
 	padding-right: 100px;
@@ -241,6 +248,22 @@ a:hover
 	position: relative;
 	bottom: 7px;
 	height: 75px;
+}
+
+.one-session
+{
+	color:#252f56;
+	font-size: 20px;
+	background-color: #fff;
+	border: 1px solid #c6c6c6;
+	height: 30px;
+	margin-left: 286px;
+	text-align: left;
+	position: relative;
+	bottom: 7px;
+	height: 75px;
+	float: left;
+	margin-bottom: 20px;
 }
 
 .title-steps-project, .title-task-step
@@ -273,5 +296,11 @@ a:hover
 
 .status-task
 {
-	width: 250px;
+	width: 250px;	
+}
+
+.task-caract
+{
+	float: left;
+
 }
