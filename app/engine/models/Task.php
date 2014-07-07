@@ -33,9 +33,6 @@ class Task extends Common
                 [':user' => $_SESSION['user']['id']]
             );
 
-        // var_dump($relation['admin']);
-        // die;
-
         $tab = array();
         if($relation['admin'] == 1)
             $tab['admin'] = $task;
