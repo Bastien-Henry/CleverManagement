@@ -21,8 +21,17 @@ class ProjectController extends CommonController
         else
         {
             $res = $this->model('project')->index();
+            $projects = array();
+            foreach ($res as $type => $array) {
+                foreach ($array as $key => $object) {
+                    $projects[$type][$key] = $object->getProperties();
+                    $projects[$type][$key]['members'] = $members = $this->model('project')->retrieveUsers($array[$key]['id'], 'members');
+                    $projects[$type][$key]['admins'] = $members = $this->model('project')->retrieveUsers($array[$key]['id'], 'additionalAdmins');
+                }
+            }
+
             $this->userDirectories();
-            $this->register('projects', $res);
+            $this->register('projects', $projects);
             $this->setView('index');
         }
     }

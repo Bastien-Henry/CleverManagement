@@ -186,7 +186,7 @@ class Common
         $value = 0;
         foreach($tasks as $task)
         {
-            $value = $this->get_percent($task->getProperties()['id']);
+            $value += $this->get_percent($task->getProperties()['id']);
         }
 
         if(count($tasks)*100 == $value && (count($tasks) != 0))
