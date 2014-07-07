@@ -24,8 +24,9 @@ class Project extends Common
         );
 
         // link to specified members
-        $membersErrors = $this->membersFlush($_POST['members'], $id_project, 0);
-        $adminsErrors = $this->membersFlush($_POST['additionalAdmins'], $id_project, 1);
+        $membersErrors = $this->membersFlush($_POST['members'], $id, 0);
+        $adminsErrors = $this->membersFlush($_POST['additionalAdmins'], $id, 1);
+        $directoryError = $this->directoryFlush($_POST['directory'], $id);
 
         return true;
     }
@@ -94,6 +95,20 @@ class Project extends Common
         return $return;
     }
 
+    public function find($id)
+    {
+        $this->permission_access($id);
+
+        $project = R::load('projects', $id);
+
+        if($project->getProperties()['id'] == 0)
+        {
+            return array('project.not_found' => 'project doesnt exist');
+        }
+
+        return $project;
+    }
+
     public function show($id)
     {
         $this->permission_access($id);
@@ -156,8 +171,10 @@ class Project extends Common
         // link to specified members
         $membersErrors = $this->membersFlush($_POST['members'], $id, 0);
         $adminsErrors = $this->membersFlush($_POST['additionalAdmins'], $id, 1);
+        $this->directoryFlush($_POST['directory'], $id);
 
         R::store($project);
+
         return $project;
     }
 
@@ -206,5 +223,56 @@ class Project extends Common
         $project = R::load('projects', $id);
 
         R::trash($project);
+    }
+
+    public function getDirectory($id)
+    {
+        $userDirectories = R::getAll('SELECT * FROM directories WHERE id_user = :user', array(':user' => $_SESSION['user']['id']));
+        $query = 'SELECT * FROM projects_directories WHERE id_project = :project AND id_directory = :directory';
+
+        $foundDir = false;
+        foreach ($userDirectories as $directory) {
+            $params = array(':project' => $id, ':directory' => $directory['id']);
+            $match = R::getAll($query, $params);
+            if (!empty($match)) {
+                $foundDir = $match;
+                break;
+            }
+        }
+
+        if ($foundDir === false) {
+            return $foundDir;
+        } elseif (count($foundDir) > 1) {
+            $this->deleteDirectories($id);
+            return false;
+        } else {
+            return $foundDir[0]['id_directory'];
+        }
+    }
+
+    public function deleteDirectories($id)
+    {
+        $userDirectories = R::getAll('SELECT * FROM directories WHERE id_user = :user', array(':user' => $_SESSION['user']['id']));
+        $query = 'DELETE FROM projects_directories WHERE id_project = :project AND id_directory = :directory';
+        
+        foreach ($userDirectories as $directory) {
+            $params = array(':project' => $id, ':directory' => $directory);
+            R::exec($query, $params);
+        }
+    }
+
+    public function directoryFlush($name, $id_project)
+    {
+        $directory = R::findOne('directories', 'name = :name AND id_user = :user', array(':name' => $name, ':user' => $_SESSION['user']['id']));
+        if (!is_object($directory)) {
+            return 'Le dossier n\'existe pas';
+        }
+
+        $exec = R::exec('INSERT INTO projects_directories (id_project, id_directory) VALUES (:project, :directory)', array(
+            ':project'  => $id_project,
+            ':directory'     => $directory->getProperties()['id'], 
+        ));
+
+        return true;
     }
 }

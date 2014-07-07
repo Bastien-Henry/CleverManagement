@@ -41,6 +41,8 @@ class ProjectController extends CommonController
         else
         {
             $form = new WalrusForm('form_project_create');
+            $directories = $this->model('user')->getDirectoriesName();
+            $form->setFieldValue('directory', 'options', $directories);
             $this->register('myFormCreate', $form->render());
             // $form->check();
             if(!empty($_POST))
@@ -67,13 +69,20 @@ class ProjectController extends CommonController
 
         $form = new WalrusForm('form_project_edit');
         $formAction = '/clevermanagement/'.$id.'/edit';
+        $directories = $this->model('user')->getDirectoriesName();
+        $form->setFieldValue('directory', 'options', $directories);
+        
         $form->setForm('action', $formAction);
 
-        $project = $this->model('project')->show($id);
+        $project = $this->model('project')->find($id);
+       
         foreach ($form->getFields() as $field => $arrayOfAttributes) {
             if ($field == 'members' || $field == 'additionalAdmins') {
                 $usersEmail = $this->model('project')->retrieveUsersEmails($id, $field);
                 $form->setFieldValue($field, 'value', implode(',', $usersEmail));
+            } elseif($field == 'directory') {
+                $directory = $this->model('project')->getDirectory($id);
+                $form->setFieldValue($field, 'value', $directory);
             } elseif ($arrayOfAttributes['type'] == 'textarea') {
                 $form->setFieldValue($field, 'text', $project->getProperties()[$field]);
             } else {
@@ -96,7 +105,7 @@ class ProjectController extends CommonController
             }
         }
 
-        $res = $this->model('project')->show($id);
+        $res = $this->model('project')->find($id);
 
         if(is_array($res))
         {
