@@ -1,5 +1,5 @@
 {% include 'header/header.html.twig' %}
-{% if task.admin %}
+{% if task['admin'] %}
 	{% set type = 'admin' %}
 {% else %}
 	{% set type = 'member' %}

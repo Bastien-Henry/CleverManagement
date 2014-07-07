@@ -1,4 +1,9 @@
 {% include 'header/header.html.twig' %}
+{% if step['admin'] %}
+	{% set type = 'admin' %}
+{% else %}
+	{% set type = 'member' %}
+{% endif %}
 
 <div>
 	{% if project['admin'] %}
@@ -52,12 +57,12 @@
 		{% endif %}
 	</div>
 	<div class="action-project">
-		<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet">
+		<a href="/CleverManagement/{{project_id}}/edit" title="Editer le projet">
 			<span>
 				<img src="/CleverManagement/assets/images/edit.png">
 			</span>
 		</a>
-		<a href="/CleverManagement/{{project.id}}/delete" title="Supprimer le projet">
+		<a href="/CleverManagement/{{project_id}}/delete" title="Supprimer le projet">
 			<span>
 				<img src="/CleverManagement/assets/images/delete.png">
 			</span>
@@ -153,33 +158,11 @@
 	    </div>
 	</a>
 	{% endfor %}
-	<!-- {% for step in steps['admin'] %}
-	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
-		<div class="one-step">
-			<div class="title-steps-project">
-				<span style="position:relative;top:5px;">{{ step.name }} du {{step.startline}} au {{step.deadline}} status = {{ step.status }}</span>
-				<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/edit" title="Editer l'&eacute;tape">
-	      			<span>
-	      				<img src="/CleverManagement/assets/images/edit.png">
-	      			</span>
-	      		</a>
-	      		<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/delete" title="Supprimer le projet">
-		  			<span>
-		  				<img src="/CleverManagement/assets/images/delete.png">
-		  			</span>
-		  		</a>
-			</div>
-			<div class="description-steps-project">
-				<span style="position:relative;top:10px;">{{ step.description }}</span>
-			</div>
-		</div>
-	</a>
-	{% endfor %} -->
 	{% for step in steps['member'] %}
 	<a href="/Clevermanagement/{{project_id}}/step/{{step.id}}/show">
 		<div class="span2 step" {% if step.status == 1%}style="background-color:#b94a48;"{%elseif step.status == 2%}style="background-color:#e67e22;"{%elseif step.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
 	      	<div class="title-directory">
-	      		<span style='position:relative;top:5px;'>{{project.name}}</span>
+	      		<span style='position:relative;top:5px;'>{{project[type].name}}</span>
 	      	</div>
 	      	<div class="descr-directory">
 	      		<p>

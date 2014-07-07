@@ -1,15 +1,20 @@
 {% include 'header/header.html.twig' %}
+{% if step['admin'] %}
+	{% set type = 'admin' %}
+{% else %}
+	{% set type = 'member' %}
+{% endif %}
 <div>
-	<div class="name-step"><span style="position:relative;top:5px;">Etape : {{step.name|raw}}</span></div>
+	<div class="name-step"><span style="position:relative;top:5px;">Etape : {{step[type].name|raw}}</span></div>
 
 	<div class="description-step">
 		<p>
 			<h3>Description de l'etape : </h3>
-			{{step.description|raw}}
+			{{step[type].description|raw}}
 		</p>
 		<p>
-			Debut : {{step.startline}} <br>
-			Fin : {{step.deadline}}
+			Debut : {{step[type].startline}} <br>
+			Fin : {{step[type].deadline}}
 		</p>
 		<p>
 			Nombre d'heures passé sur l'étape {{ hour_step }} h<br>

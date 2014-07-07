@@ -92,30 +92,14 @@ class StepController extends CommonController
 
     public function edit($id_project, $id_step)
     {
-        if (empty($_SESSION)) {
+        if (empty($_SESSION))
+        {
             $this->go('/CleverManagement/');
         }
         else
         {
             $this->userDirectories();
-            $this->setView('edit');
-
-            $form = new WalrusForm('form_step_edit');
-            $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/edit';
-            $form->setForm('action', $formAction);
             
-
-            $step = $this->model('step')->show($id_project, $id_step);
-            foreach ($form->getFields() as $field => $arrayOfAttribute) {
-                if ($arrayOfAttribute['type'] == 'textarea') {
-                    $arrayOfAttribute['text'] = $step->getProperties()[$field];
-                } else {
-                    $arrayOfAttribute['value'] = $step->getProperties()[$field];
-                }
-                $form->setFields($field, $arrayOfAttribute);
-            }
-
-            $this->register('myFormEdit', $form->render());
             if(!empty($_POST))
             {
                 $res = $this->model('step')->edit($id_project, $id_step);
@@ -127,13 +111,37 @@ class StepController extends CommonController
                 {
                     $this->go('/CleverManagement/'.$id_project.'/show');
                 }
+
+                $step = $this->model('step')->show($id_project, $id_step);
+
+                if(is_array($step))
+                {
+                    $this->register('error', 'Step doesnt exist');
+                }
             }
-
-            $step = $this->model('step')->show($id_project, $id_step);
-
-            if(is_array($step))
+            else
             {
-                $this->register('error', 'Step doesnt exist');
+                $this->setView('edit');
+
+                $form = new WalrusForm('form_step_edit');
+                $formAction = '/clevermanagement/'.$id_project.'/step/'.$id_step.'/edit';
+                $form->setForm('action', $formAction);
+
+                $step = $this->model('step')->find($id_step);
+
+                foreach ($form->getFields() as $field => $arrayOfAttribute)
+                {
+                    if($arrayOfAttribute['type'] == 'textarea')
+                    {
+                        $arrayOfAttribute['text'] = $step->getProperties()[$field];
+                    }
+                    else
+                    {
+                        $arrayOfAttribute['value'] = $step->getProperties()[$field];
+                    }
+                    $form->setFields($field, $arrayOfAttribute);
+                }
+                $this->register('myFormEdit', $form->render());
             }
         }
     }
