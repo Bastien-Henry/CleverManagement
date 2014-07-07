@@ -14,11 +14,6 @@ class ProjectController extends CommonController
 {
     public function index()
     {
-        // var_dump($_SESSION['acl']);
-        // $test = WalrusACL::hasRight('member', 'supervisor');
-        // var_dump($test);
-
-        // die();
         if (empty($_SESSION))
         {
             $this->go('/CleverManagement/signin');
@@ -57,19 +52,23 @@ class ProjectController extends CommonController
 
     public function edit($id)
     {
+        var_dump('test0');
         if (empty($_SESSION)) {
             $this->go('/CleverManagement/');
             return;
         }
+        var_dump('test1');
 
         $this->userDirectories();
         $this->setView('edit');
+        var_dump('test2');
 
         $form = new WalrusForm('form_project_edit');
         $formAction = '/clevermanagement/'.$id.'/edit';
         $form->setForm('action', $formAction);
+        var_dump('test3');
 
-        $project = $this->model('project')->show($id);
+        $project = $this->model('project')->find($id);
         foreach ($form->getFields() as $field => $arrayOfAttributes) {
             if ($field == 'members' || $field == 'additionalAdmins') {
                 $usersEmail = $this->model('project')->retrieveUsersEmails($id, $field);
@@ -80,6 +79,8 @@ class ProjectController extends CommonController
                 $form->setFieldValue($field, 'value', $project->getProperties()[$field]);
             }
         }
+
+        var_dump('test4');
 
         $this->register('myFormEdit', $form->render());
 
@@ -97,6 +98,8 @@ class ProjectController extends CommonController
         }
 
         $res = $this->model('project')->show($id);
+
+        var_dump('test5');
 
         if(is_array($res))
         {

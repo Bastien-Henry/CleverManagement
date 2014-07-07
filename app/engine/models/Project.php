@@ -94,6 +94,18 @@ class Project extends Common
         return $return;
     }
 
+    public function find($id)
+    {
+        $project = R::load('projects', $id);
+
+        if($project->getProperties()['id'] == 0)
+        {
+            return array('project.not_found' => 'project doesnt exist');
+        }
+
+        return $project;
+    }
+
     public function show($id)
     {
         $this->permission_access($id);
@@ -139,6 +151,7 @@ class Project extends Common
 
     public function edit($id)
     {
+        die('Test');
         $this->permission_exec($id);
 
         $project = R::load('projects', $id);
