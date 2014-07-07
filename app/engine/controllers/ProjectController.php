@@ -14,11 +14,6 @@ class ProjectController extends CommonController
 {
     public function index()
     {
-        // var_dump($_SESSION['acl']);
-        // $test = WalrusACL::hasRight('member', 'supervisor');
-        // var_dump($test);
-
-        // die();
         if (empty($_SESSION))
         {
             $this->go('/CleverManagement/signin');
@@ -75,14 +70,14 @@ class ProjectController extends CommonController
         $form->setForm('action', $formAction);
 
         $project = $this->model('project')->find($id);
-       
+
         foreach ($form->getFields() as $field => $arrayOfAttributes) {
             if ($field == 'members' || $field == 'additionalAdmins') {
                 $usersEmail = $this->model('project')->retrieveUsersEmails($id, $field);
                 $form->setFieldValue($field, 'value', implode(',', $usersEmail));
             } elseif($field == 'directory') {
-                $directory = $this->model('project')->getDirectory($id);
-                $form->setFieldValue($field, 'value', $directory);
+                //$directory = $this->model('project')->getDirectory($id);
+                //$form->setFieldValue($field, 'value', $directory);
             } elseif ($arrayOfAttributes['type'] == 'textarea') {
                 $form->setFieldValue($field, 'text', $project->getProperties()[$field]);
             } else {

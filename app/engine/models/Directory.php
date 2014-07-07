@@ -21,9 +21,23 @@ class Directory extends Common
             [':directory' => $id]
         );
 
+        $user = R::load('users', $_SESSION['user']['id']);
+
         $projects = array();
-        foreach ($relations as $key => $object) {
-            $projects[] = R::load('projects', $object['id_project']);
+        foreach ($relations as $key => $object)
+        {
+        	$query = 'SELECT * FROM projects_users WHERE id_user = :user AND id_project = :project';
+        	$params = array(
+        		':user' => $_SESSION['user']['id'],
+        		':project' => $object['id_project']
+        		);
+        	$userLink = R::getRow($query, $params);
+        
+            if($userLink['admin'])
+                $projects['admin'][] = R::load('projects', $object['id_project']);
+            else
+                $projects['member'][] = R::load('projects', $object['id_project']);
+
             $this->status_step($object['id_project']);
         }
 

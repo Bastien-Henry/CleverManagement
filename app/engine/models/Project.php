@@ -40,22 +40,30 @@ class Project extends Common
     */
     private function membersFlush($selects, $id_project, $boolAdmin)
     {
+        if(empty($selects) || $selects == "") {
+            return;
+        }
         $members = $this->parseSelects($selects);
 
         $memberErrors = array();
+
         foreach ($members as $value => $status) {
             if ($status === 1) {
                 $member = R::findOne('users', 'email = ?', array($value));
-                if ($member == null) {
+
+                if ($member == null || !is_object($member)) {
                     $memberErrors[] = $value;
                     continue;
                 }
 
-                $relation = R::findOne('projects_users', 'id_user = ? AND id_project = ? AND admin = ?', array($member->getProperties()['id'], $id_project, $boolAdmin));
+                $query = 'SELECT * FROM projects_users WHERE id_user = :user AND id_project = :project AND admin = :admin';
+                $params = array(':user' => $member->getProperties()['id'], ':project' => $id_project, ':admin' => $boolAdmin);
+                $relation = R::getRow($query, $params);
+
                 if ($relation != null) {
                     continue;
                 }
-                
+
                 $exec = R::exec('INSERT INTO projects_users (id_user, id_project, admin) VALUES (:user, :project, :admin)', array(
                     ':user'     => $member->getProperties()['id'], 
                     ':project'  => $id_project,
@@ -153,7 +161,6 @@ class Project extends Common
     public function edit($id)
     {
         $this->permission_exec($id);
-
         $project = R::load('projects', $id);
 
         if(empty($_POST['name']))
@@ -166,11 +173,10 @@ class Project extends Common
         $project->startline = $_POST['startline'];
         $project->deadline = $_POST['deadline'];
 
-        // link to specified members
+        //link to specified members
         $membersErrors = $this->membersFlush($_POST['members'], $id, 0);
         $adminsErrors = $this->membersFlush($_POST['additionalAdmins'], $id, 1);
         $this->directoryFlush($_POST['directory'], $id);
-
         R::store($project);
 
         return $project;
@@ -243,7 +249,7 @@ class Project extends Common
             $this->deleteDirectories($id);
             return false;
         } else {
-            return $foundDir[0]['id_directory'];
+            return $foundDir[0][0]['id_directory'];
         }
     }
 
@@ -257,7 +263,7 @@ class Project extends Common
         $query = 'DELETE FROM projects_directories WHERE id_project = :project AND id_directory = :directory';
         
         foreach ($userDirectories as $directory) {
-            $params = array(':project' => $id, ':directory' => $directory);
+            $params = array(':project' => $id, ':directory' => $directory['id']);
             R::exec($query, $params);
         }
     }

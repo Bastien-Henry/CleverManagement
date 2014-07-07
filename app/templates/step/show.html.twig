@@ -1,15 +1,20 @@
 {% include 'header/header.html.twig' %}
+{% if step['admin'] %}
+	{% set type = 'admin' %}
+{% else %}
+	{% set type = 'member' %}
+{% endif %}
 <div>
-	<div class="name-step"><span style="position:relative;top:5px;">Etape : {{step.name|raw}}</span></div>
+	<div class="name-step"><span style="position:relative;top:5px;">Etape : {{step[type].name|raw}}</span></div>
 
 	<div class="description-step">
 		<p>
 			<h3>Description de l'etape : </h3>
-			{{step.description|raw}}
+			{{step[type].description|raw}}
 		</p>
 		<p>
-			Debut : {{step.startline}} <br>
-			Fin : {{step.deadline}}
+			Debut : {{step[type].startline}} <br>
+			Fin : {{step[type].deadline}}
 		</p>
 		<p>
 			Nombre d'heures passé sur l'étape {{ hour_step }} h<br>
@@ -44,29 +49,31 @@
   		{% endif %}
 	</div>
 	<div class="task-step">
-		<div class="task">
+		<div class="task" style="margin-left:282px;">
 			<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/create" style="color:#fff;">Nouvelle tache</a></button>
 		</div>
 
 		<br><br>
-		<strong>{{message}}</strong><br>
+		<strong style="margin-left:100px;">{{message}}</strong><br>
 		<br><br>
 		{% if tasks['admin'] %}
 			{% for task in tasks['admin'] %}
 			<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/show">
 				<div class="one-task">
-					<div class="title-task-step" {% if task.percent == 0%}style="background-color:#b94a48;"{%elseif task.percent == 100%}style="background-color:#468847;"{%else%}style="background-color:#fcf8e3;"{%endif%}>
+					<div class="title-task-step" {% if task.percent == 0%}style="background-color:#b94a48;"{%elseif task.percent == 100 and task.close == 0%}style="background-color:#468847;"{%elseif task.close == 1 and task.percent == 100%}style="background-color:#7f8c8d;color:#fff;"{%else%}style="background-color:#e67e22;"{%endif%}>
 						<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}}</span>
-						<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit" title="Editer l'etape">
-			      			<span>
-			      				<img src="/CleverManagement/assets/images/edit.png" style="height:28px;">
-			      			</span>
-			      		</a>
-			      		<a href="/Clevermanagement/{{project_id}}/step/{{ step_id }}/task/{{ task.id }}/delete" title="Supprimer l'etape">
-				  			<span>
-				  				<img src="/CleverManagement/assets/images/delete.png" style="height:28px;">
-				  			</span>
-				  		</a>
+						{%if task.close == 0%}
+							<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit" title="Editer l'etape">
+				      			<span>
+				      				<img src="/CleverManagement/assets/images/edit.png" style="height:28px;">
+				      			</span>
+				      		</a>
+				      		<a href="/Clevermanagement/{{project_id}}/step/{{ step_id }}/task/{{ task.id }}/delete" title="Supprimer l'etape">
+					  			<span>
+					  				<img src="/CleverManagement/assets/images/delete.png" style="height:28px;">
+					  			</span>
+					  		</a>
+					  	{%endif%}
 					</div>
 					<div class="description-task-step">
 						<span style="position:relative;top:10px;">

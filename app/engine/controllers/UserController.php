@@ -31,7 +31,8 @@ class UserController extends CommonController
 	            }
 	            else
 	            {
-	                $this->go('/CleverManagement/');
+	                //$this->go('/CleverManagement/');
+	                $this->register('message', '<div class="alert alert-success">Compte correctement cr&eacute;&eacute; !</div>');
 	            }
 	        }
 	    }
