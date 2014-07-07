@@ -12,6 +12,8 @@ form_project_edit:
       type: text
       label: Name
       required: false
+      check:
+        min: 4
     startline:
       type: date
       label: Startline
@@ -26,6 +28,8 @@ form_project_edit:
       required: false
       rows: "5"
       cols: "100"
+      check:
+        min: 4
     members:
       type: hidden
       id: members-project

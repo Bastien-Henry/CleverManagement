@@ -1,0 +1,4 @@
+_error:
+    path: 'clevermanagement/error/access/:id'
+    controller: 'ErrorController'
+    action: 'error'

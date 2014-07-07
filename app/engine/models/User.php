@@ -23,7 +23,7 @@ class User
         }
         else
         {
-            $errors['email.taken'] = 'Email already taken';
+            $errors['email.taken'] = '<div class="alert alert-error">Cette adresse email est d&eacute;j&agrave; prise par un autre utilisateur.</div>';
         }
 
         if(!empty($errors))

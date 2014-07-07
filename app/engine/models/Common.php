@@ -22,11 +22,16 @@ class Common
                 {
                     if($type == 'tasks')
                         if($type_obj->getProperties()['close'] == 1)
-                            die('Cette tache est acctuelement fermé.');
+                        {
+                            header("location: /clevermanagement/error/access/2");
+                            die();
+                        }
+                            
                     return;
                 }
             }
-            die('Vous n\'avez pas les droits pour effectuer cette action.');
+            header("location: /clevermanagement/error/access/3");
+            die();
         }
         elseif($type)
         {
@@ -34,7 +39,10 @@ class Common
             if($type == 'tasks')
             {
                 if($type_obj->getProperties()['close'] == 1)
-                    die('Cette tache est acctuelement fermé.');
+                {
+                     header("location: /clevermanagement/error/access/2");
+                     die();
+                }
             }
         }
 
@@ -54,7 +62,11 @@ class Common
         }
 
         if(!$permission)
-            die('Vous n\'avez pas les droits pour acceder a ces information.');
+        {
+            header("location: /clevermanagement/error/access/1");
+            die();
+        }
+            
     }
 
     public function userDirectories()

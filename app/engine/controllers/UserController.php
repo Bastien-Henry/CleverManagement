@@ -19,22 +19,20 @@ class UserController extends CommonController
         }
         else
         {
-	        $form = new WalrusForm('form_signup');
-	        $this->register('formSignUp', $form->render());
-	        $this->setView('login');
-
-	        if (!empty($_POST)) {
+	        if (!empty($_POST)) 
+	        {
 	            $res = $this->model('user')->signup();
-	            
-	            if (isset($res['errors'])) {
-	                $this->register('errors', $res['errors']);
+
+	            if (isset($res)) {
+	                $this->register('errorsMail', $res['email.taken']);
 	            }
 	            else
 	            {
-	                //$this->go('/CleverManagement/');
 	                $this->register('message', '<div class="alert alert-success">Compte correctement cr&eacute;&eacute; !</div>');
 	            }
 	        }
+
+	        $this->setView('login');
 	    }
     }
 
@@ -44,7 +42,8 @@ class UserController extends CommonController
         {
 	        if(!$this->model('user')->signin())
 	        {
-	            $this->register('errors', array('credentials' => 'wrong email/password'));
+	        	//var_dump($this->model('user')->signin());
+	            $this->register('messageError', '<div class="alert alert-error">Combinaison email/mot de passe invalide !</div>');
 	        }
 	        else
 	        {

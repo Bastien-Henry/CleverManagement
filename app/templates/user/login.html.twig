@@ -4,13 +4,13 @@
   		<title>Clever Management - Make your projects crystal</title>
   		<link rel="stylesheet" type="text/css" href="main.css">
   		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="assets/styles/bootstrap.css">
-		<link rel="stylesheet" href="assets/styles/main.css">
+		<link rel="stylesheet" href="/CleverManagement/assets/styles/bootstrap.css">
+		<link rel="stylesheet" href="/CleverManagement/assets/styles/main.css">
 	</head>
  	<body>
  		<div class="navbar">
 		  <div class="navbar-inner">
-		    <a class="brand" href="#"><img src="assets/images/logo.png"></a>
+		    <a class="brand" href="#"><img src="/CleverManagement/assets/images/logo.png"></a>
 		    <ul class="nav">
 		      <li><a href="signup">Log In</a></li>
 		    </ul>
@@ -26,29 +26,30 @@
 		        <input type="password" class="input-block-level" placeholder="Password" name="password" required>
 		        <button class="btn btn-block btn-inverse" type="submit">Se connecter</button>
 		      </form>
+		      {{messageError | raw}}
 
 		    </div> <!-- /container -->
 
 		    <div class="span5 offset3">
-
-		    <!-- {{formSignUp}} -->
-		    	{{message | raw}}
+		    	
 		      <form class="form-signin" action="/clevermanagement/signup" method="POST">
 		        <h2 class="form-signin-heading">S'inscrire</h2>
 		        <input type="hidden" value="signup" name="type">
 		        <input type="text" class="input-block-level" placeholder="firstname" name="firstname" required>
 		        <input type="text" class="input-block-level" placeholder="lastname" name="lastname" required>
 		        <input type="email" class="input-block-level" placeholder="email" name="email" required>
+		        {{errorsMail | raw}}
 		        <input type="password" class="input-block-level" placeholder="Password" name="password" required>
 		        <input type="text" class="input-block-level" placeholder="job" name="job" required>
 		        <input type="text" class="input-block-level" name="hour_price" placeholder="Hour price &euro; / h" required> 
 		        <button class="btn btn-lg btn-inverse btn-block" type="submit">S'inscrire</button>
 		      </form>
+		      {{message | raw}}
 
 		    </div> <!-- /container -->
 	    </div>
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="bootstrap.js"></script>
+		<script src="/CleverManagement/assets/bootstrap.js"></script>
 	</body>
 </html>

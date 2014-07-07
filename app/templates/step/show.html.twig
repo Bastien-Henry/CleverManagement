@@ -60,7 +60,7 @@
 			{% for task in tasks['admin'] %}
 			<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/show">
 				<div class="one-task">
-					<div class="title-task-step" {% if task.percent == 0%}style="background-color:#b94a48;"{%elseif task.percent == 100 and task.close == 0%}style="background-color:#468847;"{%elseif task.close == 1 and task.percent == 100%}style="background-color:#7f8c8d;color:#fff;"{%else%}style="background-color:#e67e22;"{%endif%}>
+					<div class="title-task-step" {% if task.percent == 0%}style="background-color:#b94a48;"{%elseif task.percent == 100 and task.close == 0%}style="background-color:#468847;"{%elseif (task.close == 1 and task.percent == 100) or (task.close == 1 and task.percent != 100) or (task.close == 1 and task.percent == 0)%}style="background-color:#7f8c8d;color:#fff;"{%else%}style="background-color:#e67e22;"{%endif%}>
 						<span style="position:relative;top:5px;">{{ task.name }} du {{task.startline}} au {{task.deadline}}</span>
 						{%if task.close == 0%}
 							<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task.id }}/edit" title="Editer l'etape">

@@ -312,3 +312,10 @@ a:hover
 	border-radius: 3px;
 	padding: 5px;
 }
+
+.error-message
+{
+	font-size: 35px;
+	margin-left: 500px;
+	margin-top: 50px;
+}

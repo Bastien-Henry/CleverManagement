@@ -36,12 +36,14 @@ class ProjectController extends CommonController
         else
         {
             $form = new WalrusForm('form_project_create');
+            
             $directories = $this->model('user')->getDirectoriesName();
             $form->setFieldValue('directory', 'options', $directories);
             $this->register('myFormCreate', $form->render());
-            // $form->check();
+            
             if(!empty($_POST))
             {
+                $form->check();
                 $this->model('project')->create();
                 $this->go('/CleverManagement');
             }
@@ -134,7 +136,7 @@ class ProjectController extends CommonController
 
         $step = $this->model('step')->index($id);
         if (empty($step))
-            $this->register('message', "Pas d'etape trouvee pour ce projet");
+            $this->register('message', "Pas d'étape(s) trouvée(s) pour ce projet");
         else
             $this->register('message', 'Etapes :');
 
