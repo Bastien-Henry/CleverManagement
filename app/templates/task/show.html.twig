@@ -93,7 +93,7 @@
 		{% for session in sessions['admin'] %}
 		<div class="one-session">
 			<div class="title-task-step">
-				<span style="position:relative;top:5px;">Date : {{ session.created_at }} | Heure(s) travaillée(s) : {{session.hour_number}}</span>
+				<span style="position:relative;top:5px;">Date : {{ session.created_at|date('d/m/Y') }} | Heure(s) travaillée(s) : {{session.hour_number}}</span>
 				<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/{{ session.id }}/edit" title="Editer l'etape">
 		  			<span>
 		  				<img src="/CleverManagement/assets/images/edit.png" style="height:28px;">
