@@ -9,7 +9,6 @@ class Step extends Common
 {
     public function find($id_step)
     {
-        var_dump('Bite');
         $step = R::load('steps', $id_step);
 
         return $step;
