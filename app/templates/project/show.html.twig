@@ -9,14 +9,15 @@
 	{% if project['admin'] %}
 	<div class="name-project"><span style="position:relative;top:5px;">Projet : {{project['admin'].name|raw}}</span></div>
 
+	<a href="/CleverManagement/"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a><br><br>
 	<div class="description-project">
 		<p>
 			<h3>Description du projet : </h3>
 			{{project['admin'].description|raw}}
 		</p>
 		<p>
-			Debut : {{project['admin'].startline}} <br>
-			Fin : {{project['admin'].deadline}}
+			Debut : {{project['admin'].startline | date("m/d/Y")}} <br>
+			Fin : {{project['admin'].deadline | date("m/d/Y")}}
 		</p>
 		<p>
 			Nombre d'heures passé sur le projet {{ hour_project }} h<br>
@@ -70,7 +71,7 @@
 	</div>
 	<div class="steps-project">
 		<div class="steps">
-			<button class="btn btn-primary"><a href="/Clevermanagement/{{project['admin'].id}}/step/create" style="color:#fff;">Nouvelle etape</a></button>
+			<a href="/Clevermanagement/{{project['admin'].id}}/step/create" style="color:#fff;"><button class="btn btn-primary">Nouvelle etape</button></a>
 		</div>
 	{% endif %}
 	{% if project['member'] %}
@@ -82,8 +83,8 @@
 			{{project['member'].description|raw}}
 		</p>
 		<p>
-			Debut : {{project['member'].startline}} <br>
-			Fin : {{project['member'].deadline}}
+			Debut : {{project['member'].startline | date("m/d/Y")}} <br>
+			Fin : {{project['member'].deadline | date("m/d/Y")}}
 		</p>
 		<p>
 			Nombre d'heures passé sur le projet {{ hour_project }} h<br>

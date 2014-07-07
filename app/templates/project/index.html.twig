@@ -8,9 +8,14 @@
 	      		<span style='position:relative;top:5px;'>{{project.name}}</span>
 	      	</div>
 	      	<div class="descr-directory">
-	      		<p>
-		      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
-		      	</p>
+	      		Admin(s) : <br>
+	      		{% for admin in project.admins %}
+	      			- {{admin.email}}<br>
+	      		{% endfor %}
+	      		Membre(s) : <br>
+	      		{% for member in project.members %}
+	      			- {{member.email}}<br>
+	      		{% endfor %}
 	      	</div>
 	      	<div class="menu-directory">
 	      		<a href="/CleverManagement/{{project.id}}/edit" title="Editer le projet" class="edit-project">
@@ -34,9 +39,14 @@
 	      		<span style='position:relative;top:5px;'>{{project.name}}</span>
 	      	</div>
 	      	<div class="descr-directory">
-	      		<p>
-		      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
-		      	</p>
+	      		Admin(s) : <br>
+	      		{% for admin in project.admins %}
+	      			- {{admin.email}}<br>
+	      		{% endfor %}
+	      		Membre(s) : <br>
+	      		{% for member in project.members %}
+	      			- {{member.email}}<br>
+	      		{% endfor %}
 	      	</div>
 	      	<div class="menu-directory">
 	      	</div>

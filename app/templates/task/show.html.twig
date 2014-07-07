@@ -11,6 +11,7 @@
 			T&acirc;che : {{task[type].name|raw}}
 		</span>
 	</div>
+	<a href="/CleverManagement/{{project_id}}/step/{{step_id}}/show"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a><br><br>
 	<div class="task-caract">
 		<div class="description-task">
 			<p>
@@ -18,8 +19,8 @@
 				{{task[type].description|raw}}
 			</p>
 			<p>
-				Debut : {{task[type].startline}} <br>
-				Fin : {{task[type].deadline}}
+				Debut : {{task[type].startline | date("m/d/Y")}} <br>
+				Fin : {{task[type].deadline | date("m/d/Y")}}
 			</p>
 			<p>
 				Membres assignes : 
@@ -56,6 +57,17 @@
 			{% endif %}
 		</div>
 			<div class="task-step">
+				<div class="task">
+				{% if task['admin'] %}
+					{% if task['admin'].close == 0 %}
+	  					<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;"><button class="btn btn-primary">Nouvelle session</button></a>
+	  				{% endif %}
+	  			{% else %}
+	  				{% if task['member'].close == 0 %}
+	  					<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;"><button class="btn btn-primary">Nouvelle session</button></a>
+	  				{% endif %}
+	  			{% endif %}
+				</div>
 				<p style="margin-left:100px;">
 					T&acirc;che réalisée à : <br>
 					<div class="progress progress-striped" style="margin-left:100px;">
