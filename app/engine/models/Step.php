@@ -7,17 +7,29 @@ use app\engine\models\Common;
 
 class Step extends Common
 {
+    protected function find($id_step)
+    {
+        $step = R::load('steps', $id_step);
+
+        return $step;
+    }
+
     public function show($id_project, $id_step)
     {
         $this->permission_access($id_project);
         $step = R::load('steps', $id_step);
 
-        if($step->getProperties()['id'] == 0)
-        {
-            return array('step.not_found' => 'Step doesnt exist');
-        }
+        $relation = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
+                [':user' => $_SESSION['user']['id']]
+            );
 
-        return $step;
+        $tab = array();
+        if($relation['admin'] == 1)
+            $tab['admin'] = $step;
+        else
+            $tab['member'] = $step;
+    
+        return $tab;
     }
 
     public function index($id_project)
@@ -25,19 +37,29 @@ class Step extends Common
         $this->permission_access($id_project);
         $steps = R::findAll('steps', 'id_project = ?', array($id_project));
 
+        $tab = array();
         foreach($steps as $step)
         {
+            $relation = R::getRow('SELECT * FROM projects_users WHERE id_user = :user AND id_project = '.$id_project.'',
+                [':user' => $_SESSION['user']['id']]
+            );
+
+            if($relation['admin'] == 1)
+                $tab['admin'][] = $step;
+            else
+                $tab['member'][] = $step;
+
             $this->status_task($step->getProperties()['id']);
         }
 
-        return $steps;
+        return $tab;
     }
 
     public function delete($id_project, $id_step)
     {
         $this->permission_exec($id_project);
 
-        $step = $this->show($id_step);
+        $step = $this->find($id_step);
 
         R::trash($step);
     }
@@ -64,7 +86,7 @@ class Step extends Common
 
     public function create($id_project)
     {
-        $this->permission_access($id_project);
+        $this->permission_exec($id_project);
         $step = R::dispense('steps');
 
         if(empty($_POST['name']))

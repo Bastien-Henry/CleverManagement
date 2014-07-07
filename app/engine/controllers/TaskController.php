@@ -11,6 +11,12 @@ use Walrus\core\WalrusForm;
  */
 class TaskController extends CommonController
 {
+    public function done($id_project, $id_step, $id_task)
+    {
+        $this->model('task')->task_done($id_project, $id_task);
+        $this->go('/clevermanagement/'.$id_project.'/step/'.$id_step.'/show');
+    }
+
     public function show($id_project, $id_step, $id_task)
     {
         if (empty($_SESSION)) {
@@ -26,6 +32,7 @@ class TaskController extends CommonController
         $this->register('hour_task', $time_task['hour']);
         $this->register('price_task', $time_task['price']);
         $this->register('task', $task);
+        $this->register('task_id', $id_task);
         $this->register('step_id', $id_step);
         $this->register('project_id', $id_project);
         $this->register('members', $members);

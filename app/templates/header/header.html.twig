@@ -23,16 +23,15 @@
 		    <div class="span2 sidebar">
 		    	<ul class="span2 sidebar-menu">
 		    		<a href="new-project.php">
-		    			<li class="current">
-		    				<span class="text-li-sidebar">
-		    					<a href="/CleverManagement/create" class="text-li-sidebar">Nouveau projet</a>
-		    				</span>
-		    			</li>
+		    			<a href="/CleverManagement/create" class="text-li-sidebar">
+		    				<li class="current">
+		    					<span class="text-li-sidebar" style="font-weight:bold;">Nouveau projet</span>
+		    				</li>
+		    			</a>
 		    		</a>
 		    		<a href="/CleverManagement/directory/create" class="text-li-sidebar">
 		    			<li>
-		    				<span class="text-li-sidebar">Nouveau dossier
-		    				</span>
+		    				<span class="text-li-sidebar" style="font-style:italic">Nouveau dossier</span>
 		    			</li>
 		    		</a>
 		    		{% for directory in directories %}

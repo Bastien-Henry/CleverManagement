@@ -23,3 +23,11 @@ _task_edit:
     filters:
         require:
             id: '[0-9]+'
+
+_task_done:
+    path: 'clevermanagement/:id_project/step/:id_step/task/:id_task/done'
+    controller: 'taskController'
+    action: 'done'
+    filters:
+        require:
+            id: '[0-9]+'

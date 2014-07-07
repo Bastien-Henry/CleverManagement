@@ -1,59 +1,12 @@
-<!doctype html>
-<html lang="en">
-	<head>
-	    <meta charset="UTF-8">
-  		<title>Clever Management - Make your projects crystal</title>
-  		<link rel="stylesheet" type="text/css" href="main.css">
-  		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="/CleverManagement/assets/styles/bootstrap.css">
-		<link rel="stylesheet" href="/CleverManagement/assets/styles/main.css">
-	</head>
- 	<body>
- 		<div class="navbar">
-		  <div class="navbar-inner">
-		    <a class="brand" href="#"><img src="/CleverManagement/assets/images/logo.png"></a>
-		    <ul class="nav">
-		      <li><a href="/CleverManagement">Accueil</a></li>
-		      <li><a href="/CleverManagement/deconnection">Deconnexion</a></li>
-		    </ul>
-		  </div>
-		</div>
-		<div class="container-fluid">
-		  <div class="row-fluid">
-		    <div class="span2 sidebar">
-		    	<ul class="span2 sidebar-menu">
-		    		<a href="new-project.php">
-		    			<li class="current">
-		    				<span class="text-li-sidebar">
-		    					<a href="/CleverManagement/create" class="text-li-sidebar">Nouveau projet</a>
-		    				</span>
-		    			</li>
-		    		</a>
-		    		<a href="/CleverManagement/directory/create" class="text-li-sidebar">
-		    			<li>
-		    				<span class="text-li-sidebar">Nouveau dossier
-		    				</span>
-		    			</li>
-		    		</a>
-		    		{% for directory in directories %}
-		    		<a href="/CleverManagement/directory/{{directory.id}}/show" class="text-li-sidebar">
-		    			<li>
-		    				<span class="text-li-sidebar">
-		    					{{directory.name}}
-		    				</span>
-		    			</li>
-		    		</a>
-		    		{% endfor %}
-		    	</ul>
-		      <!--Sidebar content-->
-		    </div>
-			<div class="my-form">
-				{{myFormEdit | raw}}
-			</div>
-		    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		    <script src="/clevermanagement/assets/javascript/select2.js"></script>
-		    <script src="/clevermanagement/assets/javascript/script.js"></script>
-	</body>
-</html>
+{% include 'header/header.html.twig' %}
+
+<div class="my-form">
+	{{myFormEdit | raw}}
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/clevermanagement/assets/javascript/select2.js"></script>
+<script src="/clevermanagement/assets/javascript/script.js"></script>
+
+{% include 'footer/footer.html.twig' %}
 
 
