@@ -1,10 +1,9 @@
 {% include 'header/header.html.twig' %}
 
 <div class="name-project"><span style="position:relative;top:5px;">Cr&eacute;er une session</span></div>
+<a href="/CleverManagement/{{project_id}}/step/{{step_id}}/task/{{task_id}}/show"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a>
 <div class="my-form">
 	{{myFormCreate | raw}}
-	<br><br>
-	<a href="/CleverManagement/{{project_id}}/step/{{step_id}}/task/{{task_id}}/show"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a><br><br>
 </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

@@ -9,7 +9,7 @@
 	{% if project['admin'] %}
 	<div class="name-project"><span style="position:relative;top:5px;">Projet : {{project['admin'].name|raw}}</span></div>
 
-	<a href="/CleverManagement/"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a><br><br>
+	<a href="/CleverManagement/"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a>
 	<div class="description-project">
 		<p>
 			<h3>Description du projet : </h3>
@@ -71,11 +71,12 @@
 	</div>
 	<div class="steps-project">
 		<div class="steps">
-			<a href="/Clevermanagement/{{project['admin'].id}}/step/create" style="color:#fff;"><button class="btn btn-primary">Nouvelle etape</button></a>
+			<a href="/Clevermanagement/{{project['admin'].id}}/step/create" style="color:#fff;"><button class="btn btn-primary" style="margin-top:10px;">Nouvelle etape</button></a>
 		</div>
 	{% endif %}
 	{% if project['member'] %}
 	<div class="name-project"><span style="position:relative;top:5px;">Projet : {{project['member'].name|raw}}</span></div>
+	<a href="/CleverManagement/"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a>
 
 	<div class="description-project">
 		<p>
