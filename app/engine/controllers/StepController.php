@@ -37,14 +37,14 @@ class StepController extends CommonController
             $this->register('tasks', $task);
 
             $status = $this->model('step')->status_task($id_step);
-
             $this->register('status', $status);
 
             $time_step = $this->model('step')->time_step($id_step);
 
-            $this->userDirectories();
             $this->register('hour_step', $time_step['hour']);
             $this->register('price_step', $time_step['price']);
+            
+            $this->userDirectories();
 
             $this->setView('show');
         }

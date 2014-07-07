@@ -76,6 +76,7 @@
 					  	{%endif%}
 					</div>
 					<div class="description-task-step">
+						<div style="float:left;width: 600px;">
 						<span style="position:relative;top:10px;">
 							{%if task.urgent == 1%}
 					  			<span>
@@ -85,6 +86,18 @@
 
 							{{ task.description }}
 						</span>
+						</div>
+						<div style="float:right;width:400px;padding-left:10px;border-left: 1px solid #000;top:10">
+							Membres : 
+							{% for member in task.members %}
+								{% if loop.first %}
+									{{ member.email }}
+								{% else %}
+									<span style="font-weight:bold;font-size:20px">|</span> {{ member.email }}
+								{% endif %}
+							{% endfor %}
+						</div>
+						<span style="clear:both"></span>
 					</div>
 				</div>
 			</a>
