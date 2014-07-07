@@ -88,7 +88,7 @@ class ProjectController extends CommonController
         $formAction = '/clevermanagement/'.$id.'/edit';
         $directories = $this->model('user')->getDirectoriesName();
         $form->setFieldValue('directory', 'options', $directories);
-        
+
         $form->setForm('action', $formAction);
 
         $project = $this->model('project')->find($id);

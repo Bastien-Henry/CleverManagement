@@ -161,13 +161,13 @@ class Project extends Common
     public function edit($id)
     {
         $this->permission_exec($id);
-        $project = R::load('projects', $id);
 
         if(empty($_POST['name']))
         {
             return array('name.empty' => 'Name can\'t be empty');
         }
 
+        $project = R::load('projects', $id);
         $project->name = $_POST['name'];
         $project->description = $_POST['description'];
         $project->startline = $_POST['startline'];
