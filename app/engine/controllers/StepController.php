@@ -105,7 +105,7 @@ class StepController extends CommonController
             $form->setForm('action', $formAction);
             
 
-            $step = $this->model('step')->show($id_project, $id_step);
+            $step = $this->model('step')->find($id_step);
             foreach ($form->getFields() as $field => $arrayOfAttribute) {
                 if ($arrayOfAttribute['type'] == 'textarea') {
                     $arrayOfAttribute['text'] = $step->getProperties()[$field];

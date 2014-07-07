@@ -7,7 +7,7 @@ use app\engine\models\Common;
 
 class Step extends Common
 {
-    protected function find($id_step)
+    public function find($id_step)
     {
         $step = R::load('steps', $id_step);
 

@@ -233,8 +233,7 @@ class Project extends Common
             $params = array(':project' => $id, ':directory' => $directory['id']);
             $match = R::getAll($query, $params);
             if (!empty($match)) {
-                $foundDir = $match;
-                break;
+                $foundDir[] = $match;
             }
         }
 
@@ -251,6 +250,10 @@ class Project extends Common
     public function deleteDirectories($id)
     {
         $userDirectories = R::getAll('SELECT * FROM directories WHERE id_user = :user', array(':user' => $_SESSION['user']['id']));
+        if (!is_array($userDirectories) || empty($userDirectories)) {
+            return;
+        }
+
         $query = 'DELETE FROM projects_directories WHERE id_project = :project AND id_directory = :directory';
         
         foreach ($userDirectories as $directory) {
@@ -265,6 +268,8 @@ class Project extends Common
         if (!is_object($directory)) {
             return 'Le dossier n\'existe pas';
         }
+
+        $this->deleteDirectories($id_project);
 
         $exec = R::exec('INSERT INTO projects_directories (id_project, id_directory) VALUES (:project, :directory)', array(
             ':project'  => $id_project,
