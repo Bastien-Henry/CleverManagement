@@ -176,7 +176,8 @@ class Project extends Common
         //link to specified members
         $membersErrors = $this->membersFlush($_POST['members'], $id, 0);
         $adminsErrors = $this->membersFlush($_POST['additionalAdmins'], $id, 1);
-        $this->directoryFlush($_POST['directory'], $id);
+        if(isset($_POST['directory']))
+            $this->directoryFlush($_POST['directory'], $id);
         R::store($project);
 
         return $project;

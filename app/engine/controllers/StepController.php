@@ -135,6 +135,8 @@ class StepController extends CommonController
                 }
                 $form->setFields($field, $arrayOfAttribute);
             }
+            $this->register('project_id', $id_project);
+            $this->register('step_id', $id_step);
             $this->register('myFormEdit', $form->render());
 
             if(!empty($_POST))

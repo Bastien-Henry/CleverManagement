@@ -44,7 +44,6 @@ form_project_edit:
     directory:
       type: select
       multiple: false
-      required: false
       label: 'Ranger dans un dossier'
       name: 'directory'
       style: margin-top:20px;

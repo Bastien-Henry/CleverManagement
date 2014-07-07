@@ -98,8 +98,7 @@ class ProjectController extends CommonController
                 $usersEmail = $this->model('project')->retrieveUsersEmails($id, $field);
                 $form->setFieldValue($field, 'value', implode(',', $usersEmail));
             } elseif($field == 'directory') {
-                //$directory = $this->model('project')->getDirectory($id);
-                //$form->setFieldValue($field, 'value', $directory);
+                // selected=selected not supported by WalrusForm
             } elseif ($arrayOfAttributes['type'] == 'textarea') {
                 $form->setFieldValue($field, 'text', $project->getProperties()[$field]);
             }
@@ -117,13 +116,15 @@ class ProjectController extends CommonController
             $res = $this->model('project')->edit($id);
             if (!isset($form->check()['name']) && !isset($form->check()['description'])) 
             {
-                $this->model('project')->create();
+                // $this->model('project')->create();
                 $this->go('/CleverManagement');
             }
-            elseif (isset($form->check()['description'])) {
+            elseif (isset($form->check()['description']))
+            {
                 $this->register('errorName', '<div style="width: 400px;" class="alert alert-error">'.$form->check()['description'].'</div>');
             }
-            elseif (isset($form->check()['name'])) {
+            elseif (isset($form->check()['name']))
+            {
                 $this->register('errorName', '<div style="width: 
                     400px;" class="alert alert-error">'.$form->check()['name'].'</div>');
             }

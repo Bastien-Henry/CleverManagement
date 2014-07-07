@@ -11,7 +11,9 @@
 			T&acirc;che : {{task[type].name|raw}}
 		</span>
 	</div>
-	<a href="/CleverManagement/{{project_id}}/step/{{step_id}}/show"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a><br><br>
+	<div>
+		<a href="/CleverManagement/{{project_id}}/step/{{step_id}}/show"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a>
+	</div>
 	<div class="task-caract">
 		<div class="description-task">
 			<p>
@@ -33,8 +35,8 @@
 				{% endfor %}
 			</p>
 		</div>
-		<div class="action-task">
-			{% if task['admin'] %}
+		{% if task['admin'] %}
+			<div class="action-task">
 				{% if task['admin'].close == 0 %}
 					<a href="/Clevermanagement/{{ project_id }}/step/{{ step_id }}/task/{{ task_id }}/edit" title="Editer l'etape">
 			  			<span>
@@ -54,20 +56,9 @@
 			  			Ouvrir la tache
 			  		</a>
 		  		{% endif %}
-			{% endif %}
-		</div>
+			</div>
+		{% endif %}
 			<div class="task-step">
-				<div class="task">
-				{% if task['admin'] %}
-					{% if task['admin'].close == 0 %}
-	  					<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;"><button class="btn btn-primary">Nouvelle session</button></a>
-	  				{% endif %}
-	  			{% else %}
-	  				{% if task['member'].close == 0 %}
-	  					<a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;"><button class="btn btn-primary">Nouvelle session</button></a>
-	  				{% endif %}
-	  			{% endif %}
-				</div>
 				<p style="margin-left:100px;">
 					T&acirc;che réalisée à : <br>
 					<div class="progress progress-striped" style="margin-left:100px;">
@@ -94,15 +85,7 @@
 		</p>
     </div>
     <div class="task" style="position:relative;left:285px;">
-	{% if task['admin'] %}
-		{% if task['admin'].close == 0 %}
-				<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
-			{% endif %}
-		{% else %}
-			{% if task['member'].close == 0 %}
-				<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
-			{% endif %}
-		{% endif %}
+		<button class="btn btn-primary"><a href="/Clevermanagement/{{project_id}}/step/{{step_id}}/task/{{ task_id }}/session/create" style="color:#fff;">Nouvelle session</a></button>
 	</div>
 	<strong style="margin-left:285px;">{{message}}</strong><br>
 	<br><br>
