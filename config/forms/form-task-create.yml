@@ -10,12 +10,14 @@ form_task_create:
       type: text
       required: true
       label: Name
+      check:
+        min: 3
     description:
       type: textarea
       required: true
       label: Description
       check:
-        min: 50
+        min: 5
     urgent:
       type: checkbox
       options:

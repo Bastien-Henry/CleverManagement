@@ -10,17 +10,21 @@ form_task_edit:
       type: text
       required: true
       label: Name
+      check:
+        min: 3
     description:
       type: textarea
       required: true
       label: Description
       check:
-        min: 50
+        min: 5
     urgent:
       type: checkbox
       options:
         1:
           label: 'Urgent'
+      check:
+        required: false
     startline:
       type: date
       required: true
@@ -32,7 +36,6 @@ form_task_edit:
     members:
       type: select
       multiple: true
-      required: false
       label: 'Rajouter membres'
       name: 'members[]'
       options:
@@ -43,3 +46,5 @@ form_task_edit:
       type: checkbox
       label: 'Supprimer membres'
       function: 'TaskController::getRegisteredMembers([id_task:id_task])'
+      check:
+        required: false
