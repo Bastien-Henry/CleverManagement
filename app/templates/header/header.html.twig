@@ -11,7 +11,7 @@
  	<body>
  		<div class="navbar">
 		  <div class="navbar-inner">
-		    <a class="brand" href="#"><img src="/CleverManagement/assets/images/logo.png"></a>
+		    <a class="brand" href="/CleverManagement"><img src="/CleverManagement/assets/images/logo.png"></a>
 		    <ul class="nav">
 		      <li><a href="/CleverManagement">Accueil</a></li>
 		      <li><a href="/CleverManagement/deconnection">Deconnexion</a></li>
@@ -32,6 +32,11 @@
 		    		<a href="/CleverManagement/directory/create" class="text-li-sidebar">
 		    			<li>
 		    				<span class="text-li-sidebar" style="font-style:italic">Nouveau dossier</span>
+		    			</li>
+		    		</a>
+		    		<a href="/CleverManagement" class="text-li-sidebar">
+		    			<li>
+		    				<span class="text-li-sidebar">- Tous les projets -</span>
 		    			</li>
 		    		</a>
 		    		{% for directory in directories %}
