@@ -63,6 +63,7 @@ class StepController extends CommonController
     	    $form = new WalrusForm('form_step_create');
             $formAction = '/clevermanagement/'.$id_project.'/step/create';
             $form->setForm('action', $formAction);
+            $this->register('project_id', $id_project);
             $this->register('myFormCreate', $form->render());
 
             if (!empty($_POST)) {

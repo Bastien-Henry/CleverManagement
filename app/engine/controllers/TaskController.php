@@ -76,6 +76,8 @@ class TaskController extends CommonController
             $availableMembers = $this->model('project')->retrieveUsersEmails($id_project, null);
             $preparedArray = array_combine($availableMembers, $availableMembers);
             $form->setFieldValue('members', 'options', $preparedArray);
+            $this->register('project_id', $id_project);
+            $this->register('step_id', $id_step);
             $this->register('myFormCreate', $form->render());
             $this->userDirectories();
             

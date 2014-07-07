@@ -27,6 +27,9 @@ class SessionController extends CommonController
                 $this->model('session')->create($id_project, $id_task);
                 $this->go('/CleverManagement/'.$id_project.'/step/'.$id_step.'/task/'.$id_task.'/show');
             }
+            $this->register('project_id', $id_project);
+            $this->register('step_id', $id_step);
+            $this->register('task_id', $id_task);
             $this->register('myFormCreate', $form->render());
 
             $this->userDirectories();
