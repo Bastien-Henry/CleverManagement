@@ -29,6 +29,25 @@ body
 	margin-left: 35px !important;
 }
 
+.step 
+{
+	background-color: #2980b9;
+	height: 200px;
+	border:1px solid #d4d4d4;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius:10px;
+	margin-bottom: 40px;
+	margin-left: 35px !important;
+	width: 200px !important;
+}
+
 .title-directory
 {
 	text-align:center;
@@ -70,6 +89,40 @@ body
 	background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
 	background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
 	background-repeat: repeat-x;
+}
+
+.menu-step
+{
+	border-top: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	height: 30px;
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	font-size: 15px;
+	background-color: #fafafa;
+	background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
+	background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+	background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+	background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+	background-repeat: repeat-x;
+	width: 200px !important;
+	position: relative;
+	bottom: 68px;
+}
+
+.edit-step
+{
+	margin-left: 120px;
+}
+
+.delete-step
+{
+	margin-left: 10px;
 }
 
 .edit-project
@@ -195,6 +248,11 @@ a:hover
 	padding-left:40px;
 	background-color: #beccff;
 	height: 30px;
+}
+
+.title-task-step a
+{
+	color: #fff;
 }
 
 .description-steps-project, .description-task-step

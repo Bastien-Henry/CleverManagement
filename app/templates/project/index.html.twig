@@ -3,16 +3,13 @@
 <div>
 	{% for project in projects['admin'] %}
 	<a href="/CleverManagement/{{project.id}}/show">
-		<div class="span2 directory">
+		<div class="span2 directory" {% if project.status == 1%}style="background-color:#b94a48;"{%elseif project.status == 2%}style="background-color:#fcf8e3;"{%elseif project.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
 	      	<div class="title-directory">
 	      		<span style='position:relative;top:5px;'>{{project.name}}</span>
 	      	</div>
 	      	<div class="descr-directory">
 	      		<p>
 		      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
-		      	</p>
-		      	<p>
-		      		status = {{ project.status }}
 		      	</p>
 	      	</div>
 	      	<div class="menu-directory">
