@@ -3,21 +3,18 @@
 	<div class="name-project"><span style="position:relative;top:5px;">Dossier : {{myDirectory.name|raw}}</span></div>
 	<a href="/CleverManagement/directory/{{myDirectory.id}}/delete" title="Supprimer le dossier" class="delete-directory">Supprimer ce dossier</a>
 	<br><br>
-	{% if projects.count == 0 %}
+	{% if projects|length == 0 %}
 		Aucun projet dans ce dossier
 	{% else %}
-	{% for project in projects %}
+		{% for project in projects['admin'] %}
 		<a href="/CleverManagement/{{project.id}}/show">
-			<div class="span2 directory">
+			<div class="span2 directory" {% if project.status == 1%}style="background-color:#b94a48;"{%elseif project.status == 2%}style="background-color:#e67e22;"{%elseif project.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
 		      	<div class="title-directory">
 		      		<span style='position:relative;top:5px;'>{{project.name}}</span>
 		      	</div>
 		      	<div class="descr-directory">
 		      		<p>
 			      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
-			      	</p>
-			      	<p>
-			      		status = {{ project.status }}
 			      	</p>
 		      	</div>
 		      	<div class="menu-directory">
@@ -34,7 +31,23 @@
 		      	</div>
 		    </div>
 		</a>
-	{% endfor %}
+		{% endfor %}
+		{% for project in projects['member'] %}
+		<a href="/CleverManagement/{{project.id}}/show">
+			<div class="span2 directory" {% if project.status == 1%}style="background-color:#b94a48;"{%elseif project.status == 2%}style="background-color:#e67e22;"{%elseif project.status == 3%}style="background-color:#468847;"{%else%}style="background-color:#b94a48;"{%endif%}>
+		      	<div class="title-directory">
+		      		<span style='position:relative;top:5px;'>{{project.name}}</span>
+		      	</div>
+		      	<div class="descr-directory">
+		      		<p>
+			      		{{project.description | length > 350 ? project.description|slice(0, 350) ~ '(...)' : project.description}}
+			      	</p>
+		      	</div>
+		      	<div class="menu-directory">
+		      	</div>
+		    </div>
+		</a>
+		{% endfor %}
 	{% endif %}
 </div>
 {% include 'footer/footer.html.twig' %}

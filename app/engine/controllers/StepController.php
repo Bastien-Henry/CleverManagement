@@ -99,7 +99,6 @@ class StepController extends CommonController
         else
         {
             $this->userDirectories();
-            
             if(!empty($_POST))
             {
                 $res = $this->model('step')->edit($id_project, $id_step);
