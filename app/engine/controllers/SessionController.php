@@ -77,6 +77,9 @@ class SessionController extends CommonController
                 $form->setFields($field, $arrayOfAttribute);
             }
             
+            $this->register('project_id', $id_project);
+            $this->register('step_id', $id_step);
+            $this->register('task_id', $id_task);
             $this->register('myFormEdit', $form->render());
 
             if(!empty($_POST))

@@ -1,11 +1,10 @@
 {% include 'header/header.html.twig' %}
 
 <div class="name-project"><span style="position:relative;top:5px;">Editer la tache</span></div>
+<a href="/CleverManagement/{{project_id}}/step/{{step_id}}/show"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a>
 <div class="my-form">
 	{{myFormEdit | raw}}
 	{{errorName | raw}}
-	<br><br>
-	<a href="/CleverManagement/{{project_id}}/step/{{step_id}}/show"><img src="/clevermanagement/assets/images/arrow-back.png" alt="back"></a>
 </div>
 
 {% include 'footer/footer.html.twig' %}

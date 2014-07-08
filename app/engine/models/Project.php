@@ -161,13 +161,13 @@ class Project extends Common
     public function edit($id)
     {
         $this->permission_exec($id);
-        $project = R::load('projects', $id);
 
         if(empty($_POST['name']))
         {
             return array('name.empty' => 'Name can\'t be empty');
         }
 
+        $project = R::load('projects', $id);
         $project->name = $_POST['name'];
         $project->description = $_POST['description'];
         $project->startline = $_POST['startline'];
@@ -176,7 +176,8 @@ class Project extends Common
         //link to specified members
         $membersErrors = $this->membersFlush($_POST['members'], $id, 0);
         $adminsErrors = $this->membersFlush($_POST['additionalAdmins'], $id, 1);
-        $this->directoryFlush($_POST['directory'], $id);
+        if(isset($_POST['directory']))
+            $this->directoryFlush($_POST['directory'], $id);
         R::store($project);
 
         return $project;

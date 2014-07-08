@@ -16,5 +16,6 @@ class CommonController extends WalrusController
 	{
 		$directories = $this->model('common')->userDirectories();
         $this->register('directories', $directories);
+        $this->register('user', $_SESSION['user']);
 	}
 }

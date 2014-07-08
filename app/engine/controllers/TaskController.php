@@ -167,6 +167,8 @@ class TaskController extends CommonController
                 $form->setFieldValue($field, 'value', $task->getProperties()[$field]);
             }
 
+            $this->register('project_id', $id_project);
+            $this->register('step_id', $id_step);
             $this->register('myFormEdit', $form->render());
 
             if (!empty($_POST)) 

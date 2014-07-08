@@ -125,7 +125,7 @@ class Task extends Common
             $tab = R::findAll('tasks', 'id_step = ?', array($id_step));
             foreach($tab as $value)
             {
-                $value['members'] = $this->model('task')->retrieveMembers($value['id']);
+                $value['members'] = $this->retrieveMembers($value['id']);
                 if($value['id_user'] == $_SESSION['user']['id'])
                     $tasks['admin'][] = $value;
                 else
