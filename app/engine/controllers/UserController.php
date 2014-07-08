@@ -23,7 +23,7 @@ class UserController extends CommonController
 	        {
 	            $res = $this->model('user')->signup();
 
-	            if (isset($res)) {
+	            if (isset($res['email.taken'])) {
 	                $this->register('errorsMail', $res['email.taken']);
 	            }
 	            else
